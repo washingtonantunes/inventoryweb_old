@@ -57,9 +57,7 @@
 					</p:column>
 		
 					<p:column headerText="CPF" >
-						<h:outputText value="#{user.cpf}">
-							<!-- <f:converter converterId="converter.CPFConverter" /> -->
-						</h:outputText>
+						<h:outputText value="#{user.cpf}" converter="CPFConverter" />
 					</p:column>
 		
 					<p:column headerText="Projeto">
@@ -89,9 +87,7 @@
 							<p:inputText id="name" value="#{managerUserMB.user.name}" readonly="true" />
 						
 							<p:outputLabel value="CPF" for="cpf" />
-							<p:inputText id="cpf" value="#{managerUserMB.user.cpf}" readonly="true">
-								<!-- <f:converter converterId="converter.CPFConverter" /> -->
-							</p:inputText>
+							<p:inputText id="cpf" value="#{managerUserMB.user.cpf}" converter="CPFConverter" readonly="true" />
 							
 							<p:outputLabel value="Telefone" for="phone" />
 							<p:inputText id="phone" value="#{managerUserMB.user.phone}" readonly="true"/>
