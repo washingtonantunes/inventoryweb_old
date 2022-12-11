@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
 
@@ -16,8 +18,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @MappedSuperclass
-@Getter
-@Setter
 @EqualsAndHashCode(of = { "id" })
 public abstract class AbstractBean implements Serializable {
 
@@ -25,10 +25,31 @@ public abstract class AbstractBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter
+	@Setter
 	private Integer id;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(
+            name = "tb_changes_beans",
+            joinColumns = {@JoinColumn(name = "bean_id")},
+            inverseJoinColumns = {@JoinColumn(name = "change_id")}
+    )
+	
+	@Getter
 	private List<Change> changes;
+	
+	public void addChange(Change change) {
+		if (change != null) {
+			this.changes.add(change);
+		}
+	}
+
+	public void removeChange(Change change) {
+		if (change != null) {
+			this.changes.remove(change);
+		}
+	}
 
 	@Override
 	public String toString() {

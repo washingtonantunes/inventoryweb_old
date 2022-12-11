@@ -30,9 +30,6 @@ public class Change implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "id_object")
-	private AbstractBean object;
-
 	@Enumerated(EnumType.STRING)
 	private TypeChange type;
 
