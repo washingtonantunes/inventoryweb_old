@@ -23,7 +23,7 @@ public class UserRepository implements Serializable {
 	}
 
 	public List<User> findAllByParam(String paramSearch) {
-		String jpql = "from User where registration like :paramSearch or cpf like :paramSearch ";
+		String jpql = "from User where registration like :paramSearch or cpf like :paramSearch";
 
 		TypedQuery<User> query = manager.createQuery(jpql, User.class);
 		query.setParameter("paramSearch", paramSearch.toUpperCase() + "%");

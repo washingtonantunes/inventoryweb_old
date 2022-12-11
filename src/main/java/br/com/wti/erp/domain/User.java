@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,6 +23,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.wti.erp.domain.enums.StatusUser;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -68,6 +72,29 @@ public class User extends AbstractBean implements Serializable {
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Item> itens;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(
+			name = "tb_changes_users",
+			joinColumns = {@JoinColumn(name = "user_id")},
+			inverseJoinColumns = {@JoinColumn(name = "change_id")}
+			)
+
+	@Getter
+	@Setter(value = AccessLevel.PRIVATE)
+	private List<Change> changes;
+
+	public void addChange(Change change) {
+		if (change != null) {
+			this.changes.add(change);
+		}
+	}
+
+	public void removeChange(Change change) {
+		if (change != null) {
+			this.changes.remove(change);
+		}
+	}
 
 	public User() {
 	}

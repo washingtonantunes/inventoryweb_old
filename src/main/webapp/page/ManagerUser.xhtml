@@ -6,7 +6,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/WEB-INF/template/_layout.xhtml">
 	
-	<ui:param name="newPanelVisible" value="false"></ui:param>
+	<ui:param name="detailsPanelVisible" value="false"></ui:param>
 
 	<ui:define name="title">
 		Gestão de Usuários
@@ -16,8 +16,6 @@
 		<h:form id="frm">
 			<p:panel id="panelDataTable" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panelDataTable">
 			
-				<p:growl id="messages" globalOnly="true"/>
-		
 				<p:toolbar id="toolbar" style="padding: 10px">
 					<p:toolbarGroup>
 		
@@ -42,7 +40,7 @@
 					selection="#{managerUserMB.user}" rowKey="#{user.id}"
 					size="small" stripedRows="true">
 		
-					<p:ajax event="rowSelect" process="@this" update="userDataTable :frm1" onsuccess="PF('panelDetails').close()" />
+					<p:ajax event="rowSelect" process="@this" update="userDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" />
 			
 					<p:column headerText="Ações">
 						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{managerUserMB.user.id == null or managerUserMB.user.id != user.id}" onclick="PF('panelDetails').show()" />
@@ -69,13 +67,11 @@
 					</p:column>
 				</p:dataTable>
 			</p:panel>
-			</h:form>
 			
 			<p:spacer height="10px" />
 		
-			<h:form id="frm1">
 		    <p:panel id="panelDetails" header="Usuario" closable="true" toggleSpeed="500"
-		                closeSpeed="500" widgetVar="panelDetails" visible="newPanelVisible">
+		                closeSpeed="500" widgetVar="panelDetails" visible="detailsPanelVisible">
 		                
 		        <p:tabView dynamic="true" cache="true">
 		            <p:tab title="Dados">

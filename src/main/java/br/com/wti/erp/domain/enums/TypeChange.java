@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum TypeChange {
 
 	ENTRY("ENTRADA"), 
-	WITHDRAWN("WITHDRAWN");
+	WITHDRAWN("WITHDRAWN"),
+	DELIVERY_TO_USER("ENTREGA PARA USUÁRIO");
 
 	private String descricao;
 	
