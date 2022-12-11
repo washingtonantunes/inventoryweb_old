@@ -1,0 +1,43 @@
+@charset "utf-8";
+
+body {
+	font-size: 0.9em;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+}
+
+header {
+	padding: 5px 5px;
+	margin-bottom: 20px;
+	background-color: #545454;
+	color: #fff;
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+#content {
+	padding: 0px 15px;
+}
+
+footer {
+	border-top: 1px solid #ccc;
+	padding: 5px 8px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	text-align: center;
+	background-color: #c0c0c0;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: 500px;
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 10px;
+}
+
+h2 {
+	font-size: 20px;
+	font-weight: 500px;
+	padding: 0px 15px;
+}
