@@ -66,7 +66,7 @@ public class User extends AbstractBean implements Serializable {
 	@Column(nullable = false, length = 50)
 	private String project;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Item> itens;
 
 	public User() {

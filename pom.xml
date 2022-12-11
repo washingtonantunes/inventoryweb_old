@@ -24,14 +24,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.3.8.Final</version>
-			<scope>compile</scope>
-		</dependency>
-		<!-- Implementação de EntityManager da JPA -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.8.Final</version>
+			<version>5.6.10.Final</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- Driver JDBC do MySQL -->

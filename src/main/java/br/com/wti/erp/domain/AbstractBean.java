@@ -29,7 +29,7 @@ public abstract class AbstractBean implements Serializable {
 	@Setter
 	private Integer id;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
             name = "tb_changes_beans",
             joinColumns = {@JoinColumn(name = "bean_id")},
