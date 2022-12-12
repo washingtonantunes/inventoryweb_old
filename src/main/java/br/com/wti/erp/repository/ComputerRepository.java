@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 
 import br.com.wti.erp.domain.Computer;
 
-public class ComputerRepository implements Serializable {
+public class ComputerRepository implements Repository<Computer>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,10 +18,12 @@ public class ComputerRepository implements Serializable {
 		this.manager = manager;
 	}
 
+	@Override
 	public List<Computer> findAll() {
 		return manager.createQuery("from Computer", Computer.class).getResultList();
 	}
 
+	@Override
 	public List<Computer> findAllByParam(String paramSearch) {
 		String jpql = "from Computer where serial_number like :paramSearch or patrimony_number like :paramSearch";
 
@@ -31,10 +33,12 @@ public class ComputerRepository implements Serializable {
 		return query.getResultList();
 	}
 
+	@Override
 	public Computer findById(Integer id) {
 		return manager.find(Computer.class, id);
 	}
 
+	@Override
 	public Computer save(Computer computer) {
 		return manager.merge(computer);
 	}

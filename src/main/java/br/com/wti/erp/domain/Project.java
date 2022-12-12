@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.wti.erp.domain.enums.StatusProjectEnum;
+import br.com.wti.erp.service.ProjectService;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -76,6 +77,18 @@ public class Project extends AbstractBean implements Serializable {
 		if (change != null) {
 			this.changes.remove(change);
 		}
+	}
+	
+	public Long allComputers() {
+		return ProjectService.allComputers(this);
+	}
+	
+	public Long allUsers() {
+		return ProjectService.allUsers(this);
+	}
+	
+	public Integer allMonitors() {
+		return 0;
 	}
 
 	public Project() {
