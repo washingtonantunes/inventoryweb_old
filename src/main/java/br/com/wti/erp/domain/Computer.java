@@ -21,8 +21,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.com.wti.erp.domain.enums.StatusComputer;
-import br.com.wti.erp.domain.enums.TypeComputer;
+import br.com.wti.erp.domain.enums.StatusComputerEnum;
+import br.com.wti.erp.domain.enums.TypeComputerEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +42,7 @@ public class Computer extends AbstractBean implements Serializable {
 	@NotNull
 	@Column(nullable = false, length = 30)
 	@Enumerated(EnumType.STRING)
-	private TypeComputer type;
+	private TypeComputerEnum type;
 
 	@NotEmpty
 	@Column(nullable = false, length = 10)
@@ -68,7 +68,7 @@ public class Computer extends AbstractBean implements Serializable {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 30)
-	private StatusComputer status;
+	private StatusComputerEnum status;
 
 	private String note;
 

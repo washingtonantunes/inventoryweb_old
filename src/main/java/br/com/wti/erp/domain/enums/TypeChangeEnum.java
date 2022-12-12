@@ -3,7 +3,7 @@ package br.com.wti.erp.domain.enums;
 import lombok.Getter;
 
 @Getter
-public enum TypeChange {
+public enum TypeChangeEnum {
 
 	ENTRY("ENTRADA"), 
 	WITHDRAWN("WITHDRAWN"),
@@ -11,7 +11,7 @@ public enum TypeChange {
 
 	private String descricao;
 	
-	private TypeChange(String descricao) {
+	private TypeChangeEnum(String descricao) {
 		this.descricao = descricao;
 	}
 }

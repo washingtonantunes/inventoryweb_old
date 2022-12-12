@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.wti.erp.domain.enums.TypeChange;
+import br.com.wti.erp.domain.enums.TypeChangeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +31,7 @@ public class Change implements Serializable {
 	private Integer id;
 
 	@Enumerated(EnumType.STRING)
-	private TypeChange type;
+	private TypeChangeEnum type;
 
 	@Column(nullable = false, length = 200)
 	private String description;

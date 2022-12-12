@@ -3,7 +3,7 @@ package br.com.wti.erp.domain.enums;
 import lombok.Getter;
 
 @Getter
-public enum StatusComputer {
+public enum StatusComputerEnum {
 
 	STAND_BY("ESPERA"), 
 	IN_USE("EM USO"), 
@@ -12,7 +12,7 @@ public enum StatusComputer {
 
 	private String descricao;
 
-	StatusComputer(String descricao) {
+	StatusComputerEnum(String descricao) {
 		this.descricao = descricao;
 	}
 }

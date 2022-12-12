@@ -3,14 +3,14 @@ package br.com.wti.erp.domain.enums;
 import lombok.Getter;
 
 @Getter
-public enum StatusUser {
+public enum StatusUserEnum {
 
 	ACTIVE("ATIVO"), 
 	DISABLED("DESATIVADO");
 
 	private String descricao;
 
-	StatusUser(String descricao) {
+	StatusUserEnum(String descricao) {
 		this.descricao = descricao;
 	}
 }

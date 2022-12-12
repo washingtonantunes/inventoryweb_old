@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
-import br.com.wti.erp.domain.enums.StatusUser;
+import br.com.wti.erp.domain.enums.StatusUserEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -59,7 +59,7 @@ public class User extends AbstractBean implements Serializable {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 30)
-	private StatusUser status;
+	private StatusUserEnum status;
 
 	@NotNull
 	@Column(name = "date_entry", nullable = false)
