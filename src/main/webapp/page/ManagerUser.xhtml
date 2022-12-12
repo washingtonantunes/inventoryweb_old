@@ -59,7 +59,7 @@
 					</p:column>
 		
 					<p:column headerText="Projeto">
-						<h:outputText value="#{user.project}" />
+						<h:outputText value="#{user.project.name}" />
 					</p:column>
 		
 					<p:column headerText="Status">
@@ -95,7 +95,7 @@
 							<p:inputText id="department" value="#{managerUserMB.user.department}" readonly="true"/>
 							
 							<p:outputLabel value="Projeto" for="project" />
-							<p:inputText id="project" value="#{managerUserMB.user.project}" readonly="true"/>
+							<p:inputText id="project" value="#{managerUserMB.user.project.name}" readonly="true"/>
 						
 							<p:outputLabel value="Data de Entrada" for="dateEntry" />
 							<p:outputLabel id="dateEntry" value="#{managerUserMB.user.dateEntry}">

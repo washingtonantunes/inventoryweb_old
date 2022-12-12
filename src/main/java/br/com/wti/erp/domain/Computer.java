@@ -14,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -92,6 +94,14 @@ public class Computer extends AbstractBean implements Serializable {
 
 	@Column(name = "cost_type", length = 30)
 	private String costType;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "project_id", referencedColumnName = "id")
+	private Project project;
+	
+	@OneToOne(optional = true)
+	@JoinColumn(name = "user_id", unique = true)
+	private User user;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(

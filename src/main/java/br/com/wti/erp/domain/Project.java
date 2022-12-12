@@ -13,17 +13,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.br.CPF;
 
-import br.com.wti.erp.domain.enums.StatusUserEnum;
+import br.com.wti.erp.domain.enums.StatusProjectEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,54 +28,38 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_users")
-public class User extends AbstractBean implements Serializable {
+@Table(name = "tb_projects")
+public class Project extends AbstractBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty
-	@Column(unique = true, nullable = false, length = 10)
-	private String registration;
-
-	@NotEmpty
-	@Column(nullable = false, length = 100)
+	@Column(unique = true, nullable = false)
 	private String name;
 
-	@CPF
 	@NotEmpty
-	@Column(unique = true, nullable = false, length = 100)
-	private String cpf;
+	@Column(nullable = false)
+	private String city;
 
-	@Column(unique = true)
-	private String phone;
-
-	@Column(unique = true)
-	private String email;
-
-	private String department;
+	@NotEmpty
+	@Column(name = "cost_center", unique = true, nullable = false)
+	private String costCenter;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 30)
-	private StatusUserEnum status;
+	private StatusProjectEnum status;
 
 	@NotNull
 	@Column(name = "date_entry", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dateEntry;
 
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Item> itens;
-	
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "project_id", referencedColumnName = "id")
-	private Project project;
-
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
-			name = "tb_changes_users",
-			joinColumns = {@JoinColumn(name = "user_id")},
-			inverseJoinColumns = {@JoinColumn(name = "change_id")}
+			name = "tb_changes_projects", 
+			joinColumns = { @JoinColumn(name = "project_id") }, 
+			inverseJoinColumns = { @JoinColumn(name = "change_id") }
 			)
 
 	@Getter
@@ -97,11 +78,11 @@ public class User extends AbstractBean implements Serializable {
 		}
 	}
 
-	public User() {
+	public Project() {
 	}
 
 	@Override
 	public String toString() {
-		return "User " + super.toString();
+		return "Project " + super.toString();
 	}
 }

@@ -112,6 +112,9 @@
 							<p:outputLabel value="Localização" for="location" />
 							<p:inputText id="location" value="#{managerComputerMB.computer.location}" readonly="true" />
 							
+							<p:outputLabel value="Tipo Custo" for="costType" />
+							<p:inputText id="costType" value="#{managerComputerMB.computer.costType}" readonly="true" />
+							
 							<p:outputLabel value="Valor" for="value" />
 							<p:inputText id="value" value="#{managerComputerMB.computer.value}" readonly="true">
 								<f:convertNumber type="currency" pattern="R$ #0.00" currencySymbol="R$" locale="pt_BR" />
@@ -136,10 +139,10 @@
 						<p:fieldset legend="Projeto" >
 							<p:panelGrid columns="4">
 								<p:outputLabel value="Projeto" for="project" />
-								<p:inputText id="project" value="computer.project" readonly="true" />
+								<p:inputText id="project" value="#{managerComputerMB.computer.project.name}" readonly="true" />
 								
-								<p:outputLabel value="Centro de Custo" for="costType" />
-								<p:inputText id="costType" value="#{managerComputerMB.computer.costType}" readonly="true" />
+								<p:outputLabel value="Centro de Custo" for="costCenter" />
+								<p:inputText id="costCenter" value="#{managerComputerMB.computer.project.costCenter}" readonly="true" />
 							</p:panelGrid>
 						</p:fieldset>
 						
@@ -148,10 +151,10 @@
 						<p:fieldset legend="Usuário">
 							<p:panelGrid columns="4">
 								<p:outputLabel value="Matrícula" for="registration" />
-								<p:inputText id="registration" value="user.registration" readonly="true" />
+								<p:inputText id="registration" value="#{managerComputerMB.computer.user.registration}" readonly="true" />
 								
 								<p:outputLabel value="Nome" for="nameUser" />
-								<p:inputText id="nameUser" value="user.name" readonly="true" />
+								<p:inputText id="nameUser" value="#{managerComputerMB.computer.user.name}" readonly="true" />
 							</p:panelGrid>
 						</p:fieldset>
 						
