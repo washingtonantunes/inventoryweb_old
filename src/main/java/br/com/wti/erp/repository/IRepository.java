@@ -2,13 +2,13 @@ package br.com.wti.erp.repository;
 
 import java.util.List;
 
-public interface Repository<T> {
+public interface IRepository<T> {
 
 	public List<T> findAll();
 
-	public List<T> findAllByParam(String paramSearch);
+	public List<T> findAllByParams(Filter filter);
 
 	public T findById(Integer id);
 
-	public T save(T bean);
+	public T save(T entity);
 }

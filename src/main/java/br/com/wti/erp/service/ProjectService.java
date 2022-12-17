@@ -7,13 +7,14 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import br.com.wti.erp.domain.Project;
+import br.com.wti.erp.repository.Filter;
 import br.com.wti.erp.repository.ProjectRepository;
 import br.com.wti.erp.util.EntityManagerProducer;
 
-public class ProjectService implements Serializable {
+public class ProjectService implements IService<Project>, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final EntityManager manager = EntityManagerProducer.getEntityManager();
 
 	private static final ProjectRepository projectRepository = new ProjectRepository(manager);
@@ -22,8 +23,8 @@ public class ProjectService implements Serializable {
 		return projectRepository.findAll();
 	}
 
-	public List<Project> findAllByParam(String paramSearch) {
-		return projectRepository.findAllByParam(paramSearch);
+	public List<Project> findAllByParam(Filter filter) {
+		return projectRepository.findAllByParams(filter);
 	}
 
 	public Project findById(Integer id) {
@@ -34,11 +35,11 @@ public class ProjectService implements Serializable {
 	public void save(Project project) {
 		projectRepository.save(project);
 	}
-	
+
 	public static Long allComputers(Project project) {
 		return projectRepository.allComputers(project);
 	}
-	
+
 	public static Long allUsers(Project project) {
 		return projectRepository.allUsers(project);
 	}

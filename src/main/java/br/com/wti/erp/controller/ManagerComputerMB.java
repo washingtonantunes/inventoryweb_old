@@ -7,8 +7,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.wti.erp.domain.Computer;
+import br.com.wti.erp.repository.Filter;
 import br.com.wti.erp.service.ComputerService;
 import br.com.wti.erp.util.FacesMessages;
+import lombok.Getter;
+import lombok.Setter;
 
 @ManagedBean
 @ViewScoped
@@ -20,37 +23,22 @@ public class ManagerComputerMB implements Serializable {
 
 	private ComputerService computerService = new ComputerService();
 
+	@Getter
+	@Setter
 	private Computer computer;
 
+	@Getter
 	private List<Computer> listComputers;
 
-	private String paramSearch;
-
-	public Computer getComputer() {
-		return computer;
-	}
-
-	public void setComputer(Computer computer) {
-		this.computer = computer;
-	}
+	@Getter
+	@Setter
+	private Filter filter = new Filter();
 
 	public void search() {
-		listComputers = computerService.findAllByParam(this.paramSearch);
+		listComputers = computerService.findAllByParam(this.filter);
 
 		if (listComputers.isEmpty()) {
 			messages.info("Sua consulta não retornou registros.");
 		}
-	}
-
-	public List<Computer> getListComputers() {
-		return listComputers;
-	}
-
-	public String getParamSearch() {
-		return paramSearch;
-	}
-
-	public void setParamSearch(String paramSearch) {
-		this.paramSearch = paramSearch;
 	}
 }

@@ -23,10 +23,10 @@
 		
 					<p:toolbarGroup align="right">
 						<p:inputText id="paramSearch" placeholder="Digite para pesquisar..." 
-							size="20" value="#{managerProjectMB.paramSearch}" />
+							size="20" value="#{managerProjectMB.filter.paramSearch}" />
 		
 						<p:commandButton value="Pesquisar" icon="pi pi-search"
-							actionListener="#{managerProjectMB.search}" update="projectDataTable messages"
+							actionListener="#{managerProjectMB.search}" update="projectDataTable messages frm:panelDetails"
 							process="@this paramSearch" />
 					</p:toolbarGroup>
 				</p:toolbar>

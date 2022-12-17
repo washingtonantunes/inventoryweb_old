@@ -1,14 +1,18 @@
 package br.com.wti.erp.repository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import br.com.wti.erp.domain.User;
 
-public class UserRepository implements Repository<User>, Serializable {
+public class UserRepository implements IRepository<User>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,13 +28,21 @@ public class UserRepository implements Repository<User>, Serializable {
 	}
 
 	@Override
-	public List<User> findAllByParam(String paramSearch) {
-		String jpql = "from User where registration like :paramSearch or cpf like :paramSearch";
+	public List<User> findAllByParams(Filter filter) {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<User> query = builder.createQuery(User.class);
+		Root<User> root = query.from(User.class);
 
-		TypedQuery<User> query = manager.createQuery(jpql, User.class);
-		query.setParameter("paramSearch", paramSearch.toUpperCase() + "%");
+		List<Predicate> predicates = new ArrayList<>();
+		
+		predicates.add(
+				builder.or(
+					builder.like(root.get("registration"), filter.getParamSearch().toUpperCase() + "%"),
+					builder.like(root.get("cpf"), filter.getParamSearch().toUpperCase() + "%")));
 
-		return query.getResultList();
+		query.where(predicates.toArray(new Predicate[0]));
+
+		return manager.createQuery(query).getResultList();
 	}
 
 	@Override

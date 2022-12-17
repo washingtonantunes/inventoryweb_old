@@ -7,8 +7,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.wti.erp.domain.User;
+import br.com.wti.erp.repository.Filter;
 import br.com.wti.erp.service.UserService;
 import br.com.wti.erp.util.FacesMessages;
+import lombok.Getter;
+import lombok.Setter;
 
 @ManagedBean
 @ViewScoped
@@ -20,37 +23,22 @@ public class ManagerUserMB implements Serializable {
 
 	private UserService userService = new UserService();
 
+	@Getter
+	@Setter
 	private User user;
 
+	@Getter
 	private List<User> listUsers;
 
-	private String paramSearch;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	@Getter
+	@Setter
+	private Filter filter = new Filter();
 
 	public void search() {
-		listUsers = userService.findAllByParam(this.paramSearch);
+		listUsers = userService.findAllByParam(this.filter);
 
 		if (listUsers.isEmpty()) {
 			messages.info("Sua consulta não retornou registros.");
 		}
-	}
-
-	public List<User> getListUsers() {
-		return listUsers;
-	}
-
-	public String getParamSearch() {
-		return paramSearch;
-	}
-
-	public void setParamSearch(String paramSearch) {
-		this.paramSearch = paramSearch;
 	}
 }
