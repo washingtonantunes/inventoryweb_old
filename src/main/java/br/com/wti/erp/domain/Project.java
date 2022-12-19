@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,6 +17,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.wti.erp.domain.enums.StatusProjectEnum;
@@ -56,15 +57,15 @@ public class Project extends AbstractBean implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateEntry;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(
 			name = "tb_changes_projects", 
 			joinColumns = { @JoinColumn(name = "project_id") }, 
 			inverseJoinColumns = { @JoinColumn(name = "change_id") }
 			)
-
 	@Getter
-	@Setter(value = AccessLevel.PRIVATE)
+	@Setter(value = AccessLevel.PRIVATE) //TODO Corrigir changes
 	private List<Change> changes;
 
 	public void addChange(Change change) {

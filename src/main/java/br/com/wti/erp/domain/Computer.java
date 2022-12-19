@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,6 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.wti.erp.domain.enums.StatusComputerEnum;
@@ -103,15 +104,15 @@ public class Computer extends AbstractBean implements Serializable {
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(
 			name = "tb_changes_computers",
 			joinColumns = {@JoinColumn(name = "computer_id")},
 			inverseJoinColumns = {@JoinColumn(name = "change_id")}
 			)
-
 	@Getter
-	@Setter(value = AccessLevel.PRIVATE)
+	@Setter(value = AccessLevel.PRIVATE) //TODO Corrigir changes
 	private List<Change> changes;
 
 	public void addChange(Change change) {
