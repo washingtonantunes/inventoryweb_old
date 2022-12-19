@@ -3,8 +3,9 @@ package br.com.wti.erp.controller;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.com.wti.erp.domain.Computer;
 import br.com.wti.erp.repository.Filter;
@@ -13,15 +14,17 @@ import br.com.wti.erp.util.FacesMessages;
 import lombok.Getter;
 import lombok.Setter;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class ManagerComputerMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private FacesMessages messages = new FacesMessages();
+	@Inject
+	private FacesMessages messages;
 
-	private ComputerService computerService = new ComputerService();
+	@Inject
+	private ComputerService computerService;
 
 	@Getter
 	@Setter
@@ -30,9 +33,10 @@ public class ManagerComputerMB implements Serializable {
 	@Getter
 	private List<Computer> listComputers;
 
+	@Inject
 	@Getter
 	@Setter
-	private Filter filter = new Filter();
+	private Filter filter;
 
 	public void search() {
 		listComputers = computerService.findAllByParam(this.filter);

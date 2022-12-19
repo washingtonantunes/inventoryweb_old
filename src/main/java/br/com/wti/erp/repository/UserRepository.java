@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,7 +17,11 @@ public class UserRepository implements IRepository<User>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
 	private EntityManager manager;
+
+	public UserRepository() {
+	}
 
 	public UserRepository(EntityManager manager) {
 		this.manager = manager;
@@ -34,11 +39,11 @@ public class UserRepository implements IRepository<User>, Serializable {
 		Root<User> root = query.from(User.class);
 
 		List<Predicate> predicates = new ArrayList<>();
-		
+
 		predicates.add(
-				builder.or(
-					builder.like(root.get("registration"), filter.getParamSearch().toUpperCase() + "%"),
-					builder.like(root.get("cpf"), filter.getParamSearch().toUpperCase() + "%")));
+			builder.or(
+				builder.like(root.get("registration"), filter.getParamSearch().toUpperCase() + "%"),
+				builder.like(root.get("cpf"), filter.getParamSearch().toUpperCase() + "%")));
 
 		query.where(predicates.toArray(new Predicate[0]));
 

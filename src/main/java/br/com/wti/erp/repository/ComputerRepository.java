@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,7 +17,11 @@ public class ComputerRepository implements IRepository<Computer>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
 	private EntityManager manager;
+	
+	public ComputerRepository() {
+	}
 
 	public ComputerRepository(EntityManager manager) {
 		this.manager = manager;
@@ -27,6 +32,7 @@ public class ComputerRepository implements IRepository<Computer>, Serializable {
 		return manager.createQuery("from Computer", Computer.class).getResultList();
 	}
 
+	@Override
 	public List<Computer> findAllByParams(Filter filter) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Computer> query = builder.createQuery(Computer.class);
