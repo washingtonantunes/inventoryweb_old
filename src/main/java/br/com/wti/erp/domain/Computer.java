@@ -11,9 +11,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,6 +23,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.com.wti.erp.domain.changes.ChangeComputer;
 import br.com.wti.erp.domain.enums.StatusComputerEnum;
 import br.com.wti.erp.domain.enums.TypeComputerEnum;
 import lombok.AccessLevel;
@@ -34,7 +34,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_computers")
-public class Computer extends AbstractBean implements Serializable {
+public class Computer extends AbstractEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -95,39 +95,31 @@ public class Computer extends AbstractBean implements Serializable {
 
 	@Column(name = "cost_type", length = 30)
 	private String costType;
-	
+
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "project_id", referencedColumnName = "id")
 	private Project project;
-	
+
 	@OneToOne(optional = true)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinTable(
-			name = "tb_changes_computers",
-			joinColumns = {@JoinColumn(name = "computer_id")},
-			inverseJoinColumns = {@JoinColumn(name = "change_id")}
-			)
-	@Getter
-	@Setter(value = AccessLevel.PRIVATE) //TODO Corrigir changes
-	private List<Change> changes;
 
-	public void addChange(Change change) {
+	@OneToMany(mappedBy = "computer", fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	@Getter
+	@Setter(value = AccessLevel.PRIVATE)
+	private List<ChangeComputer> changes;
+
+	public void addChange(ChangeComputer change) {
 		if (change != null) {
 			this.changes.add(change);
 		}
 	}
 
-	public void removeChange(Change change) {
+	public void removeChange(ChangeComputer change) {
 		if (change != null) {
 			this.changes.remove(change);
 		}
-	}
-
-	public Computer() {
 	}
 
 	@Override

@@ -11,16 +11,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 @MappedSuperclass
 @EqualsAndHashCode(of = { "id" })
-public abstract class AbstractBean implements Serializable {
+public abstract class AbstractEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter
-	@Setter
 	private Integer id;
 	
 	@Override

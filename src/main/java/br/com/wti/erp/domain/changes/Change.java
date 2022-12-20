@@ -1,31 +1,31 @@
-package br.com.wti.erp.domain;
+package br.com.wti.erp.domain.changes;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "tb_changes")
-public class Change implements Serializable {
+@MappedSuperclass
+@EqualsAndHashCode(of = { "id" })
+public abstract class Change implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -43,11 +43,8 @@ public class Change implements Serializable {
 	@Column(nullable = false, length = 50)
 	private String author;
 
-	public Change() {
-	}
-
 	@Override
 	public String toString() {
-		return "Change " + super.toString();
+		return "[id=" + id + "]";
 	}
 }

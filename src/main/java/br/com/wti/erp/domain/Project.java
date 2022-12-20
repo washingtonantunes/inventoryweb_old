@@ -9,9 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +19,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.com.wti.erp.domain.changes.ChangeProject;
 import br.com.wti.erp.domain.enums.StatusProjectEnum;
 import br.com.wti.erp.service.ProjectService;
 import lombok.AccessLevel;
@@ -31,7 +30,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_projects")
-public class Project extends AbstractBean implements Serializable {
+public class Project extends AbstractEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -57,42 +56,36 @@ public class Project extends AbstractBean implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateEntry;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinTable(
-			name = "tb_changes_projects", 
-			joinColumns = { @JoinColumn(name = "project_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "change_id") }
-			)
+	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
 	@Getter
-	@Setter(value = AccessLevel.PRIVATE) //TODO Corrigir changes
-	private List<Change> changes;
+	@Setter(value = AccessLevel.PRIVATE)
+	private List<ChangeProject> changes;
 
-	public void addChange(Change change) {
+	public void addChange(ChangeProject change) {
 		if (change != null) {
 			this.changes.add(change);
 		}
 	}
 
-	public void removeChange(Change change) {
+	public void removeChange(ChangeProject change) {
 		if (change != null) {
 			this.changes.remove(change);
 		}
 	}
-	
+
 	public Long allComputers() {
+		// TODO Corrigir metodo contado
 		return ProjectService.allComputers(this);
 	}
-	
+
 	public Long allUsers() {
+		// TODO Corrigir metodo contado
 		return ProjectService.allUsers(this);
 	}
-	
+
 	public Integer allMonitors() {
 		return 0;
-	}
-
-	public Project() {
 	}
 
 	@Override
