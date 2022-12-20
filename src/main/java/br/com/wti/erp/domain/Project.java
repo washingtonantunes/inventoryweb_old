@@ -21,7 +21,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.wti.erp.domain.changes.ChangeProject;
 import br.com.wti.erp.domain.enums.StatusProjectEnum;
-import br.com.wti.erp.service.ProjectService;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -72,16 +71,6 @@ public class Project extends AbstractEntity implements Serializable {
 		if (change != null) {
 			this.changes.remove(change);
 		}
-	}
-
-	public Long allComputers() {
-		// TODO Corrigir metodo contado
-		return ProjectService.allComputers(this);
-	}
-
-	public Long allUsers() {
-		// TODO Corrigir metodo contado
-		return ProjectService.allUsers(this);
 	}
 
 	public Integer allMonitors() {

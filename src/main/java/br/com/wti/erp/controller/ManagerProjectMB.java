@@ -45,4 +45,23 @@ public class ManagerProjectMB implements Serializable {
 			messages.info("Sua consulta não retornou registros.");
 		}
 	}
+	
+	@Getter
+	private Long allComputers;
+	
+	@Getter
+	private Long allUsers;
+	
+	@Getter
+	private Long allMonitors;
+	
+	public void updateQuantity() {
+		if(project != null) {
+			allComputers = projectService.allComputers(project);
+			
+			allUsers = projectService.allUsers(project);
+			
+			allMonitors = projectService.allMonitors(project);
+		}
+	}
 }

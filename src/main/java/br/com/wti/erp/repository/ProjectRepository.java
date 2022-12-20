@@ -77,4 +77,13 @@ public class ProjectRepository implements IRepository<Project>, Serializable {
 
 		return query.getSingleResult();
 	}
+	
+	public Long allMonitors(Project project) {
+		String jpql = "select count(*) from Monitor where project_id = :project_id";
+
+		TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
+		query.setParameter("project_id", project.getId());
+
+		return query.getSingleResult();
+	}
 }

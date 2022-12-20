@@ -38,13 +38,15 @@ public class ProjectService implements IService<Project>, Serializable {
 		projectRepository.save(project);
 	}
 
-	public static Long allComputers(Project project) {
-		//TODO allComputer
-		return 10L;
+	public Long allComputers(Project project) {
+		return projectRepository.allComputers(project);
 	}
 
-	public static Long allUsers(Project project) {
-		//TODO allUsers
-		return 20L;
+	public Long allUsers(Project project) {
+		return projectRepository.allUsers(project);
+	}
+	
+	public Long allMonitors(Project project) {
+		return projectRepository.allMonitors(project);
 	}
 }
