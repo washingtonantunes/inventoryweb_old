@@ -15,7 +15,7 @@ INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_ent
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (8, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ71047RM', 002245, 'STAND_BY');
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (9, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ93049RM', 003345, 'STAND_BY');
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (10, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRL93187RM', 001145, 'STAND_BY');
-INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status, project_id, user_id) VALUES (11, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ0101RM', 004245, 'STAND_BY', 2, 3);
+INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status, project_id, user_id) VALUES (11, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ0101RM', 004245, 'IN_USE', 2, 3);
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (12, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ14327RM', 001245, 'STAND_BY');
 
 INSERT INTO tb_changes_project (author, description, date, type, project_id) VALUES ('Washington Antunes', 'Projeto Cadastrado no Sistema', '2022-05-10', 'ENTRY', 1);

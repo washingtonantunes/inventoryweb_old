@@ -16,7 +16,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import br.com.wti.erp.domain.changes.ChangeComputer;
-import br.com.wti.erp.domain.enums.StatusComputerEnum;
 import br.com.wti.erp.domain.enums.TypeComputerEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -35,28 +34,17 @@ public class Computer extends AbstractEquipment implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TypeComputerEnum type;
 
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 30)
-	private StatusComputerEnum status;
-
 	@Column(name = "host_name", unique = true, length = 30)
 	private String hostName;
 
 	@Column(name = "address_mac", length = 30)
 	private String addressMAC;
 
-	@Column(name = "patrimony_number", unique = true, length = 10)
-	private String patrimonyNumber;
-
 	@Column(name = "memory_ram", length = 10)
 	private String memoryRam;
 
 	@Column(name = "hard_disk", length = 10)
 	private String hardDisk;
-
-	@Column(name = "cost_type", length = 30)
-	private String costType;
 
 	@OneToMany(mappedBy = "computer", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)

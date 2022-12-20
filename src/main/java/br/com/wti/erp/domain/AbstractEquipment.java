@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.com.wti.erp.domain.enums.StatusComputerEnum;
+import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +31,9 @@ public abstract class AbstractEquipment extends AbstractEntity implements Serial
 	@NotEmpty
 	@Column(name = "serial_number", unique = true, nullable = false, length = 30)
 	private String serialNumber;
+	
+	@Column(name = "patrimony_number", unique = true, length = 10)
+	private String patrimonyNumber;
 	
 	@NotEmpty
 	@Column(nullable = false, length = 10)
@@ -53,15 +56,18 @@ public abstract class AbstractEquipment extends AbstractEntity implements Serial
 	@Column(nullable = false, length = 30)
 	private String location;
 
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 30)
-	private StatusComputerEnum status;
-
 	private String note;
 
 	@Column(precision = 10, scale = 2)
 	private BigDecimal value;
+	
+	@Column(name = "cost_type", length = 30)
+	private String costType;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 30)
+	private StatusEquipmentEnum status;
 	
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "project_id", referencedColumnName = "id")
