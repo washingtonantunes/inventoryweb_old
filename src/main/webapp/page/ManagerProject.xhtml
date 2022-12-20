@@ -40,7 +40,7 @@
 					selection="#{managerProjectMB.entity}" rowKey="#{project.id}"
 					size="small" stripedRows="true">
 		
-					<p:ajax event="rowSelect" process="@this" update="projectDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" />
+					<p:ajax event="rowSelect" process="@this" update="projectDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" oncomplete="#{managerProjectMB.updateQuantity()}" />
 			
 					<p:column headerText="Ações">
 						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{managerProjectMB.entity.id == null or managerProjectMB.entity.id != project.id}" onclick="PF('panelDetails').show()" />
@@ -96,7 +96,8 @@
 						<p:fieldset>
 							<p:outputPanel>
 								<p:outputLabel value="Usuários" for="users" style="margin-right: 10px" />
-								<p:inputText id="users" value="#{managerProjectMB.entity.allUsers()}" readonly="true" size="10" />
+
+								<p:inputText id="users" value="#{managerProjectMB.allUsers}" readonly="true" size="10" />
 							</p:outputPanel>
 						</p:fieldset>
 
@@ -105,7 +106,8 @@
 						<p:fieldset>
 							<p:panelGrid columns="2" layout="flex">
 								<p:outputLabel value="Computadores" for="computers" />
-								<p:inputText id="computers" value="#{managerProjectMB.entity.allComputers()}" readonly="true" size="5" />
+
+								<p:inputText id="computers" value="#{managerProjectMB.allComputers}" readonly="true" size="5" />
 							</p:panelGrid>
 						</p:fieldset>
 
@@ -114,7 +116,8 @@
 						<p:fieldset>
 							<p:panelGrid columns="2">
 								<p:outputLabel value="Monitores" for="monitors" />
-								<p:inputText id="monitors" value="#{managerProjectMB.entity.allMonitors()}" readonly="true" size="5" />
+
+								<p:inputText id="monitors" value="#{managerProjectMB.allMonitors}" readonly="true" size="5" />
 							</p:panelGrid>
 						</p:fieldset>
 					</p:tab>

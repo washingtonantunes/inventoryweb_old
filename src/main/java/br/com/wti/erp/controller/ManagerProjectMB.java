@@ -61,4 +61,23 @@ public class ManagerProjectMB extends BaseCrudMB<Project> implements Serializabl
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Getter
+	private Long allComputers;
+	
+	@Getter
+	private Long allUsers;
+	
+	@Getter
+	private Long allMonitors;
+	
+	public void updateQuantity() {
+		if(project != null) {
+			allComputers = projectService.allComputers(project);
+			
+			allUsers = projectService.allUsers(project);
+			
+			allMonitors = projectService.allMonitors(project);
+		}
+	}
 }
