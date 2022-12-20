@@ -1,48 +1,64 @@
 package br.com.wti.erp.controller;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.wti.erp.domain.Project;
-import br.com.wti.erp.repository.Filter;
 import br.com.wti.erp.service.ProjectService;
-import br.com.wti.erp.util.FacesMessages;
-import lombok.Getter;
-import lombok.Setter;
 
 @Named
 @ViewScoped
-public class ManagerProjectMB implements Serializable {
+public class ManagerProjectMB extends BaseCrudMB<Project> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private FacesMessages messages;
-
-	@Inject
 	private ProjectService projectService;
+	
+	@PostConstruct
+	@Override
+	public void init() {
+		setService(projectService);
+	}
 
-	@Getter
-	@Setter
-	private Project project;
+	@Override
+	public void preNew(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 
-	@Getter
-	private List<Project> listProjects;
+	@Override
+	public void posNew(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 
-	@Inject
-	@Getter
-	@Setter
-	private Filter filter;
+	@Override
+	public void preUpdate(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 
-	public void search() {
-		listProjects = projectService.findAllByParam(this.filter);
+	@Override
+	public void posUpdate(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 
-		if (listProjects.isEmpty()) {
-			messages.info("Sua consulta não retornou registros.");
-		}
+	@Override
+	public void preSave(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void posSave(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 }

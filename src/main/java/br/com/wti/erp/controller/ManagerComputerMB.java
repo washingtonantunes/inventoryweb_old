@@ -1,48 +1,64 @@
 package br.com.wti.erp.controller;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.wti.erp.domain.Computer;
-import br.com.wti.erp.repository.Filter;
 import br.com.wti.erp.service.ComputerService;
-import br.com.wti.erp.util.FacesMessages;
-import lombok.Getter;
-import lombok.Setter;
 
 @Named
 @ViewScoped
-public class ManagerComputerMB implements Serializable {
+public class ManagerComputerMB extends BaseCrudMB<Computer> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private FacesMessages messages;
-
-	@Inject
 	private ComputerService computerService;
+	
+	@PostConstruct
+	@Override
+	public void init() {
+		setService(computerService);
+	}
 
-	@Getter
-	@Setter
-	private Computer computer;
+	@Override
+	public void preNew(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 
-	@Getter
-	private List<Computer> listComputers;
+	@Override
+	public void posNew(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 
-	@Inject
-	@Getter
-	@Setter
-	private Filter filter;
+	@Override
+	public void preUpdate(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 
-	public void search() {
-		listComputers = computerService.findAllByParam(this.filter);
+	@Override
+	public void posUpdate(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 
-		if (listComputers.isEmpty()) {
-			messages.info("Sua consulta não retornou registros.");
-		}
+	@Override
+	public void preSave(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void posSave(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 }

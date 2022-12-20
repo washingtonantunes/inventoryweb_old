@@ -33,17 +33,17 @@
 		
 				<p:spacer height="20px" />
 				
-				<p:dataTable id="projectDataTable" value="#{managerProjectMB.listProjects}" 
+				<p:dataTable id="projectDataTable" value="#{managerProjectMB.searchResult}" 
 					var="project" emptyMessage="Nenhum Registro Encontrado!" 
 					paginator="true" rows="10"
 					paginatorPosition="bottom" selectionMode="single"
-					selection="#{managerProjectMB.project}" rowKey="#{project.id}"
+					selection="#{managerProjectMB.entity}" rowKey="#{project.id}"
 					size="small" stripedRows="true">
 		
 					<p:ajax event="rowSelect" process="@this" update="projectDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" />
 			
 					<p:column headerText="Ações">
-						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{managerProjectMB.project.id == null or managerProjectMB.project.id != project.id}" onclick="PF('panelDetails').show()" />
+						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{managerProjectMB.entity.id == null or managerProjectMB.entity.id != project.id}" onclick="PF('panelDetails').show()" />
 					</p:column>
 					
 					<p:column headerText="Nome">
@@ -72,31 +72,31 @@
 		        <p:tabView dynamic="true" cache="true">
 					<p:tab title="Dados">
 						<p:panelGrid columns="4" layout="grid"
-							rendered="#{managerProjectMB.project ne null}"
+							rendered="#{managerProjectMB.entity ne null}"
 							style="width: 100%">
 							<p:outputLabel value="Nome" for="name" />
-							<p:inputText id="name" value="#{managerProjectMB.project.name}" readonly="true" />
+							<p:inputText id="name" value="#{managerProjectMB.entity.name}" readonly="true" />
 
 							<p:outputLabel value="Cidade" for="city" />
-							<p:inputText id="city" value="#{managerProjectMB.project.city}" readonly="true" />
+							<p:inputText id="city" value="#{managerProjectMB.entity.city}" readonly="true" />
 
 							<p:outputLabel value="Centro de Custo" for="costCenter" />
-							<p:inputText id="costCenter" value="#{managerProjectMB.project.costCenter}" readonly="true" />
+							<p:inputText id="costCenter" value="#{managerProjectMB.entity.costCenter}" readonly="true" />
 							
 							<p:outputLabel value="Data de Entrada" for="dateEntry" />
-							<p:outputLabel id="dateEntry" value="#{managerProjectMB.project.dateEntry}">
+							<p:outputLabel id="dateEntry" value="#{managerProjectMB.entity.dateEntry}">
 								<f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="pt_BR" />
 							</p:outputLabel>
 
 							<p:outputLabel value="Status" for="status" />
-							<p:outputLabel id="status" value="#{managerProjectMB.project.status.descricao}" />
+							<p:outputLabel id="status" value="#{managerProjectMB.entity.status.descricao}" />
 						</p:panelGrid>
 					</p:tab>
 					<p:tab title="Financeiro">
 						<p:fieldset>
 							<p:outputPanel>
 								<p:outputLabel value="Usuários" for="users" style="margin-right: 10px" />
-								<p:inputText id="users" value="#{managerProjectMB.project.allUsers()}" readonly="true" size="10" />
+								<p:inputText id="users" value="#{managerProjectMB.entity.allUsers()}" readonly="true" size="10" />
 							</p:outputPanel>
 						</p:fieldset>
 
@@ -105,7 +105,7 @@
 						<p:fieldset>
 							<p:panelGrid columns="2" layout="flex">
 								<p:outputLabel value="Computadores" for="computers" />
-								<p:inputText id="computers" value="#{managerProjectMB.project.allComputers()}" readonly="true" size="5" />
+								<p:inputText id="computers" value="#{managerProjectMB.entity.allComputers()}" readonly="true" size="5" />
 							</p:panelGrid>
 						</p:fieldset>
 
@@ -114,14 +114,14 @@
 						<p:fieldset>
 							<p:panelGrid columns="2">
 								<p:outputLabel value="Monitores" for="monitors" />
-								<p:inputText id="monitors" value="#{managerProjectMB.project.allMonitors()}" readonly="true" size="5" />
+								<p:inputText id="monitors" value="#{managerProjectMB.entity.allMonitors()}" readonly="true" size="5" />
 							</p:panelGrid>
 						</p:fieldset>
 					</p:tab>
 					<p:tab title="Alterações">
 		                <p:outputPanel>
 							<p:dataTable id="changeDataTable"
-								value="#{managerProjectMB.project.changes}" var="change"
+								value="#{managerProjectMB.entity.changes}" var="change"
 								emptyMessage="Nenhum registro encontrado!" rows="10" size="small">
 			
 								<p:column headerText="Tipo">
