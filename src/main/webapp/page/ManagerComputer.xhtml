@@ -137,7 +137,7 @@
 					</p:tab>
 					<p:tab title="Logística">
 						<p:fieldset legend="Projeto">
-							<p:panelGrid columns="4" rendered="#{managerComputerMB.computer.project ne null}">
+							<p:panelGrid columns="4" rendered="#{managerComputerMB.entity.project ne null}">
 								<p:outputLabel value="Projeto" for="project" />
 								<p:inputText id="project" value="#{managerComputerMB.entity.project.name}" readonly="true" />
 								
@@ -145,13 +145,13 @@
 								<p:inputText id="costCenter" value="#{managerComputerMB.entity.project.costCenter}" readonly="true" />
 							</p:panelGrid>
 							
-							<p:outputLabel rendered="#{managerComputerMB.computer.project == null}" value="Nenhum Projeto Vinculado" />
+							<p:outputLabel rendered="#{managerComputerMB.entity.project == null}" value="Nenhum Projeto Vinculado" />
 						</p:fieldset>
 						
 						<p:spacer height="10px" />
 						
 						<p:fieldset legend="Usuário">
-							<p:panelGrid columns="4" rendered="#{managerComputerMB.computer.user ne null}">
+							<p:panelGrid columns="4" rendered="#{managerComputerMB.entity.user ne null}">
 								<p:outputLabel value="Matrícula" for="registration" />
 								<p:inputText id="registration" value="#{managerComputerMB.entity.user.registration}" readonly="true" />
 								
@@ -159,7 +159,7 @@
 								<p:inputText id="nameUser" value="#{managerComputerMB.entity.user.name}" readonly="true" />
 							</p:panelGrid>
 							
-							<p:outputLabel rendered="#{managerComputerMB.computer.user == null}" value="Nenhum Usuário Vinculado" />
+							<p:outputLabel rendered="#{managerComputerMB.entity.user == null}" value="Nenhum Usuário Vinculado" />
 						</p:fieldset>
 						
 						<p:spacer height="10px" />

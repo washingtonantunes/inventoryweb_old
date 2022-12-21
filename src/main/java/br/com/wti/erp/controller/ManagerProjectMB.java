@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import br.com.wti.erp.domain.Project;
 import br.com.wti.erp.service.ProjectService;
+import lombok.Getter;
 
 @Named
 @ViewScoped
@@ -72,12 +73,12 @@ public class ManagerProjectMB extends BaseCrudMB<Project> implements Serializabl
 	private Long allMonitors;
 	
 	public void updateQuantity() {
-		if(project != null) {
-			allComputers = projectService.allComputers(project);
+		if(getEntity() != null) {
+			allComputers = projectService.allComputers(getEntity());
 			
-			allUsers = projectService.allUsers(project);
+			allUsers = projectService.allUsers(getEntity());
 			
-			allMonitors = projectService.allMonitors(project);
+			allMonitors = projectService.allMonitors(getEntity());
 		}
 	}
 }
