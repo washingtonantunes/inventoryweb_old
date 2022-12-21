@@ -135,4 +135,5 @@ public abstract class BaseCrudMB<Bean> extends BaseMB implements Serializable {
 	public abstract void posSave(ActionEvent event);
 
 	public abstract void init();
+	
 }

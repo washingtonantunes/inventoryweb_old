@@ -7,6 +7,8 @@
 	template="/WEB-INF/template/_layout.xhtml">
 	
 	<ui:param name="detailsPanelVisible" value="false"></ui:param>
+	<ui:param name="managerBean" value="#{managerProjectMB}"></ui:param>
+	<ui:param name="model" value="#{managerProjectMB.entity}"></ui:param>
 
 	<ui:define name="title">
 		Gestão de Projetos
@@ -23,27 +25,27 @@
 		
 					<p:toolbarGroup align="right">
 						<p:inputText id="paramSearch" placeholder="Digite para pesquisar..." 
-							size="20" value="#{managerProjectMB.filter.paramSearch}" />
+							size="20" value="#{managerBean.filter.paramSearch}" />
 		
 						<p:commandButton value="Pesquisar" icon="pi pi-search"
-							actionListener="#{managerProjectMB.search}" update="projectDataTable messages frm:panelDetails"
+							actionListener="#{managerBean.search}" update="projectDataTable messages frm:panelDetails"
 							process="@this paramSearch" />
 					</p:toolbarGroup>
 				</p:toolbar>
 		
 				<p:spacer height="20px" />
 				
-				<p:dataTable id="projectDataTable" value="#{managerProjectMB.searchResult}" 
+				<p:dataTable id="projectDataTable" value="#{managerBean.searchResult}" 
 					var="project" emptyMessage="Nenhum Registro Encontrado!" 
 					paginator="true" rows="10"
 					paginatorPosition="bottom" selectionMode="single"
-					selection="#{managerProjectMB.entity}" rowKey="#{project.id}"
+					selection="#{model}" rowKey="#{project.id}"
 					size="small" stripedRows="true">
 		
-					<p:ajax event="rowSelect" process="@this" update="projectDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" oncomplete="#{managerProjectMB.updateQuantity()}" />
+					<p:ajax event="rowSelect" process="@this" update="projectDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" oncomplete="#{managerBean.updateQuantity()}" />
 			
 					<p:column headerText="Ações">
-						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{managerProjectMB.entity.id == null or managerProjectMB.entity.id != project.id}" onclick="PF('panelDetails').show()" />
+						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{model.id == null or model.id != project.id}" onclick="PF('panelDetails').show()" />
 					</p:column>
 					
 					<p:column headerText="Nome">
@@ -72,24 +74,24 @@
 		        <p:tabView dynamic="true" cache="true">
 					<p:tab title="Dados">
 						<p:panelGrid columns="4" layout="grid"
-							rendered="#{managerProjectMB.entity ne null}"
+							rendered="#{model ne null}"
 							style="width: 100%">
 							<p:outputLabel value="Nome" for="name" />
-							<p:inputText id="name" value="#{managerProjectMB.entity.name}" readonly="true" />
+							<p:inputText id="name" value="#{model.name}" readonly="true" />
 
 							<p:outputLabel value="Cidade" for="city" />
-							<p:inputText id="city" value="#{managerProjectMB.entity.city}" readonly="true" />
+							<p:inputText id="city" value="#{model.city}" readonly="true" />
 
 							<p:outputLabel value="Centro de Custo" for="costCenter" />
-							<p:inputText id="costCenter" value="#{managerProjectMB.entity.costCenter}" readonly="true" />
+							<p:inputText id="costCenter" value="#{model.costCenter}" readonly="true" />
 							
 							<p:outputLabel value="Data de Entrada" for="dateEntry" />
-							<p:outputLabel id="dateEntry" value="#{managerProjectMB.entity.dateEntry}">
+							<p:outputLabel id="dateEntry" value="#{model.dateEntry}">
 								<f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="pt_BR" />
 							</p:outputLabel>
 
 							<p:outputLabel value="Status" for="status" />
-							<p:outputLabel id="status" value="#{managerProjectMB.entity.status.descricao}" />
+							<p:outputLabel id="status" value="#{model.status.descricao}" />
 						</p:panelGrid>
 					</p:tab>
 					<p:tab title="Financeiro">
@@ -97,7 +99,7 @@
 							<p:outputPanel>
 								<p:outputLabel value="Usuários" for="users" style="margin-right: 10px" />
 
-								<p:inputText id="users" value="#{managerProjectMB.allUsers}" readonly="true" size="10" />
+								<p:inputText id="users" value="#{managerBean.allUsers}" readonly="true" size="10" />
 							</p:outputPanel>
 						</p:fieldset>
 
@@ -107,7 +109,7 @@
 							<p:panelGrid columns="2" layout="flex">
 								<p:outputLabel value="Computadores" for="computers" />
 
-								<p:inputText id="computers" value="#{managerProjectMB.allComputers}" readonly="true" size="5" />
+								<p:inputText id="computers" value="#{managerBean.allComputers}" readonly="true" size="5" />
 							</p:panelGrid>
 						</p:fieldset>
 
@@ -117,14 +119,14 @@
 							<p:panelGrid columns="2">
 								<p:outputLabel value="Monitores" for="monitors" />
 
-								<p:inputText id="monitors" value="#{managerProjectMB.allMonitors}" readonly="true" size="5" />
+								<p:inputText id="monitors" value="#{managerBean.allMonitors}" readonly="true" size="5" />
 							</p:panelGrid>
 						</p:fieldset>
 					</p:tab>
 					<p:tab title="Alterações">
 		                <p:outputPanel>
 							<p:dataTable id="changeDataTable"
-								value="#{managerProjectMB.entity.changes}" var="change"
+								value="#{model.changes}" var="change"
 								emptyMessage="Nenhum registro encontrado!" rows="10" size="small">
 			
 								<p:column headerText="Tipo">

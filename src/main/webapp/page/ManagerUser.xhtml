@@ -7,6 +7,8 @@
 	template="/WEB-INF/template/_layout.xhtml">
 	
 	<ui:param name="detailsPanelVisible" value="false"></ui:param>
+	<ui:param name="managerBean" value="#{managerUserMB}"></ui:param>
+	<ui:param name="model" value="#{managerUserMB.entity}"></ui:param>
 
 	<ui:define name="title">
 		Gestão de Usuários
@@ -23,27 +25,27 @@
 		
 					<p:toolbarGroup align="right">
 						<p:inputText id="paramSearch" placeholder="Digite para pesquisar..." 
-							size="20" value="#{managerUserMB.filter.paramSearch}" />
+							size="20" value="#{managerBean.filter.paramSearch}" />
 		
 						<p:commandButton value="Pesquisar" icon="pi pi-search"
-							actionListener="#{managerUserMB.search}" update="userDataTable messages frm:panelDetails"
+							actionListener="#{managerBean.search}" update="userDataTable messages frm:panelDetails"
 							process="@this paramSearch" />
 					</p:toolbarGroup>
 				</p:toolbar>
 		
 				<p:spacer height="20px" />
 				
-				<p:dataTable id="userDataTable" value="#{managerUserMB.searchResult}" 
+				<p:dataTable id="userDataTable" value="#{managerBean.searchResult}" 
 					var="user" emptyMessage="Nenhum Registro Encontrado!" 
 					paginator="true" rows="10"
 					paginatorPosition="bottom" selectionMode="single"
-					selection="#{managerUserMB.entity}" rowKey="#{user.id}"
+					selection="#{model}" rowKey="#{user.id}"
 					size="small" stripedRows="true">
 		
 					<p:ajax event="rowSelect" process="@this" update="userDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" />
 			
 					<p:column headerText="Ações">
-						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{managerUserMB.entity.id == null or managerUserMB.entity.id != user.id}" onclick="PF('panelDetails').show()" />
+						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{model.id == null or model.id != user.id}" onclick="PF('panelDetails').show()" />
 					</p:column>
 					
 					<p:column headerText="Matrícula">
@@ -75,35 +77,35 @@
 		                
 		        <p:tabView dynamic="true" cache="true">
 		            <p:tab title="Dados">
-			            <p:panelGrid columns="4" layout="grid" rendered="#{managerUserMB.entity ne null}" style="width: 100%">
+			            <p:panelGrid columns="4" layout="grid" rendered="#{model ne null}" style="width: 100%">
 							<p:outputLabel value="Matrícula" for="registration" />
-							<p:inputText id="registration" value="#{managerUserMB.entity.registration}" readonly="true" />
+							<p:inputText id="registration" value="#{model.registration}" readonly="true" />
 							
 							<p:outputLabel value="Nome" for="name" />
-							<p:inputText id="name" value="#{managerUserMB.entity.name}" readonly="true" />
+							<p:inputText id="name" value="#{model.name}" readonly="true" />
 						
 							<p:outputLabel value="CPF" for="cpf" />
-							<p:inputText id="cpf" value="#{managerUserMB.entity.cpf}" converter="CPFConverter" readonly="true" />
+							<p:inputText id="cpf" value="#{model.cpf}" converter="CPFConverter" readonly="true" />
 							
 							<p:outputLabel value="Telefone" for="phone" />
-							<p:inputText id="phone" value="#{managerUserMB.entity.phone}" readonly="true"/>
+							<p:inputText id="phone" value="#{model.phone}" readonly="true"/>
 						
 							<p:outputLabel value="Email" for="email" />
-							<p:inputText id="email" value="#{managerUserMB.entity.email}" readonly="true"/>
+							<p:inputText id="email" value="#{model.email}" readonly="true"/>
 							
 							<p:outputLabel value="Departamento" for="department" />
-							<p:inputText id="department" value="#{managerUserMB.entity.department}" readonly="true"/>
+							<p:inputText id="department" value="#{model.department}" readonly="true"/>
 							
 							<p:outputLabel value="Projeto" for="project" />
-							<p:inputText id="project" value="#{managerUserMB.entity.project.name}" readonly="true"/>
+							<p:inputText id="project" value="#{model.project.name}" readonly="true"/>
 						
 							<p:outputLabel value="Data de Entrada" for="dateEntry" />
-							<p:outputLabel id="dateEntry" value="#{managerUserMB.entity.dateEntry}">
+							<p:outputLabel id="dateEntry" value="#{model.dateEntry}">
 								<f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="pt_BR"/>
 							</p:outputLabel>
 							
 							<p:outputLabel value="Status" for="status" />
-							<p:outputLabel id="status" value="#{managerUserMB.entity.status.descricao}" />
+							<p:outputLabel id="status" value="#{model.status.descricao}" />
 						</p:panelGrid>
 		            </p:tab>
 		            <p:tab title="Equipamentos">
@@ -117,7 +119,7 @@
 		            	
 		            	<p:spacer height="10px" />
 		            	
-						<p:dataTable id="itemDataTable" value="#{managerUserMB.entity.itens}" 
+						<p:dataTable id="itemDataTable" value="#{model.itens}" 
 							var="item" emptyMessage="Nenhum registro encontrado!" 
 							rows="10" size="small">
 		
@@ -140,7 +142,7 @@
 		            <p:tab title="Alterações">
 		                <p:outputPanel>
 							<p:dataTable id="changeDataTable"
-								value="#{managerUserMB.entity.changes}" var="change"
+								value="#{model.changes}" var="change"
 								emptyMessage="Nenhum registro encontrado!" rows="10" size="small">
 			
 								<p:column headerText="Tipo">

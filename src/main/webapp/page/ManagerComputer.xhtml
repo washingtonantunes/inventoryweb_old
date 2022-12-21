@@ -7,6 +7,8 @@
 	template="/WEB-INF/template/_layout.xhtml">
 	
 	<ui:param name="detailsPanelVisible" value="false"></ui:param>
+	<ui:param name="managerBean" value="#{managerComputerMB}"></ui:param>
+	<ui:param name="model" value="#{managerComputerMB.entity}"></ui:param>
 
 	<ui:define name="title">
 		Gestão de Computadores
@@ -23,27 +25,27 @@
 		
 					<p:toolbarGroup align="right">
 						<p:inputText id="paramSearch" placeholder="Digite para pesquisar..." 
-							size="20" value="#{managerComputerMB.filter.paramSearch}" />
+							size="20" value="#{managerBean.filter.paramSearch}" />
 		
 						<p:commandButton value="Pesquisar" icon="pi pi-search"
-							actionListener="#{managerComputerMB.search}" update="computerDataTable messages frm:panelDetails"
+							actionListener="#{managerBean.search}" update="computerDataTable messages frm:panelDetails"
 							process="@this paramSearch" />
 					</p:toolbarGroup>
 				</p:toolbar>
 		
 				<p:spacer height="20px" />
 				
-				<p:dataTable id="computerDataTable" value="#{managerComputerMB.searchResult}" 
+				<p:dataTable id="computerDataTable" value="#{managerBean.searchResult}" 
 					var="computer" emptyMessage="Nenhum Registro Encontrado!" 
 					paginator="true" rows="10"
 					paginatorPosition="bottom" selectionMode="single"
-					selection="#{managerComputerMB.entity}" rowKey="#{computer.id}"
+					selection="#{model}" rowKey="#{computer.id}"
 					size="small" stripedRows="true">
 		
 					<p:ajax event="rowSelect" process="@this" update="computerDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" />
 			
 					<p:column headerText="Ações">
-						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{managerComputerMB.entity.id == null or managerComputerMB.entity.id != computer.id}" onclick="PF('panelDetails').show()" />
+						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{model.id == null or model.id != computer.id}" onclick="PF('panelDetails').show()" />
 					</p:column>
 					
 					<p:column headerText="Número de Série">
@@ -80,86 +82,86 @@
 		        <p:tabView dynamic="true" cache="true">
 					<p:tab title="Dados">
 						<p:panelGrid columns="4" layout="grid"
-							rendered="#{managerComputerMB.entity ne null}"
+							rendered="#{model ne null}"
 							style="width: 100%">
 							<p:outputLabel value="Número de Série" for="serialNumber" />
-							<p:inputText id="serialNumber" value="#{managerComputerMB.entity.serialNumber}" readonly="true" />
+							<p:inputText id="serialNumber" value="#{model.serialNumber}" readonly="true" />
 
 							<p:outputLabel value="Tipo" for="type" />
-							<p:inputText id="type" value="#{managerComputerMB.entity.type}" readonly="true" />
+							<p:inputText id="type" value="#{model.type}" readonly="true" />
 
 							<p:outputLabel value="Marca" for="brand" />
-							<p:inputText id="brand" value="#{managerComputerMB.entity.brand}" readonly="true" />
+							<p:inputText id="brand" value="#{model.brand}" readonly="true" />
 							
 							<p:outputLabel value="N.º Patrimônio" for="patrimonyNumber" />
-							<p:inputText id="patrimonyNumber" value="#{managerComputerMB.entity.patrimonyNumber}" readonly="true" />
+							<p:inputText id="patrimonyNumber" value="#{model.patrimonyNumber}" readonly="true" />
 
 							<p:outputLabel value="Modelo" for="model" />
-							<p:inputText id="model" value="#{managerComputerMB.entity.model}" readonly="true" />
+							<p:inputText id="model" value="#{model.model}" readonly="true" />
 
 							<p:outputLabel value="Host Name" for="hostName" />
-							<p:inputText id="hostName" value="#{managerComputerMB.entity.hostName}" readonly="true" />
+							<p:inputText id="hostName" value="#{model.hostName}" readonly="true" />
 
 							<p:outputLabel value="Endereço MAC" for="addressMAC" />
-							<p:inputText id="addressMAC" value="#{managerComputerMB.entity.addressMAC}" readonly="true" />
+							<p:inputText id="addressMAC" value="#{model.addressMAC}" readonly="true" />
 
 							<p:outputLabel value="Memória RAM" for="memoryRam" />
-							<p:inputText id="memoryRam" value="#{managerComputerMB.entity.memoryRam}" readonly="true" />
+							<p:inputText id="memoryRam" value="#{model.memoryRam}" readonly="true" />
 							
 							<p:outputLabel value="Disco Rígido" for="hardDisk" />
-							<p:inputText id="hardDisk" value="#{managerComputerMB.entity.hardDisk}" readonly="true" />
+							<p:inputText id="hardDisk" value="#{model.hardDisk}" readonly="true" />
 							
 							<p:outputLabel value="Localização" for="location" />
-							<p:inputText id="location" value="#{managerComputerMB.entity.location}" readonly="true" />
+							<p:inputText id="location" value="#{model.location}" readonly="true" />
 							
 							<p:outputLabel value="Tipo Custo" for="costType" />
-							<p:inputText id="costType" value="#{managerComputerMB.entity.costType}" readonly="true" />
+							<p:inputText id="costType" value="#{model.costType}" readonly="true" />
 							
 							<p:outputLabel value="Valor" for="value" />
-							<p:inputText id="value" value="#{managerComputerMB.entity.value}" readonly="true">
+							<p:inputText id="value" value="#{model.value}" readonly="true">
 								<f:convertNumber type="currency" pattern="R$ #0.00" currencySymbol="R$" locale="pt_BR" />
 							</p:inputText>
 							
 							<p:outputLabel value="Nota Entrada" for="noteEntry" />
-							<p:inputText id="noteEntry" value="#{managerComputerMB.entity.noteEntry}" readonly="true" />
+							<p:inputText id="noteEntry" value="#{model.noteEntry}" readonly="true" />
 							
 							<p:outputLabel value="Notas" for="note" />
-							<p:inputTextarea id="note" value="#{managerComputerMB.entity.note}" readonly="true" />
+							<p:inputTextarea id="note" value="#{model.note}" readonly="true" />
 
 							<p:outputLabel value="Data de Entrada" for="dateEntry" />
-							<p:outputLabel id="dateEntry" value="#{managerComputerMB.entity.dateEntry}">
+							<p:outputLabel id="dateEntry" value="#{model.dateEntry}">
 								<f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="pt_BR" />
 							</p:outputLabel>
 
 							<p:outputLabel value="Status" for="status" />
-							<p:outputLabel id="status" value="#{managerComputerMB.entity.status.descricao}" />
+							<p:outputLabel id="status" value="#{model.status.descricao}" />
 						</p:panelGrid>
 					</p:tab>
 					<p:tab title="Logística">
 						<p:fieldset legend="Projeto">
-							<p:panelGrid columns="4" rendered="#{managerComputerMB.entity.project ne null}">
+							<p:panelGrid columns="4" rendered="#{model.project ne null}">
 								<p:outputLabel value="Projeto" for="project" />
-								<p:inputText id="project" value="#{managerComputerMB.entity.project.name}" readonly="true" />
+								<p:inputText id="project" value="#{model.project.name}" readonly="true" />
 								
 								<p:outputLabel value="Centro de Custo" for="costCenter" />
-								<p:inputText id="costCenter" value="#{managerComputerMB.entity.project.costCenter}" readonly="true" />
+								<p:inputText id="costCenter" value="#{model.project.costCenter}" readonly="true" />
 							</p:panelGrid>
 							
-							<p:outputLabel rendered="#{managerComputerMB.entity.project == null}" value="Nenhum Projeto Vinculado" />
+							<p:outputLabel rendered="#{model.project == null}" value="Nenhum Projeto Vinculado" />
 						</p:fieldset>
 						
 						<p:spacer height="10px" />
 						
 						<p:fieldset legend="Usuário">
-							<p:panelGrid columns="4" rendered="#{managerComputerMB.entity.user ne null}">
+							<p:panelGrid columns="4" rendered="#{model.user ne null}">
 								<p:outputLabel value="Matrícula" for="registration" />
-								<p:inputText id="registration" value="#{managerComputerMB.entity.user.registration}" readonly="true" />
+								<p:inputText id="registration" value="#{model.user.registration}" readonly="true" />
 								
 								<p:outputLabel value="Nome" for="nameUser" />
-								<p:inputText id="nameUser" value="#{managerComputerMB.entity.user.name}" readonly="true" />
+								<p:inputText id="nameUser" value="#{model.user.name}" readonly="true" />
 							</p:panelGrid>
 							
-							<p:outputLabel rendered="#{managerComputerMB.entity.user == null}" value="Nenhum Usuário Vinculado" />
+							<p:outputLabel rendered="#{model.user == null}" value="Nenhum Usuário Vinculado" />
 						</p:fieldset>
 						
 						<p:spacer height="10px" />
@@ -177,7 +179,7 @@
 		            <p:tab title="Alterações">
 		                <p:outputPanel>
 							<p:dataTable id="changeDataTable"
-								value="#{managerComputerMB.entity.changes}" var="change"
+								value="#{model.changes}" var="change"
 								emptyMessage="Nenhum registro encontrado!" rows="10" size="small">
 			
 								<p:column headerText="Tipo">
