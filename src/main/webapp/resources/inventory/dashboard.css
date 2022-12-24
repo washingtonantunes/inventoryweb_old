@@ -1,0 +1,49 @@
+@charset "ISO-8859-1";
+
+.panel-main {
+	display: flex;
+	justify-content: center;
+}
+
+.panel {
+	display: flex;
+	justify-content: space-between;
+	width: 1366px;
+}
+
+.card {
+	display: block;
+	text-align: center;
+	color: white;
+	min-width: 250px;
+	min-height: 140px;
+	max-width: 250px;
+	max-height: 140px;
+	border-radius: 4px;
+}
+
+.card-head {
+	padding: 2px 0px;
+	border-bottom: 2px solid black;
+	font-weight: bold;
+}
+
+.card-body {
+	padding: 6px 0px;
+}
+
+.card-body label {
+	font-size: 40px !important;
+	font-weight: bold;
+}
+
+.card-footer {
+	display: flex;
+	justify-content: center;
+}
+
+.card-footer div label {
+	margin: 5px 8px;
+	font-size: 14px !important;
+}
+
