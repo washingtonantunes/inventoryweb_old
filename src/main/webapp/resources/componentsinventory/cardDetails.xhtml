@@ -15,31 +15,31 @@
 		<div class="card" style="background: #{cc.attrs.model.color};">
 
 			<div class="card-head">
-				<p:outputLabel value="#{cc.attrs.model.title1}" />
+				<p:outputLabel value="#{cc.attrs.model.titleMain}" />
 			</div>
 
 			<div class="card-body">
-				<p:outputLabel value="#{cc.attrs.model.value1}" />
+				<p:outputLabel value="#{cc.attrs.model.valueMain}" />
 			</div>
 
 			<div class="card-footer">
 				<div>
-					<p:outputLabel value="#{cc.attrs.model.title2}" />
+					<p:outputLabel value="#{cc.attrs.model.titleFirst}" />
 					<br />
-					<p:outputLabel value="#{cc.attrs.model.value2}" />
+					<p:outputLabel value="#{cc.attrs.model.valueFirst}" />
 				</div>
 
 				<div>
-					<p:outputLabel value="#{cc.attrs.model.title3}" />
+					<p:outputLabel value="#{cc.attrs.model.titleSecond}" />
 					<br />
-					<p:outputLabel value="#{cc.attrs.model.value3}" />
+					<p:outputLabel value="#{cc.attrs.model.valueSecond}" />
 				</div>
 
-				<h:panelGroup rendered="#{cc.attrs.model.title4 != null}">
+				<h:panelGroup rendered="#{cc.attrs.model.titleThird != null}">
 					<div>
-						<p:outputLabel value="#{cc.attrs.model.title4}" />
+						<p:outputLabel value="#{cc.attrs.model.titleThird}" />
 						<br />
-						<p:outputLabel value="#{cc.attrs.model.value4}" />
+						<p:outputLabel value="#{cc.attrs.model.valueThird}" />
 					</div>
 				</h:panelGroup>
 

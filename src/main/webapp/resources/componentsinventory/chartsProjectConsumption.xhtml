@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+
+<h:body>
+	<cc:interface>
+		<cc:attribute name="manager" required="true" />
+	</cc:interface>
+
+	<cc:implementation>
+
+		<div class="panel-charts-dunot">
+
+			<div class="panel-charts-dunot">
+
+				<div class="panel-charts-dunot-head">
+					<p:outputLabel value="Projeto x Consumo" />
+
+					<p:selectOneMenu id="typeConsumption"
+						value="#{cc.attrs.manager.dashboard.typeConsumptionSelected}"
+						label="Tipos" style="width: 11rem" panelStyle="width: 11rem"
+						scrollHeight="250" dynamic="true">
+
+						<p:ajax event="change" listener="#{cc.attrs.manager.changeDados}"
+							update="charts-dunot" />
+
+						<f:selectItems value="#{cc.attrs.manager.typeConsumption}" var="type"
+							itemLabel="#{type.descricao}" itemValue="#{type}" />
+					</p:selectOneMenu>
+				</div>
+				<div class="charts-dunot">
+					<p:donutChart id="charts-dunot"
+						model="#{cc.attrs.manager.dashboard.donutModel}" />
+				</div>
+
+			</div>
+
+		</div>
+
+	</cc:implementation>
+</h:body>
+
+</html>

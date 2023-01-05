@@ -14,16 +14,250 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<h:form id="frm" styleClass="panel-main">
+		<h:form id="frm">
+			<div class="panel-main">
+			<div class="panel-main-first">
+				<!-- inicio painel de card -->
+				<p:card
+					style="background: #{managerBean.dashboard.cardDetailComputers.color}">
+					<div class="card-head">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailComputers.titleMain}" />
+					</div>
 
-			<div class="panel">
-				<ui:repeat value="#{managerBean.dashboard.cardsDetail}" var="card">
-				
-					<wcc:cardDetails model="#{card}" />
-					
-				</ui:repeat>
+					<div class="card-body">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailComputers.valueMain}" />
+					</div>
+
+					<div class="card-footer">
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailComputers.titleFirst}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailComputers.valueFirst}" />
+						</div>
+
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailComputers.titleSecond}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailComputers.valueSecond}" />
+						</div>
+
+						<h:panelGroup
+							rendered="#{managerBean.dashboard.cardDetailComputers.titleThird != null}">
+							<div>
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailComputers.titleThird}" />
+								<br />
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailComputers.valueThird}" />
+							</div>
+						</h:panelGroup>
+					</div>
+				</p:card>
+
+				<p:card
+					style="background: #{managerBean.dashboard.cardDetailMonitors.color}">
+					<div class="card-head">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailMonitors.titleMain}" />
+					</div>
+
+					<div class="card-body">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailMonitors.valueMain}" />
+					</div>
+
+					<div class="card-footer">
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailMonitors.titleFirst}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailMonitors.valueFirst}" />
+						</div>
+
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailMonitors.titleSecond}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailMonitors.valueSecond}" />
+						</div>
+
+						<h:panelGroup
+							rendered="#{managerBean.dashboard.cardDetailMonitors.titleThird != null}">
+							<div>
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailMonitors.titleThird}" />
+								<br />
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailMonitors.valueThird}" />
+							</div>
+						</h:panelGroup>
+					</div>
+				</p:card>
+
+				<p:card
+					style="background: #{managerBean.dashboard.cardDetailPeripherals.color};">
+					<div class="card-head">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailPeripherals.titleMain}" />
+					</div>
+
+					<div class="card-body">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailPeripherals.valueMain}" />
+					</div>
+
+					<div class="card-footer">
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailPeripherals.titleFirst}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailPeripherals.valueFirst}" />
+						</div>
+
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailPeripherals.titleSecond}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailPeripherals.valueSecond}" />
+						</div>
+
+						<h:panelGroup
+							rendered="#{managerBean.dashboard.cardDetailPeripherals.titleThird != null}">
+							<div>
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailPeripherals.titleThird}" />
+								<br />
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailPeripherals.valueThird}" />
+							</div>
+						</h:panelGroup>
+					</div>
+				</p:card>
+
+				<p:card
+					style="background: #{managerBean.dashboard.cardDetailLicenses.color}">
+					<div class="card-head">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailLicenses.titleMain}" />
+					</div>
+
+					<div class="card-body">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailLicenses.valueMain}" />
+					</div>
+
+					<div class="card-footer">
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailLicenses.titleFirst}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailLicenses.valueFirst}" />
+						</div>
+
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailLicenses.titleSecond}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailLicenses.valueSecond}" />
+						</div>
+
+						<h:panelGroup
+							rendered="#{managerBean.dashboard.cardDetailLicenses.titleThird != null}">
+							<div>
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailLicenses.titleThird}" />
+								<br />
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailLicenses.valueThird}" />
+							</div>
+						</h:panelGroup>
+					</div>
+				</p:card>
+
+				<p:card
+					style="background: #{managerBean.dashboard.cardDetailUsers.color}">
+					<div class="card-head">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailUsers.titleMain}" />
+					</div>
+
+					<div class="card-body">
+						<p:outputLabel
+							value="#{managerBean.dashboard.cardDetailUsers.valueMain}" />
+					</div>
+
+					<div class="card-footer">
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailUsers.titleFirst}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailUsers.valueFirst}" />
+						</div>
+
+						<div>
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailUsers.titleSecond}" />
+							<br />
+							<p:outputLabel
+								value="#{managerBean.dashboard.cardDetailUsers.valueSecond}" />
+						</div>
+
+						<h:panelGroup
+							rendered="#{managerBean.dashboard.cardDetailUsers.titleThird != null}">
+							<div>
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailUsers.titleThird}" />
+								<br />
+								<p:outputLabel
+									value="#{managerBean.dashboard.cardDetailUsers.valueThird}" />
+							</div>
+						</h:panelGroup>
+					</div>
+				</p:card>
 			</div>
+			<!-- fim painel de card -->
+			<!-- inicio painel consumo -->
+			<div class="panel-main-second">
 
+				<div class="panel-charts-dunot">
+
+					<div class="panel-charts-dunot-head">
+						<p:outputLabel value="Projeto x Consumo" />
+
+						<p:selectOneMenu id="typeConsumption"
+							value="#{managerBean.dashboard.typeConsumptionSelected}" label="Tipos"
+							style="width: 11rem" panelStyle="width: 11rem" scrollHeight="250"
+							dynamic="true" >
+
+							<p:ajax event="change" listener="#{managerBean.changeDados}" update="charts-dunot" />
+
+							<f:selectItems value="#{managerBean.typeConsumption}" var="type"
+								itemLabel="#{type.descricao}" itemValue="#{type}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="charts-dunot">
+						<p:donutChart id="charts-dunot"
+							model="#{managerBean.dashboard.donutModel}" />
+					</div>
+
+				</div>
+
+			</div>
+			<!-- fim painel consumo -->
+			</div>
 		</h:form>
 
 	</ui:define>
