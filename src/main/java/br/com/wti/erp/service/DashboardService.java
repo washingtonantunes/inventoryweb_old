@@ -12,11 +12,11 @@ import org.primefaces.model.charts.donut.DonutChartDataSet;
 import org.primefaces.model.charts.donut.DonutChartModel;
 import org.primefaces.model.charts.donut.DonutChartOptions;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
+import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.optionconfig.title.Title;
 
 import br.com.wti.erp.domain.dashboard.Dashboard;
 import br.com.wti.erp.domain.dashboard.DetailObjectCard;
-import br.com.wti.erp.domain.enums.TypeConsumptionEnum;
 
 public class DashboardService implements Serializable {
 
@@ -114,10 +114,36 @@ public class DashboardService implements Serializable {
 
 	public void setConsumptionDonutChartModel(Dashboard dashboard) {
 		DonutChartModel donutModel = new DonutChartModel();
-
-		donutModel.setData(escolherDadosDonutChartModel(dashboard.getTypeConsumptionSelected()));
-
-		donutModel.setOptions(configuraOptions());
+		
+		ChartData data = new ChartData();
+		
+		data.addChartDataSet(obterDadosConsumo());
+		
+		List<String> labels = new ArrayList<>();
+		labels.add("Ifood");
+		labels.add("Sinqia");
+		labels.add("Nubank");
+		data.setLabels(labels);
+		
+		donutModel.setData(data);
+		
+		DonutChartOptions options = new DonutChartOptions();
+		
+		Title title = new Title();
+		title.setDisplay(true);
+		title.setText("Consumo");
+		title.setFontSize(20);
+		options.setTitle(title);
+		
+		Legend legend = new Legend();
+		legend.setDisplay(true);
+		legend.setPosition("left");
+		LegendLabel legendLabels = new LegendLabel();
+		legendLabels.setBoxWidth(20);
+		legend.setLabels(legendLabels);
+		options.setLegend(legend);
+		
+		donutModel.setOptions(options);
 
 		dashboard.setConsumptionDonutChartModel(donutModel);
 	}
@@ -166,104 +192,21 @@ public class DashboardService implements Serializable {
 		dashboard.setLogisticsBarChartModel(barModel);
 	}
 
-	private DonutChartOptions configuraOptions() {
-		DonutChartOptions options = new DonutChartOptions();
+	private DonutChartDataSet obterDadosConsumo() {
+		DonutChartDataSet dataSet = new DonutChartDataSet();
+		List<Number> values = new ArrayList<>();
+		values.add(100);
+		values.add(200);
+		values.add(50);
+		dataSet.setData(values);
 
-		Legend legend = new Legend();
-		legend.setPosition("left");
-		legend.setFullWidth(true);
+		List<String> bgColors = new ArrayList<>();
+		bgColors.add("rgb(255, 99, 132)");
+		bgColors.add("rgb(54, 162, 235)");
+		bgColors.add("rgb(255, 205, 86)");
+		dataSet.setBackgroundColor(bgColors);
 
-		options.setLegend(legend);
-
-		return options;
-	}
-
-	private ChartData escolherDadosDonutChartModel(TypeConsumptionEnum type) {
-		ChartData data = new ChartData();
-
-		if (type == TypeConsumptionEnum.COMPUTERS) {
-			DonutChartDataSet dataSet = new DonutChartDataSet();
-			List<Number> values = new ArrayList<>();
-			values.add(100);
-			values.add(100);
-			values.add(100);
-			dataSet.setData(values);
-
-			List<String> bgColors = new ArrayList<>();
-			bgColors.add("rgb(255, 99, 132)");
-			bgColors.add("rgb(54, 162, 235)");
-			bgColors.add("rgb(255, 205, 86)");
-			dataSet.setBackgroundColor(bgColors);
-
-			data.addChartDataSet(dataSet);
-			List<String> labels = new ArrayList<>();
-			labels.add("Ifood Computer");
-			labels.add("Sinqia Computer");
-			labels.add("Nubank Computer");
-			data.setLabels(labels);
-		} else if (type == TypeConsumptionEnum.MONITORS) {
-			DonutChartDataSet dataSet = new DonutChartDataSet();
-			List<Number> values = new ArrayList<>();
-			values.add(100);
-			values.add(100);
-			values.add(500);
-			dataSet.setData(values);
-
-			List<String> bgColors = new ArrayList<>();
-			bgColors.add("rgb(255, 99, 132)");
-			bgColors.add("rgb(54, 162, 235)");
-			bgColors.add("rgb(255, 205, 86)");
-			dataSet.setBackgroundColor(bgColors);
-
-			data.addChartDataSet(dataSet);
-			List<String> labels = new ArrayList<>();
-			labels.add("Ifood Monitor");
-			labels.add("Sinqia Monitor");
-			labels.add("Nubank Monitor");
-			data.setLabels(labels);
-		} else if (type == TypeConsumptionEnum.PERIPHERALS) {
-			DonutChartDataSet dataSet = new DonutChartDataSet();
-			List<Number> values = new ArrayList<>();
-			values.add(300);
-			values.add(700);
-			values.add(800);
-			dataSet.setData(values);
-
-			List<String> bgColors = new ArrayList<>();
-			bgColors.add("rgb(255, 99, 132)");
-			bgColors.add("rgb(54, 162, 235)");
-			bgColors.add("rgb(255, 205, 86)");
-			dataSet.setBackgroundColor(bgColors);
-
-			data.addChartDataSet(dataSet);
-			List<String> labels = new ArrayList<>();
-			labels.add("Ifood Periféricos");
-			labels.add("Sinqia Periféricos");
-			labels.add("Nubank Periféricos");
-			data.setLabels(labels);
-		} else {
-			DonutChartDataSet dataSet = new DonutChartDataSet();
-			List<Number> values = new ArrayList<>();
-			values.add(100);
-			values.add(200);
-			values.add(300);
-			dataSet.setData(values);
-
-			List<String> bgColors = new ArrayList<>();
-			bgColors.add("rgb(255, 99, 132)");
-			bgColors.add("rgb(54, 162, 235)");
-			bgColors.add("rgb(255, 205, 86)");
-			dataSet.setBackgroundColor(bgColors);
-
-			data.addChartDataSet(dataSet);
-			List<String> labels = new ArrayList<>();
-			labels.add("Ifood");
-			labels.add("Sinqia");
-			labels.add("Nubank");
-			data.setLabels(labels);
-		}
-
-		return data;
+		return dataSet;
 	}
 
 	private BarChartDataSet obterDadosEntregas() {

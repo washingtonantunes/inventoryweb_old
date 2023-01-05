@@ -5,7 +5,6 @@ import java.io.Serializable;
 import org.primefaces.model.charts.bar.BarChartModel;
 import org.primefaces.model.charts.donut.DonutChartModel;
 
-import br.com.wti.erp.domain.enums.TypeConsumptionEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +23,6 @@ public class Dashboard implements Serializable {
 	private DetailObjectCard cardDetailLicenses;
 
 	private DetailObjectCard cardDetailUsers;
-
-	private TypeConsumptionEnum typeConsumptionSelected;
 
 	private DonutChartModel consumptionDonutChartModel;
 

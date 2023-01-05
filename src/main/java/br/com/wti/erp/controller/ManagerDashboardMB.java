@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.wti.erp.domain.dashboard.Dashboard;
-import br.com.wti.erp.domain.enums.TypeConsumptionEnum;
 import br.com.wti.erp.service.DashboardService;
 import lombok.Getter;
 
@@ -32,14 +31,6 @@ public class ManagerDashboardMB implements Serializable {
 		service.setConsumptionDonutChartModel(dashboard);
 
 		service.setLogisticsBarChartModel(dashboard);
-	}
-
-	public void changeDados() {
-		service.setConsumptionDonutChartModel(dashboard);
-	}
-
-	public TypeConsumptionEnum[] getTypeConsumption() {
-		return TypeConsumptionEnum.values();
 	}
 
 }

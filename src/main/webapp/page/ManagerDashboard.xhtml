@@ -185,26 +185,8 @@
 				<div class="panel-main-second">
 
 					<div class="panel-charts-dunot-consumption">
-
-						<div class="panel-charts-dunot-head">
-							<p:outputLabel value="Projeto x Consumo" />
-
-							<p:selectOneMenu id="typeConsumption" value="#{managerBean.dashboard.typeConsumptionSelected}"
-								label="Tipos" style="width: 11rem" panelStyle="width: 11rem"
-								scrollHeight="250" dynamic="true">
-
-								<p:ajax event="change" listener="#{managerBean.changeDados}"
-									update="charts-dunot" />
-
-								<f:selectItems value="#{managerBean.typeConsumption}" var="type"
-									itemLabel="#{type.descricao}" itemValue="#{type}" />
-							</p:selectOneMenu>
-						</div>
-						<div class="charts-dunot">
-							<p:donutChart id="charts-dunot" model="#{managerBean.dashboard.consumptionDonutChartModel}"
-								style="width: 100%; height: 350px;" />
-						</div>
-
+						<p:donutChart id="charts-dunot" model="#{managerBean.dashboard.consumptionDonutChartModel}"
+								style="width: 350px; height: 100%;" />
 					</div>
 
 					<div class="panel-charts-bar-logistics">
