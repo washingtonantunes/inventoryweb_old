@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.bar.BarChartDataSet;
+import org.primefaces.model.charts.bar.BarChartModel;
+import org.primefaces.model.charts.bar.BarChartOptions;
 import org.primefaces.model.charts.donut.DonutChartDataSet;
 import org.primefaces.model.charts.donut.DonutChartModel;
 import org.primefaces.model.charts.donut.DonutChartOptions;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
+import org.primefaces.model.charts.optionconfig.title.Title;
 
 import br.com.wti.erp.domain.dashboard.Dashboard;
 import br.com.wti.erp.domain.dashboard.DetailObjectCard;
@@ -108,14 +112,58 @@ public class DashboardService implements Serializable {
 		dashboard.setCardDetailUsers(card5);
 	}
 
-	public void setDataDonut(Dashboard dashboard) {
+	public void setConsumptionDonutChartModel(Dashboard dashboard) {
 		DonutChartModel donutModel = new DonutChartModel();
-		
-		donutModel.setData(escolherDados(dashboard.getTypeConsumptionSelected()));
+
+		donutModel.setData(escolherDadosDonutChartModel(dashboard.getTypeConsumptionSelected()));
 
 		donutModel.setOptions(configuraOptions());
 
-		dashboard.setDonutModel(donutModel);
+		dashboard.setConsumptionDonutChartModel(donutModel);
+	}
+
+	public void setLogisticsBarChartModel(Dashboard dashboard) {
+		BarChartModel barModel = new BarChartModel();
+
+		ChartData data = new ChartData();
+
+		data.addChartDataSet(obterDadosEntregas());
+		data.addChartDataSet(obterDadosTrocas());
+		data.addChartDataSet(obterDadosDevolucoes());
+
+		List<String> labels = new ArrayList<>();
+		labels.add("Janeiro");
+		labels.add("Fevereiro");
+		labels.add("Março");
+		labels.add("Abril");
+		labels.add("Maio");
+		labels.add("Junho");
+		labels.add("Julho");
+		labels.add("Agosto");
+		labels.add("Setembro");
+		labels.add("Outubro");
+		labels.add("Novembro");
+		labels.add("Dezembro");
+		data.setLabels(labels);
+
+		barModel.setData(data);
+
+		BarChartOptions options = new BarChartOptions();
+
+		Title title = new Title();
+		title.setDisplay(true);
+		title.setText("Logística");
+		title.setFontSize(20);
+		options.setTitle(title);
+
+		Legend legend = new Legend();
+		legend.setDisplay(true);
+		legend.setPosition("bottom");
+		options.setLegend(legend);
+
+		barModel.setOptions(options);
+
+		dashboard.setLogisticsBarChartModel(barModel);
 	}
 
 	private DonutChartOptions configuraOptions() {
@@ -126,13 +174,13 @@ public class DashboardService implements Serializable {
 		legend.setFullWidth(true);
 
 		options.setLegend(legend);
-		
+
 		return options;
 	}
-	
-	private ChartData escolherDados(TypeConsumptionEnum type) {
+
+	private ChartData escolherDadosDonutChartModel(TypeConsumptionEnum type) {
 		ChartData data = new ChartData();
-		
+
 		if (type == TypeConsumptionEnum.COMPUTERS) {
 			DonutChartDataSet dataSet = new DonutChartDataSet();
 			List<Number> values = new ArrayList<>();
@@ -214,7 +262,82 @@ public class DashboardService implements Serializable {
 			labels.add("Nubank");
 			data.setLabels(labels);
 		}
-		
+
 		return data;
+	}
+
+	private BarChartDataSet obterDadosEntregas() {
+		BarChartDataSet barDataSet = new BarChartDataSet();
+		barDataSet.setLabel("Entregas");
+		barDataSet.setBackgroundColor("rgba(163, 157, 212, 0.7)");
+		barDataSet.setBorderColor("rgb(163, 157, 212)");
+		barDataSet.setBorderWidth(1);
+
+		List<Number> values = new ArrayList<>();
+		values.add(65);
+		values.add(59);
+		values.add(80);
+		values.add(81);
+		values.add(56);
+		values.add(55);
+		values.add(40);
+		values.add(40);
+		values.add(30);
+		values.add(30);
+		values.add(40);
+		values.add(10);
+		barDataSet.setData(values);
+
+		return barDataSet;
+	}
+
+	private BarChartDataSet obterDadosTrocas() {
+		BarChartDataSet barDataSet = new BarChartDataSet();
+		barDataSet.setLabel("Trocas");
+		barDataSet.setBackgroundColor("rgba(236, 47, 111, 0.7)");
+		barDataSet.setBorderColor("rgb(236, 47, 111)");
+		barDataSet.setBorderWidth(1);
+
+		List<Number> values = new ArrayList<>();
+		values.add(15);
+		values.add(20);
+		values.add(10);
+		values.add(5);
+		values.add(5);
+		values.add(10);
+		values.add(5);
+		values.add(20);
+		values.add(10);
+		values.add(80);
+		values.add(60);
+		values.add(5);
+		barDataSet.setData(values);
+
+		return barDataSet;
+	}
+
+	private BarChartDataSet obterDadosDevolucoes() {
+		BarChartDataSet barDataSet = new BarChartDataSet();
+		barDataSet.setLabel("Devoluções");
+		barDataSet.setBackgroundColor("rgba(161, 171, 122, 0.7)");
+		barDataSet.setBorderColor("rgb(161, 171, 122)");
+		barDataSet.setBorderWidth(1);
+
+		List<Number> values = new ArrayList<>();
+		values.add(15);
+		values.add(19);
+		values.add(20);
+		values.add(1);
+		values.add(56);
+		values.add(45);
+		values.add(10);
+		values.add(20);
+		values.add(7);
+		values.add(80);
+		values.add(30);
+		values.add(4);
+		barDataSet.setData(values);
+
+		return barDataSet;
 	}
 }

@@ -17,7 +17,6 @@
 	.panel-main-first {
 		width: 1800px;
 	}
-	
 	.panel-main-second {
 		width: 1800px;
 	}
@@ -65,21 +64,24 @@
 	font-size: 14px !important;
 }
 /*grafico dunots projeto x consumo*/
-
 .panel-main-second {
+	display: flex; justify-content : space-evenly;
 	margin: 20px 0px;
+	justify-content: space-evenly;
 }
 
-.panel-charts-dunot {
-	min-width: 480px;
-	min-height: 320px;
-	max-width: 480px;
-	max-height: 320px;
+.panel-charts-dunot-consumption {
+	background: #F6F5F5; min-width : 480px; min-height : 350px; max-width :
+	480px; max-height : 350px;
 	border: 2px solid black;
 	border-radius: 4px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	min-width: 480px;
+	min-height: 350px;
+	max-width: 480px;
+	max-height: 350px;
 }
 
 .panel-charts-dunot-head {
@@ -92,6 +94,20 @@
 }
 
 .charts-dunot {
-	width: 250px;
+	width: 280px;
 	overflow-y: auto;
+}
+
+.panel-charts-bar-logistics {
+	background: #F6F5F5;
+	min-width: 800px;
+	min-height: 350px;
+	max-width: 8000px;
+	max-height: 350px;
+	border: 2px solid black;
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 5px 0;
 }

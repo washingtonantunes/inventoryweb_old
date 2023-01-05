@@ -17,25 +17,27 @@ import lombok.Getter;
 public class ManagerDashboardMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private DashboardService service;
 
 	@Inject
 	@Getter
 	private Dashboard dashboard;
-	
+
 	@PostConstruct
 	public void init() {
 		service.setDataCards(dashboard);
-		
-		service.setDataDonut(dashboard);
+
+		service.setConsumptionDonutChartModel(dashboard);
+
+		service.setLogisticsBarChartModel(dashboard);
 	}
-	
+
 	public void changeDados() {
-		service.setDataDonut(dashboard);
+		service.setConsumptionDonutChartModel(dashboard);
 	}
-	
+
 	public TypeConsumptionEnum[] getTypeConsumption() {
 		return TypeConsumptionEnum.values();
 	}
