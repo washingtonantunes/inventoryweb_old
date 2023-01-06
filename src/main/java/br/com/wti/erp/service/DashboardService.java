@@ -11,6 +11,9 @@ import org.primefaces.model.charts.bar.BarChartOptions;
 import org.primefaces.model.charts.donut.DonutChartDataSet;
 import org.primefaces.model.charts.donut.DonutChartModel;
 import org.primefaces.model.charts.donut.DonutChartOptions;
+import org.primefaces.model.charts.line.LineChartDataSet;
+import org.primefaces.model.charts.line.LineChartModel;
+import org.primefaces.model.charts.line.LineChartOptions;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.optionconfig.title.Title;
@@ -114,27 +117,27 @@ public class DashboardService implements Serializable {
 
 	public void setConsumptionDonutChartModel(Dashboard dashboard) {
 		DonutChartModel donutModel = new DonutChartModel();
-		
+
 		ChartData data = new ChartData();
-		
+
 		data.addChartDataSet(obterDadosConsumo());
-		
+
 		List<String> labels = new ArrayList<>();
 		labels.add("Ifood");
 		labels.add("Sinqia");
 		labels.add("Nubank");
 		data.setLabels(labels);
-		
+
 		donutModel.setData(data);
-		
+
 		DonutChartOptions options = new DonutChartOptions();
-		
+
 		Title title = new Title();
 		title.setDisplay(true);
 		title.setText("Consumo");
 		title.setFontSize(20);
 		options.setTitle(title);
-		
+
 		Legend legend = new Legend();
 		legend.setDisplay(true);
 		legend.setPosition("left");
@@ -142,7 +145,7 @@ public class DashboardService implements Serializable {
 		legendLabels.setBoxWidth(20);
 		legend.setLabels(legendLabels);
 		options.setLegend(legend);
-		
+
 		donutModel.setOptions(options);
 
 		dashboard.setConsumptionDonutChartModel(donutModel);
@@ -192,6 +195,49 @@ public class DashboardService implements Serializable {
 		dashboard.setLogisticsBarChartModel(barModel);
 	}
 
+	public void setCostLineChartModel(Dashboard dashboard) {
+		LineChartModel lineModel = new LineChartModel();
+
+		ChartData data = new ChartData();
+
+		data.addChartDataSet(obterDadosCusto1());
+		data.addChartDataSet(obterDadosCusto2());
+
+		List<String> labels = new ArrayList<>();
+		labels.add("Janeiro");
+		labels.add("Fevereiro");
+		labels.add("Março");
+		labels.add("Abril");
+		labels.add("Maio");
+		labels.add("Junho");
+		labels.add("Julho");
+		labels.add("Agosto");
+		labels.add("Setembro");
+		labels.add("Outubro");
+		labels.add("Novembro");
+		labels.add("Dezembro");
+		data.setLabels(labels);
+
+		lineModel.setData(data);
+
+		LineChartOptions options = new LineChartOptions();
+
+		Title title = new Title();
+		title.setDisplay(true);
+		title.setText("Custo");
+		title.setFontSize(20);
+		options.setTitle(title);
+
+		Legend legend = new Legend();
+		legend.setDisplay(true);
+		legend.setPosition("bottom");
+		options.setLegend(legend);
+
+		lineModel.setOptions(options);
+
+		dashboard.setCostLineChartModel(lineModel);
+	}
+
 	private DonutChartDataSet obterDadosConsumo() {
 		DonutChartDataSet dataSet = new DonutChartDataSet();
 		List<Number> values = new ArrayList<>();
@@ -210,11 +256,11 @@ public class DashboardService implements Serializable {
 	}
 
 	private BarChartDataSet obterDadosEntregas() {
-		BarChartDataSet barDataSet = new BarChartDataSet();
-		barDataSet.setLabel("Entregas");
-		barDataSet.setBackgroundColor("rgba(163, 157, 212, 0.7)");
-		barDataSet.setBorderColor("rgb(163, 157, 212)");
-		barDataSet.setBorderWidth(1);
+		BarChartDataSet dataSet = new BarChartDataSet();
+		dataSet.setLabel("Entregas");
+		dataSet.setBackgroundColor("rgba(163, 157, 212, 0.7)");
+		dataSet.setBorderColor("rgb(163, 157, 212)");
+		dataSet.setBorderWidth(1);
 
 		List<Number> values = new ArrayList<>();
 		values.add(65);
@@ -229,17 +275,17 @@ public class DashboardService implements Serializable {
 		values.add(30);
 		values.add(40);
 		values.add(10);
-		barDataSet.setData(values);
+		dataSet.setData(values);
 
-		return barDataSet;
+		return dataSet;
 	}
 
 	private BarChartDataSet obterDadosTrocas() {
-		BarChartDataSet barDataSet = new BarChartDataSet();
-		barDataSet.setLabel("Trocas");
-		barDataSet.setBackgroundColor("rgba(236, 47, 111, 0.7)");
-		barDataSet.setBorderColor("rgb(236, 47, 111)");
-		barDataSet.setBorderWidth(1);
+		BarChartDataSet dataSet = new BarChartDataSet();
+		dataSet.setLabel("Trocas");
+		dataSet.setBackgroundColor("rgba(236, 47, 111, 0.7)");
+		dataSet.setBorderColor("rgb(236, 47, 111)");
+		dataSet.setBorderWidth(1);
 
 		List<Number> values = new ArrayList<>();
 		values.add(15);
@@ -254,17 +300,17 @@ public class DashboardService implements Serializable {
 		values.add(80);
 		values.add(60);
 		values.add(5);
-		barDataSet.setData(values);
+		dataSet.setData(values);
 
-		return barDataSet;
+		return dataSet;
 	}
 
 	private BarChartDataSet obterDadosDevolucoes() {
-		BarChartDataSet barDataSet = new BarChartDataSet();
-		barDataSet.setLabel("Devoluções");
-		barDataSet.setBackgroundColor("rgba(161, 171, 122, 0.7)");
-		barDataSet.setBorderColor("rgb(161, 171, 122)");
-		barDataSet.setBorderWidth(1);
+		BarChartDataSet dataSet = new BarChartDataSet();
+		dataSet.setLabel("Devoluções");
+		dataSet.setBackgroundColor("rgba(161, 171, 122, 0.7)");
+		dataSet.setBorderColor("rgb(161, 171, 122)");
+		dataSet.setBorderWidth(1);
 
 		List<Number> values = new ArrayList<>();
 		values.add(15);
@@ -279,8 +325,61 @@ public class DashboardService implements Serializable {
 		values.add(80);
 		values.add(30);
 		values.add(4);
-		barDataSet.setData(values);
+		dataSet.setData(values);
 
-		return barDataSet;
+		return dataSet;
 	}
+
+	private LineChartDataSet obterDadosCusto1() {
+		LineChartDataSet dataSet = new LineChartDataSet();
+		dataSet.setLabel("Sinquia");
+		dataSet.setBackgroundColor("rgba(248, 11, 5, 0.7)");
+		dataSet.setBorderColor("rgb(248, 11, 5)");
+		dataSet.setTension(0.1);
+		dataSet.setFill(false);
+
+		List<Object> values = new ArrayList<>();
+		values.add(1500);
+		values.add(1900);
+		values.add(2005);
+		values.add(10000);
+		values.add(5600);
+		values.add(45000);
+		values.add(10000);
+		values.add(20000);
+		values.add(7000);
+		values.add(80000);
+		values.add(30000);
+		values.add(4000);
+		dataSet.setData(values);
+
+		return dataSet;
+	}
+
+	private LineChartDataSet obterDadosCusto2() {
+		LineChartDataSet dataSet = new LineChartDataSet();
+		dataSet.setLabel("IFOOD");
+		dataSet.setBackgroundColor("rgba(217, 4, 93, 0.7)");
+		dataSet.setBorderColor("rgb(217, 4, 93)");
+		dataSet.setTension(0.1);
+		dataSet.setFill(false);
+
+		List<Object> values = new ArrayList<>();
+		values.add(4500);
+		values.add(1900);
+		values.add(8005);
+		values.add(1000);
+		values.add(15600);
+		values.add(4500);
+		values.add(1000);
+		values.add(2000);
+		values.add(6000);
+		values.add(8000);
+		values.add(3000);
+		values.add(7000);
+		dataSet.setData(values);
+
+		return dataSet;
+	}
+
 }

@@ -20,5 +20,4 @@ public class DetailObjectCard {
 
 	private String titleThird;
 	private Long valueThird;
-
 }

@@ -7,7 +7,7 @@
 	flex-wrap: wrap;
 }
 /*painel de cards*/
-.panel-main-first {
+.panel-main-top {
 	display: flex;
 	justify-content: space-evenly;
 	width: 1366px;
@@ -55,7 +55,7 @@
 	font-size: 14px !important;
 }
 /*grafico dunots projeto x consumo*/
-.panel-main-second {
+.panel-main-center {
 	display: flex;
 	justify-content: space-evenly;
 	width: 1366px;
@@ -77,6 +77,26 @@
 }
 
 .panel-charts-bar-logistics {
+	background: #F6F5F5;
+	min-width: 800px;
+	min-height: 350px;
+	max-width: 800px;
+	max-height: 350px;
+	border: 2px solid black;
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 5px 0;
+}
+
+.panel-main-bottom {
+	display: flex;
+	justify-content: space-evenly;
+	width: 1366px;
+}
+
+.panel-charts-line-cost{
 	background: #F6F5F5;
 	min-width: 800px;
 	min-height: 350px;

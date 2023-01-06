@@ -16,8 +16,10 @@
 	<ui:define name="content">
 		<h:form id="frm">
 			<div class="panel-main">
-				<div class="panel-main-first">
-					<!-- inicio painel de card -->
+			
+				<!-- inicio painel superior -->
+				<div class="panel-main-top">
+					
 					<p:card style="background: #{managerBean.dashboard.cardDetailComputers.color}">
 						<div class="card-head">
 							<p:outputLabel value="#{managerBean.dashboard.cardDetailComputers.titleMain}" />
@@ -179,10 +181,10 @@
 						</div>
 					</p:card>
 				</div>
-				<!-- fim painel de card -->
+				<!-- fim painel de superior -->
 
-				<!-- inicio painel consumo -->
-				<div class="panel-main-second">
+				<!-- inicio painel central -->
+				<div class="panel-main-center">
 
 					<div class="panel-charts-dunot-consumption">
 						<p:donutChart id="charts-dunot" model="#{managerBean.dashboard.consumptionDonutChartModel}"
@@ -195,7 +197,18 @@
 					</div>
 
 				</div>
-				<!-- fim painel consumo -->
+				<!-- fim painel central -->
+				
+				<!-- inicio painel inferior -->
+				<div class="panel-main-bottom">
+
+					<div class="panel-charts-line-cost">
+						<p:lineChart model="#{managerBean.dashboard.costLineChartModel}"
+							style="width: 100%; height: 340px;" />
+					</div>
+
+				</div>
+				<!-- fim painel inferior -->
 
 			</div>
 		</h:form>

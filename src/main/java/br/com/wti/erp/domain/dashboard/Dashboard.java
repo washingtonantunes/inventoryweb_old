@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.primefaces.model.charts.bar.BarChartModel;
 import org.primefaces.model.charts.donut.DonutChartModel;
+import org.primefaces.model.charts.line.LineChartModel;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,5 +28,7 @@ public class Dashboard implements Serializable {
 	private DonutChartModel consumptionDonutChartModel;
 
 	private BarChartModel logisticsBarChartModel;
+	
+	private LineChartModel costLineChartModel;
 
 }
