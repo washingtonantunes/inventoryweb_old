@@ -28,16 +28,16 @@ public class ManagerDashboardGeneralMB implements Serializable {
 	private DashboardGeneral dashboard;
 	
 	@Getter
-	private List<String> years = new ArrayList<>();
+	private List<Integer> years = new ArrayList<>();
 
 	@PostConstruct
 	public void init() {
 		
-		years.add("2021");
-		years.add("2022");
-		years.add("2023");
+		years.add(2021);
+		years.add(2022);
+		years.add(2023);
 		
-		dashboard.setYearSelected(Integer.toString(LocalDate.now().getYear()));
+		dashboard.setYearSelected(LocalDate.now().getYear());
 		
 		service.setDataCardsGeneral(dashboard);
 

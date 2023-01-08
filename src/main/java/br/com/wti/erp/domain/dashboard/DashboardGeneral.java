@@ -14,7 +14,7 @@ public class DashboardGeneral implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String yearSelected;
+	private Integer yearSelected;
 
 	private DetailObjectCard cardDetailComputers;
 

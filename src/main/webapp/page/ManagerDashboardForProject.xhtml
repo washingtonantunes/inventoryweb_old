@@ -31,6 +31,7 @@
 					<p:commandButton value="Show" actionListener="#{managerBean.changeParameterSearch}" 
 						oncomplete="if (!args.validationFailed) PF('dialogSelectProjectYear').hide()" process="modal" update="@form messages"  />
 					
+					<p:commandButton value="Home" action="#{managerNavigationMB.redirectHome}"  />
 				</p:panelGrid>
 			</p:dialog>
 			

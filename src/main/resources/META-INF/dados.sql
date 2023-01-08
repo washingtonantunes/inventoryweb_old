@@ -9,9 +9,9 @@ INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_ent
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (2, 'HP', '2021-12-23 11:00:54', 'TI', 'PRODESK 400 G4', 'DESKTOP', '25416', 'BRJ742KBDK', 005426, 'STAND_BY');
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (3, 'HP', '2021-12-23 13:00:54', 'TI', 'PRODESK 400 G4', 'NOTEBOOK', '25416', 'BRJ831TSWN', 010254, 'STAND_BY');
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (4, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ93047RM', 000245, 'STAND_BY');
-INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status, project_id) VALUES (5, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ934521', 000444, 'IN_USE', 1 );
+INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (5, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ934521', 000444, 'IN_USE');
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status, project_id, user_id) VALUES (6, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ93000RM', 100245, 'IN_USE', 1, 1);
-INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status, project_id) VALUES (7, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ83000RM', 000205, 'IN_USE', 2);
+INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (7, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ83000RM', 000205, 'IN_USE');
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (8, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ71047RM', 002245, 'STAND_BY');
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (9, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ93049RM', 003345, 'STAND_BY');
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (10, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRL93187RM', 001145, 'STAND_BY');
@@ -38,11 +38,17 @@ INSERT INTO tb_changes_computer (author, description, date, type, computer_id) V
 INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 11);
 INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 12);
 
-INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ934521', '2022-12-05', 'DELIVERY_TO_USER', 1);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário', '2022-01-05', 'DELIVERY_TO_USER', 6);
+INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ93000RM', '2022-12-05', 'DELIVERY_TO_USER', 1);
+INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário: 125622', '2022-12-05', 'DELIVERY_TO_USER', 6);
 
-INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ0101RM', '2022-12-05', 'DELIVERY_TO_USER', 3);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário', '2022-01-05', 'DELIVERY_TO_USER', 11);
+INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ831TSWN', '2022-12-05', 'DELIVERY_TO_USER', 3);
+INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário: 123322', '2022-12-05', 'DELIVERY_TO_USER', 11);
+
+INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ934521', '2021-09-01', 'DELIVERY_TO_USER', 2);
+INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário: 005622', '2021-09-01', 'DELIVERY_TO_USER', 5);
+
+INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Devolução de Equipamento: BRJ934521', '2022-12-09', 'DEVOLUTION_TO_USER', 2);
+INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Entrada de Equipamento no Estoque por Usuário: 005622', '2022-12-09', 'DEVOLUTION_TO_USER', 5);
 
 INSERT INTO tb_items (identification, type, value, id_user) VALUES ('BRJ934521', 'NOTEBOOK', '0', '1');
 INSERT INTO tb_items (identification, type, value, id_user) VALUES ('BRJ0101RM', 'NOTEBOOK', '0', '3');
