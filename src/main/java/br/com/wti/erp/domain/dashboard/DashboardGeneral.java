@@ -3,17 +3,18 @@ package br.com.wti.erp.domain.dashboard;
 import java.io.Serializable;
 
 import org.primefaces.model.charts.bar.BarChartModel;
-import org.primefaces.model.charts.donut.DonutChartModel;
-import org.primefaces.model.charts.line.LineChartModel;
+import org.primefaces.model.charts.pie.PieChartModel;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Dashboard implements Serializable {
+public class DashboardGeneral implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	private String yearSelected;
 
 	private DetailObjectCard cardDetailComputers;
 
@@ -25,10 +26,13 @@ public class Dashboard implements Serializable {
 
 	private DetailObjectCard cardDetailUsers;
 
-	private DonutChartModel consumptionDonutChartModel;
-
 	private BarChartModel logisticsBarChartModel;
-	
-	private LineChartModel costLineChartModel;
 
+	private PieChartModel percentageComputersPieChartModel;
+
+	private PieChartModel percentageMonitorsPieChartModel;
+
+	private PieChartModel percentagePeripheralsPieChartModel;
+
+	private PieChartModel percentageLicensesPieChartModel;
 }

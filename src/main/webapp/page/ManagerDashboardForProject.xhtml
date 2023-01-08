@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:wcc="http://xmlns.jcp.org/jsf/composite/componentsinventory"
+	template="/WEB-INF/template/_layout.xhtml">
+
+	<ui:param name="managerBean" value="#{managerDashboardForProjectMB}"></ui:param>
+
+	<ui:define name="content">
+	
+		<h:form id="frm">
+			<p:dialog id="modal" widgetVar="dialogSelectProjectYear" modal="true" visible="true" 
+					closable="false" resizable="false" width="300" >
+				<p:messages id="messages" />
+				
+				<p:panelGrid columns="1" layout="flex" style="text-align: center;">
+			
+					<p:selectOneMenu label="project" required="true" value="#{managerBean.dashboard.projectSelected}" requiredMessage="É necessário selecionar um projeto">
+						<f:selectItem itemLabel="Selecione o Projeto" noSelectionOption="true"/>
+						<f:selectItems value="#{managerBean.projects}" var="project" itemValue="#{project}" />
+					</p:selectOneMenu>
+		
+					<p:selectOneMenu label="year" required="true" value="#{managerBean.dashboard.yearSelected}" requiredMessage="É necessário selecionar um ano">
+						<f:selectItem itemLabel="Selecione o Ano" noSelectionOption="true"/>
+						<f:selectItems value="#{managerBean.years}" var="year" itemValue="#{year}" />
+					</p:selectOneMenu>
+					
+					<p:commandButton value="Show" actionListener="#{managerBean.changeParameterSearch}" 
+						oncomplete="if (!args.validationFailed) PF('dialogSelectProjectYear').hide()" process="modal" update="@form messages"  />
+					
+				</p:panelGrid>
+			</p:dialog>
+			
+			<p:outputPanel id="panel-main" rendered="#{managerBean.dashboard.projectSelected != null and managerBean.dashboard.yearSelected != null}">
+				<div class="panel-title">
+					<h1>Dashboard - #{managerBean.dashboard.projectSelected} - #{managerBean.dashboard.yearSelected}</h1>
+	
+					<div>
+						<p:selectOneMenu value="#{managerBean.dashboard.projectSelected}" style="margin:0 10px;">
+							<f:selectItems value="#{managerBean.projects}" />
+	
+							<p:ajax event="change" listener="#{managerBean.changeParameterSearch}" update="panel-main" />
+						</p:selectOneMenu>
+	
+						<p:selectOneMenu value="#{managerBean.dashboard.yearSelected}" style="margin:0 10px;">
+							<f:selectItems value="#{managerBean.years}" />
+	
+							<p:ajax event="change" listener="#{managerBean.changeParameterSearch}" update="panel-main" />
+						</p:selectOneMenu>
+						
+					</div>
+				</div>
+
+				<div class="panel-main">
+				
+					<!-- inicio painel superior -->
+					<div class="panel-main-top">
+					
+						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailComputers.color};">
+							<div class="card-head">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailComputers.titleMain}" />
+							</div>
+	
+							<div class="card-body">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailComputers.valueMain}" />
+							</div>
+	
+						</div>
+	
+						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailMonitors.color}">
+							<div class="card-head">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailMonitors.titleMain}" />
+							</div>
+	
+							<div class="card-body">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailMonitors.valueMain}" />
+							</div>
+	
+						</div>
+	
+						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailPeripherals.color};">
+							<div class="card-head">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailPeripherals.titleMain}" />
+							</div>
+	
+							<div class="card-body">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailPeripherals.valueMain}" />
+							</div>
+	
+						</div>
+	
+						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailLicenses.color}">
+							<div class="card-head">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailLicenses.titleMain}" />
+							</div>
+	
+							<div class="card-body">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailLicenses.valueMain}" />
+							</div>
+	
+						</div>
+	
+						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailUsers.color}">
+							<div class="card-head">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailUsers.titleMain}" />
+							</div>
+	
+							<div class="card-body">
+								<p:outputLabel value="#{managerBean.dashboard.cardDetailUsers.valueMain}" />
+							</div>
+	
+						</div>
+						
+					</div>
+					<!-- fim painel de superior -->
+	
+					
+					<!-- inicio painel inferior -->
+					<div class="panel-main-bottom">
+						<div class="panel-charts-line-cost">
+							<p:lineChart model="#{managerBean.dashboard.costLineChartModel}"
+								style="width: 100%; height: 340px;" />
+						</div>
+
+					</div>
+					<!-- fim painel inferior -->
+					
+				</div>
+			</p:outputPanel>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

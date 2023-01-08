@@ -1,33 +1,42 @@
 @charset "ISO-8859-1";
 
-/*painel principal*/
+.panel-title {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0;
+}
+
 .panel-main {
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
 }
-/*painel de cards*/
+
 .panel-main-top {
 	display: flex;
 	justify-content: space-evenly;
 	width: 1366px;
+	margin-bottom: 20px;
 }
 
-.ui-card {
+.card-panel-main-general {
 	text-align: center !important;
 	color: white !important;
 	min-width: 250px !important;
 	min-height: 140px !important;
 	max-width: 250px !important;
 	max-height: 140px !important;
+	border-radius: 4px;
 }
 
-.ui-card-body {
-	padding: 0 !important;
-}
-
-.ui-card-content {
-	padding: 0 !important;
+.card-panel-main-project {
+	text-align: center !important;
+	color: white !important;
+	min-width: 200px !important;
+	min-height: 90px !important;
+	max-width: 200px !important;
+	max-height: 90px !important;
+	border-radius: 4px;
 }
 
 .card-head {
@@ -54,12 +63,18 @@
 	margin: 5px 8px;
 	font-size: 14px !important;
 }
-/*grafico dunots projeto x consumo*/
+
 .panel-main-center {
 	display: flex;
 	justify-content: space-evenly;
 	width: 1366px;
 	margin: 20px 0px;
+}
+
+.panel-main-bottom {
+	display: flex;
+	justify-content: space-evenly;
+	width: 1366px;
 }
 
 .panel-charts-dunot-consumption {
@@ -90,13 +105,7 @@
 	padding: 5px 0;
 }
 
-.panel-main-bottom {
-	display: flex;
-	justify-content: space-evenly;
-	width: 1366px;
-}
-
-.panel-charts-line-cost{
+.panel-charts-line-cost {
 	background: #F6F5F5;
 	min-width: 800px;
 	min-height: 350px;
@@ -107,5 +116,19 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding: 5px 0;
+}
+
+.panel-charts-pie-percentage {
+	background: #F6F5F5;
+	min-width: 480px;
+	min-height: 350px;
+	max-width: 480px;
+	max-height: 350px;
+	border: 2px solid black;
+	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 	padding: 5px 0;
 }

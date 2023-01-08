@@ -2,6 +2,7 @@ package br.com.wti.erp.service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -20,6 +21,10 @@ public class ProjectService implements IService<Project>, Serializable {
 	@Override
 	public List<Project> findAll() {
 		return projectRepository.findAll();
+	}
+	
+	public List<String> findAllString() {
+		return findAll().stream().map(Project::getName).collect(Collectors.toList());		
 	}
 
 	@Override

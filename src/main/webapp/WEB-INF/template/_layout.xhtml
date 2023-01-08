@@ -33,6 +33,11 @@
 					<p:menuitem value="Computadores" action="#{managerNavigationMB.redirectManagerComputer}" />
 					<p:menuitem value="Usuários" action="#{managerNavigationMB.redirectManagerUser}" />
 				</p:submenu>
+				
+				<p:submenu label="Dashboard" icon="pi pi-chart-bar">
+					<p:menuitem value="Geral" action="#{managerNavigationMB.redirectManagerDashboardGeneral}" />
+					<p:menuitem value="Por Projeto" action="#{managerNavigationMB.redirectManagerDashboardForProject}" />
+				</p:submenu>
 
 			</p:menubar>
 		</h:form>

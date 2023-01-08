@@ -8,150 +8,161 @@ import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.bar.BarChartDataSet;
 import org.primefaces.model.charts.bar.BarChartModel;
 import org.primefaces.model.charts.bar.BarChartOptions;
-import org.primefaces.model.charts.donut.DonutChartDataSet;
-import org.primefaces.model.charts.donut.DonutChartModel;
-import org.primefaces.model.charts.donut.DonutChartOptions;
 import org.primefaces.model.charts.line.LineChartDataSet;
 import org.primefaces.model.charts.line.LineChartModel;
 import org.primefaces.model.charts.line.LineChartOptions;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
-import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.optionconfig.title.Title;
+import org.primefaces.model.charts.pie.PieChartDataSet;
+import org.primefaces.model.charts.pie.PieChartModel;
+import org.primefaces.model.charts.pie.PieChartOptions;
 
-import br.com.wti.erp.domain.dashboard.Dashboard;
+import br.com.wti.erp.domain.dashboard.DashboardGeneral;
+import br.com.wti.erp.domain.dashboard.DashboardForProject;
 import br.com.wti.erp.domain.dashboard.DetailObjectCard;
 
 public class DashboardService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public void setDataCards(Dashboard dashboard) {
+	public void setDataCardsGeneral(DashboardGeneral dashboard) {
 
-		DetailObjectCard card1 = new DetailObjectCard();
+		DetailObjectCard computers = new DetailObjectCard();
 
-		card1.setColor("#228B22");
+		computers.setColor("#228B22");
 
-		card1.setTitleMain("Computadores");
-		card1.setValueMain(500L);
+		computers.setTitleMain("Computadores");
+		computers.setValueMain(500L);
 
-		card1.setTitleFirst("Disponivel");
-		card1.setValueFirst(300L);
+		computers.setTitleFirst("Disponivel");
+		computers.setValueFirst(300L);
 
-		card1.setTitleSecond("Em Uso");
-		card1.setValueSecond(200L);
+		computers.setTitleSecond("Em Uso");
+		computers.setValueSecond(200L);
 
-		card1.setTitleThird("Desativados");
-		card1.setValueThird(100L);
+		computers.setTitleThird("Desativados");
+		computers.setValueThird(100L);
 
-		dashboard.setCardDetailComputers(card1);
+		dashboard.setCardDetailComputers(computers);
 
-		DetailObjectCard card2 = new DetailObjectCard();
+		DetailObjectCard monitors = new DetailObjectCard();
 
-		card2.setColor("#B22222");
+		monitors.setColor("#B22222");
 
-		card2.setTitleMain("Monitores");
-		card2.setValueMain(300L);
+		monitors.setTitleMain("Monitores");
+		monitors.setValueMain(300L);
 
-		card2.setTitleFirst("Disponivel");
-		card2.setValueFirst(150L);
+		monitors.setTitleFirst("Disponivel");
+		monitors.setValueFirst(150L);
 
-		card2.setTitleSecond("Em Uso");
-		card2.setValueSecond(100L);
+		monitors.setTitleSecond("Em Uso");
+		monitors.setValueSecond(100L);
 
-		card2.setTitleThird("Desativados");
-		card2.setValueThird(50L);
+		monitors.setTitleThird("Desativados");
+		monitors.setValueThird(50L);
 
-		dashboard.setCardDetailMonitors(card2);
+		dashboard.setCardDetailMonitors(monitors);
 
-		DetailObjectCard card3 = new DetailObjectCard();
+		DetailObjectCard peripherals = new DetailObjectCard();
 
-		card3.setColor("#FFA500");
+		peripherals.setColor("#FFA500");
 
-		card3.setTitleMain("Periféricos");
-		card3.setValueMain(200L);
+		peripherals.setTitleMain("Periféricos");
+		peripherals.setValueMain(200L);
 
-		card3.setTitleFirst("Disponivel");
-		card3.setValueFirst(150L);
+		peripherals.setTitleFirst("Disponivel");
+		peripherals.setValueFirst(150L);
 
-		card3.setTitleSecond("Em Uso");
-		card3.setValueSecond(30L);
+		peripherals.setTitleSecond("Em Uso");
+		peripherals.setValueSecond(30L);
 
-		card3.setTitleThird("Desativados");
-		card3.setValueThird(20L);
+		peripherals.setTitleThird("Desativados");
+		peripherals.setValueThird(20L);
 
-		dashboard.setCardDetailPeripherals(card3);
+		dashboard.setCardDetailPeripherals(peripherals);
 
-		DetailObjectCard card4 = new DetailObjectCard();
+		DetailObjectCard licenses = new DetailObjectCard();
 
-		card4.setColor("#0000CD");
+		licenses.setColor("#0000CD");
 
-		card4.setTitleMain("Licenças");
-		card4.setValueMain(50L);
+		licenses.setTitleMain("Licenças");
+		licenses.setValueMain(50L);
 
-		card4.setTitleFirst("Disponivel");
-		card4.setValueFirst(30L);
+		licenses.setTitleFirst("Disponivel");
+		licenses.setValueFirst(30L);
 
-		card4.setTitleSecond("Em Uso");
-		card4.setValueSecond(20L);
+		licenses.setTitleSecond("Em Uso");
+		licenses.setValueSecond(20L);
 
-		card4.setTitleThird("Vencidas");
-		card4.setValueThird(0L);
+		licenses.setTitleThird("Vencidas");
+		licenses.setValueThird(0L);
 
-		dashboard.setCardDetailLicenses(card4);
+		dashboard.setCardDetailLicenses(licenses);
 
-		DetailObjectCard card5 = new DetailObjectCard();
+		DetailObjectCard users = new DetailObjectCard();
 
-		card5.setColor("#808080");
+		users.setColor("#808080");
 
-		card5.setTitleMain("Usuários");
-		card5.setValueMain(500L);
+		users.setTitleMain("Usuários");
+		users.setValueMain(500L);
 
-		card5.setTitleFirst("Ativos");
-		card5.setValueFirst(450L);
+		users.setTitleFirst("Ativos");
+		users.setValueFirst(450L);
 
-		card5.setTitleSecond("Desativados");
-		card5.setValueSecond(50L);
+		users.setTitleSecond("Desativados");
+		users.setValueSecond(50L);
 
-		dashboard.setCardDetailUsers(card5);
+		dashboard.setCardDetailUsers(users);
+	}
+	
+	public void setDataCardsForProject(DashboardForProject dashboard) {
+		DetailObjectCard computers = new DetailObjectCard();
+
+		computers.setColor("#228B22");
+
+		computers.setTitleMain("Computadores");
+		computers.setValueMain(500L);
+
+		dashboard.setCardDetailComputers(computers);
+
+		DetailObjectCard monitors = new DetailObjectCard();
+
+		monitors.setColor("#B22222");
+
+		monitors.setTitleMain("Monitores");
+		monitors.setValueMain(300L);
+
+		dashboard.setCardDetailMonitors(monitors);
+
+		DetailObjectCard peripherals = new DetailObjectCard();
+
+		peripherals.setColor("#FFA500");
+
+		peripherals.setTitleMain("Periféricos");
+		peripherals.setValueMain(200L);
+
+		dashboard.setCardDetailPeripherals(peripherals);
+
+		DetailObjectCard licenses = new DetailObjectCard();
+
+		licenses.setColor("#0000CD");
+
+		licenses.setTitleMain("Licenças");
+		licenses.setValueMain(50L);
+
+		dashboard.setCardDetailLicenses(licenses);
+
+		DetailObjectCard users = new DetailObjectCard();
+
+		users.setColor("#808080");
+
+		users.setTitleMain("Usuários");
+		users.setValueMain(500L);
+
+		dashboard.setCardDetailUsers(users);
 	}
 
-	public void setConsumptionDonutChartModel(Dashboard dashboard) {
-		DonutChartModel donutModel = new DonutChartModel();
-
-		ChartData data = new ChartData();
-
-		data.addChartDataSet(obterDadosConsumo());
-
-		List<String> labels = new ArrayList<>();
-		labels.add("Ifood");
-		labels.add("Sinqia");
-		labels.add("Nubank");
-		data.setLabels(labels);
-
-		donutModel.setData(data);
-
-		DonutChartOptions options = new DonutChartOptions();
-
-		Title title = new Title();
-		title.setDisplay(true);
-		title.setText("Consumo");
-		title.setFontSize(20);
-		options.setTitle(title);
-
-		Legend legend = new Legend();
-		legend.setDisplay(true);
-		legend.setPosition("left");
-		LegendLabel legendLabels = new LegendLabel();
-		legendLabels.setBoxWidth(20);
-		legend.setLabels(legendLabels);
-		options.setLegend(legend);
-
-		donutModel.setOptions(options);
-
-		dashboard.setConsumptionDonutChartModel(donutModel);
-	}
-
-	public void setLogisticsBarChartModel(Dashboard dashboard) {
+	public void setLogisticsBarChartModel(DashboardGeneral dashboard) {
 		BarChartModel barModel = new BarChartModel();
 
 		ChartData data = new ChartData();
@@ -195,13 +206,12 @@ public class DashboardService implements Serializable {
 		dashboard.setLogisticsBarChartModel(barModel);
 	}
 
-	public void setCostLineChartModel(Dashboard dashboard) {
+	public void setCostLineChartModel(DashboardForProject dashboard) {
 		LineChartModel lineModel = new LineChartModel();
 
 		ChartData data = new ChartData();
 
-		data.addChartDataSet(obterDadosCusto1());
-		data.addChartDataSet(obterDadosCusto2());
+		data.addChartDataSet(obterDadosCusto());
 
 		List<String> labels = new ArrayList<>();
 		labels.add("Janeiro");
@@ -237,22 +247,12 @@ public class DashboardService implements Serializable {
 
 		dashboard.setCostLineChartModel(lineModel);
 	}
-
-	private DonutChartDataSet obterDadosConsumo() {
-		DonutChartDataSet dataSet = new DonutChartDataSet();
-		List<Number> values = new ArrayList<>();
-		values.add(100);
-		values.add(200);
-		values.add(50);
-		dataSet.setData(values);
-
-		List<String> bgColors = new ArrayList<>();
-		bgColors.add("rgb(255, 99, 132)");
-		bgColors.add("rgb(54, 162, 235)");
-		bgColors.add("rgb(255, 205, 86)");
-		dataSet.setBackgroundColor(bgColors);
-
-		return dataSet;
+	
+	public void setPercentagePieChartModel(DashboardGeneral dashboard) {
+		dashboard.setPercentageComputersPieChartModel(obterDadosPercentageComputers());
+		dashboard.setPercentageMonitorsPieChartModel(obterDadosPercentageMonitors());
+		dashboard.setPercentagePeripheralsPieChartModel(obterDadosPercentagePeripherals());
+		dashboard.setPercentageLicensesPieChartModel(obterDadosPercentageLicenses());
 	}
 
 	private BarChartDataSet obterDadosEntregas() {
@@ -330,7 +330,7 @@ public class DashboardService implements Serializable {
 		return dataSet;
 	}
 
-	private LineChartDataSet obterDadosCusto1() {
+	private LineChartDataSet obterDadosCusto() {
 		LineChartDataSet dataSet = new LineChartDataSet();
 		dataSet.setLabel("Sinquia");
 		dataSet.setBackgroundColor("rgba(248, 11, 5, 0.7)");
@@ -356,30 +356,250 @@ public class DashboardService implements Serializable {
 		return dataSet;
 	}
 
-	private LineChartDataSet obterDadosCusto2() {
-		LineChartDataSet dataSet = new LineChartDataSet();
-		dataSet.setLabel("IFOOD");
-		dataSet.setBackgroundColor("rgba(217, 4, 93, 0.7)");
-		dataSet.setBorderColor("rgb(217, 4, 93)");
-		dataSet.setTension(0.1);
-		dataSet.setFill(false);
+	private PieChartModel obterDadosPercentageComputers() {
+		PieChartModel pieModel = new PieChartModel();
+		
+		ChartData data = new ChartData();
+		
+		PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        values.add(300);
+        values.add(50);
+        values.add(100);
+        dataSet.setData(values);
 
-		List<Object> values = new ArrayList<>();
-		values.add(4500);
-		values.add(1900);
-		values.add(8005);
-		values.add(1000);
-		values.add(15600);
-		values.add(4500);
-		values.add(1000);
-		values.add(2000);
-		values.add(6000);
-		values.add(8000);
-		values.add(3000);
-		values.add(7000);
-		dataSet.setData(values);
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(42, 150, 153)");
+        bgColors.add("rgb(74, 189, 158)");
+        bgColors.add("rgb(237, 77, 101)");
+        dataSet.setBackgroundColor(bgColors);
 
-		return dataSet;
+        List<String> labels = new ArrayList<>();
+        labels.add("Disponivel");
+        labels.add("Em Uso");
+        labels.add("Desativados");
+        data.setLabels(labels);
+
+        data.addChartDataSet(dataSet);
+        
+        pieModel.setData(data);
+        
+		PieChartOptions options = new PieChartOptions();
+		
+		Legend legend = new Legend();
+		legend.setDisplay(false);
+		options.setLegend(legend);
+
+		pieModel.setOptions(options);
+
+		Title title = new Title();
+		title.setDisplay(true);
+		title.setText("Computadores");
+		title.setFontSize(15);
+		options.setTitle(title);
+		
+		return pieModel;
 	}
+	
+	private PieChartModel obterDadosPercentageMonitors() {
+		PieChartModel pieModel = new PieChartModel();
+		
+		ChartData data = new ChartData();
+		
+		PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        values.add(300);
+        values.add(50);
+        values.add(100);
+        dataSet.setData(values);
 
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(0, 35, 245)");
+        bgColors.add("rgb(120, 67, 21)");
+        bgColors.add("rgb(169, 33, 107)");
+        dataSet.setBackgroundColor(bgColors);
+
+        List<String> labels = new ArrayList<>();
+        labels.add("Disponivel");
+        labels.add("Em Uso");
+        labels.add("Desativados");
+        data.setLabels(labels);
+
+        data.addChartDataSet(dataSet);
+        
+        pieModel.setData(data);
+        
+		PieChartOptions options = new PieChartOptions();
+		
+		Legend legend = new Legend();
+		legend.setDisplay(false);
+		options.setLegend(legend);
+
+		pieModel.setOptions(options);
+
+		Title title = new Title();
+		title.setDisplay(true);
+		title.setText("Monitores");
+		title.setFontSize(15);
+		options.setTitle(title);
+		
+		return pieModel;
+	}
+	
+	private PieChartModel obterDadosPercentagePeripherals() {
+		PieChartModel pieModel = new PieChartModel();
+		
+		ChartData data = new ChartData();
+		
+		PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        values.add(300);
+        values.add(50);
+        values.add(100);
+        dataSet.setData(values);
+
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(55, 125, 34)");
+        bgColors.add("rgb(235, 51, 36)");
+        bgColors.add("rgb(239, 136, 190)");
+        dataSet.setBackgroundColor(bgColors);
+
+        List<String> labels = new ArrayList<>();
+        labels.add("Disponivel");
+        labels.add("Em Uso");
+        labels.add("Desativados");
+        data.setLabels(labels);
+
+        data.addChartDataSet(dataSet);
+        
+        pieModel.setData(data);
+        
+		PieChartOptions options = new PieChartOptions();
+		
+		Legend legend = new Legend();
+		legend.setDisplay(false);
+		options.setLegend(legend);
+
+		pieModel.setOptions(options);
+
+		Title title = new Title();
+		title.setDisplay(true);
+		title.setText("Peripheral");
+		title.setFontSize(15);
+		options.setTitle(title);
+		
+		return pieModel;
+	}
+	
+	private PieChartModel obterDadosPercentageLicenses() {
+		PieChartModel pieModel = new PieChartModel();
+		
+		ChartData data = new ChartData();
+		
+		PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        values.add(300);
+        values.add(50);
+        values.add(100);
+        dataSet.setData(values);
+
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(137, 56, 118)");
+        bgColors.add("rgb(43, 89, 38)");
+        bgColors.add("rgb(75, 164, 166)");
+        dataSet.setBackgroundColor(bgColors);
+
+        List<String> labels = new ArrayList<>();
+        labels.add("Disponivel");
+        labels.add("Em Uso");
+        labels.add("Desativados");
+        data.setLabels(labels);
+
+        data.addChartDataSet(dataSet);
+        
+        pieModel.setData(data);
+        
+		PieChartOptions options = new PieChartOptions();
+		
+		Legend legend = new Legend();
+		legend.setDisplay(false);
+		options.setLegend(legend);
+
+		pieModel.setOptions(options);
+
+		Title title = new Title();
+		title.setDisplay(true);
+		title.setText("Licenças");
+		title.setFontSize(15);
+		options.setTitle(title);
+		
+		return pieModel;
+	}
+	
+//	public PieChartModel obterDadosPercentageComputers() {
+//		PieChartModel pieModel = new PieChartModel();
+//
+//        pieModel.set("Disponivel", 200);
+//        pieModel.set("Em Uso", 80);
+//        pieModel.set("Desativados", 10);
+//
+//        pieModel.setTitle("Computadores");
+//        pieModel.setLegendPosition(null);
+//        pieModel.setFill(false);
+//        pieModel.setShowDataLabels(true);
+//        pieModel.setDiameter(100);
+//        
+//        return pieModel;
+//	}
+//	
+//	public PieChartModel obterDadosPercentageMonitors() {
+//		PieChartModel pieModel = new PieChartModel();
+//
+//        pieModel.set("Disponivel", 500);
+//        pieModel.set("Em Uso", 150);
+//        pieModel.set("Desativados", 30);
+//        pieModel.setSeriesColors(null);
+//
+//        pieModel.setTitle("Monitores");
+//        pieModel.setLegendPosition(null);
+//        pieModel.setFill(false);
+//        pieModel.setShowDataLabels(true);
+//        pieModel.setDiameter(100);
+//        
+//        return pieModel;
+//	}
+//	
+//	public PieChartModel obterDadosPercentagePeripherals() {
+//		PieChartModel pieModel = new PieChartModel();
+//
+//        pieModel.set("Disponivel", 400);
+//        pieModel.set("Em Uso", 50);
+//        pieModel.set("Desativados", 5);
+//        pieModel.setSeriesColors(null);
+//
+//        pieModel.setTitle("Periféricos");
+//        pieModel.setLegendPosition(null);
+//        pieModel.setFill(false);
+//        pieModel.setShowDataLabels(true);
+//        pieModel.setDiameter(100);
+//        
+//        return pieModel;
+//	}
+//	
+//	public PieChartModel obterDadosPercentageLicenses() {
+//		PieChartModel pieModel = new PieChartModel();
+//
+//        pieModel.set("Disponivel", 400);
+//        pieModel.set("Em Uso", 50);
+//        pieModel.set("Desativados", 5);
+//        pieModel.setSeriesColors(null);
+//
+//        pieModel.setTitle("Licenças");
+//        pieModel.setLegendPosition(null);
+//        pieModel.setFill(false);
+//        pieModel.setShowDataLabels(true);
+//        pieModel.setDiameter(100);
+//        
+//        return pieModel;
+//	}
 }
