@@ -31,14 +31,15 @@ public abstract class Change implements Serializable  {
 	private Integer id;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "type_change", nullable = false)
 	private TypeChangeEnum type;
 
 	@Column(nullable = false, length = 200)
 	private String description;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
-	private Date date;
+	@Column(name = "date_change", nullable = false)
+	private Date dateChange;
 
 	@Column(nullable = false, length = 50)
 	private String author;

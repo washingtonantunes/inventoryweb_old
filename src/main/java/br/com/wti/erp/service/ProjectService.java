@@ -2,7 +2,6 @@ package br.com.wti.erp.service;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -14,7 +13,7 @@ import br.com.wti.erp.util.annotations.Transactional;
 public class ProjectService implements IService<Project>, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private ProjectRepository projectRepository;
 
@@ -22,9 +21,9 @@ public class ProjectService implements IService<Project>, Serializable {
 	public List<Project> findAll() {
 		return projectRepository.findAll();
 	}
-	
+
 	public List<String> findAllString() {
-		return findAll().stream().map(Project::getName).collect(Collectors.toList());		
+		return projectRepository.findAllProjectString();
 	}
 
 	@Override
@@ -50,7 +49,7 @@ public class ProjectService implements IService<Project>, Serializable {
 	public Long allUsers(Project project) {
 		return projectRepository.allUsers(project);
 	}
-	
+
 	public Long allMonitors(Project project) {
 		return projectRepository.allMonitors(project);
 	}

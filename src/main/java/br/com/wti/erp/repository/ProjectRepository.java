@@ -86,4 +86,11 @@ public class ProjectRepository implements IRepository<Project>, Serializable {
 
 		return query.getSingleResult();
 	}
+	
+	public List<String> findAllProjectString() {
+		String jpql = "SELECT p.name FROM Project p";
+
+		return manager.createQuery(jpql, String.class).getResultList();
+
+	}
 }
