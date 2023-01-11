@@ -7,17 +7,11 @@ import lombok.Setter;
 @Setter
 public class DetailObjectCard {
 
-	private String color;
+	private Long valueTotal = 0L;
 
-	private String titleMain;
-	private Long valueMain;
+	private Long valueFirst = 0L;
 
-	private String titleFirst;
-	private Long valueFirst;
+	private Long valueSecond = 0L;
 
-	private String titleSecond;
-	private Long valueSecond;
-
-	private String titleThird;
-	private Long valueThird;
+	private Long valueThird = 0L;
 }

@@ -52,7 +52,6 @@ public class ManagerDashboardGeneralMB implements Serializable {
 		service.setLogisticsBarChartModel(dashboard);
 
 		service.setPercentagePieChartModel(dashboard);
-
 	}
 
 }

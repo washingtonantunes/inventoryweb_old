@@ -1,4 +1,4 @@
-package br.com.wti.erp.util;
+package br.com.wti.erp.util.producers;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
