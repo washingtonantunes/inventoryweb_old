@@ -3,7 +3,7 @@ package br.com.wti.erp.domain.enums;
 import lombok.Getter;
 
 @Getter
-public enum StatusProjectEnum {
+public enum StatusProjectEnum implements StatusEnum {
 
 	ACTIVE("ATIVO"), 
 	DISABLED("DESATIVADO");

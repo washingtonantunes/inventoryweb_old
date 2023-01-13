@@ -3,7 +3,7 @@ package br.com.wti.erp.domain.enums;
 import lombok.Getter;
 
 @Getter
-public enum StatusEquipmentEnum {
+public enum StatusEquipmentEnum implements StatusEnum {
 
 	STAND_BY("DISPONIVEL"), 
 	IN_USE("EM USO"), 

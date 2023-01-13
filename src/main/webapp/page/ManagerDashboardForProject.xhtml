@@ -36,10 +36,10 @@
 			</p:dialog>
 			
 			<p:outputPanel id="panel-main" rendered="#{managerBean.dashboard.projectSelected != null and managerBean.dashboard.yearSelected != null}">
-				<div class="panel-title">
+				<h:panelGroup class="panel-title">
 					<h1>Dashboard - #{managerBean.dashboard.projectSelected} - #{managerBean.dashboard.yearSelected}</h1>
 	
-					<div>
+					<h:panelGroup>
 						<p:selectOneMenu value="#{managerBean.dashboard.projectSelected}" style="margin:0 10px;">
 							<f:selectItems value="#{managerBean.projects}" />
 	
@@ -52,84 +52,84 @@
 							<p:ajax event="change" listener="#{managerBean.changeParameterSearch}" update="panel-main" />
 						</p:selectOneMenu>
 						
-					</div>
-				</div>
+					</h:panelGroup>
+				</h:panelGroup>
 
-				<div class="panel-main">
+				<h:panelGroup class="panel-main">
 				
 					<!-- inicio painel superior -->
-					<div class="panel-main-top">
+					<h:panelGroup class="panel-main-top">
 					
-						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailComputers.color};">
+						<h:panelGroup class="card-panel-main-project" style="background: #228B22">
 							<div class="card-head">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailComputers.titleMain}" />
+								<p:outputLabel value="Computadores" />
 							</div>
 	
 							<div class="card-body">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailComputers.valueMain}" />
+								<p:outputLabel value="#{managerBean.dashboard.quantityObject.computers}" />
 							</div>
 	
-						</div>
+						</h:panelGroup>
 	
-						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailMonitors.color}">
+						<h:panelGroup class="card-panel-main-project" style="background: #B22222">
 							<div class="card-head">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailMonitors.titleMain}" />
+								<p:outputLabel value="Monitores" />
 							</div>
 	
 							<div class="card-body">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailMonitors.valueMain}" />
+								<p:outputLabel value="#{managerBean.dashboard.quantityObject.monitors}" />
 							</div>
 	
-						</div>
+						</h:panelGroup>
 	
-						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailPeripherals.color};">
+						<h:panelGroup class="card-panel-main-project" style="background: #FFA500">
 							<div class="card-head">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailPeripherals.titleMain}" />
+								<p:outputLabel value="Periféricos" />
 							</div>
 	
 							<div class="card-body">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailPeripherals.valueMain}" />
+								<p:outputLabel value="#{managerBean.dashboard.quantityObject.peripherals}" />
 							</div>
 	
-						</div>
+						</h:panelGroup>
 	
-						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailLicenses.color}">
+						<h:panelGroup class="card-panel-main-project" style="background: #0000CD">
 							<div class="card-head">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailLicenses.titleMain}" />
+								<p:outputLabel value="Licenças" />
 							</div>
 	
 							<div class="card-body">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailLicenses.valueMain}" />
+								<p:outputLabel value="#{managerBean.dashboard.quantityObject.licenses}" />
 							</div>
 	
-						</div>
+						</h:panelGroup>
 	
-						<div class="card-panel-main-project" style="background: #{managerBean.dashboard.cardDetailUsers.color}">
+						<h:panelGroup class="card-panel-main-project" style="background: #808080">
 							<div class="card-head">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailUsers.titleMain}" />
+								<p:outputLabel value="Usuários" />
 							</div>
 	
 							<div class="card-body">
-								<p:outputLabel value="#{managerBean.dashboard.cardDetailUsers.valueMain}" />
+								<p:outputLabel value="#{managerBean.dashboard.quantityObject.users}" />
 							</div>
 	
-						</div>
+						</h:panelGroup>
 						
-					</div>
+					</h:panelGroup>
 					<!-- fim painel de superior -->
 	
 					
 					<!-- inicio painel inferior -->
-					<div class="panel-main-bottom">
-						<div class="panel-charts-line-cost">
+					<h:panelGroup class="panel-main-bottom">
+						<h:panelGroup class="panel-charts-line-cost">
 							<p:lineChart model="#{managerBean.dashboard.costLineChartModel}"
 								style="width: 100%; height: 340px;" />
-						</div>
+						</h:panelGroup>
 
-					</div>
+					</h:panelGroup>
 					<!-- fim painel inferior -->
 					
-				</div>
+				</h:panelGroup>
 			</p:outputPanel>
 		</h:form>
 

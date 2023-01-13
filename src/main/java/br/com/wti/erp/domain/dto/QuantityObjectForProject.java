@@ -27,4 +27,9 @@ public class QuantityObjectForProject implements Serializable {
 		this.licenses = licenses;
 		this.users = users;
 	}
+	
+	public QuantityObjectForProject(Long computers, Long monitors) {
+		this.computers = computers;
+		this.monitors = monitors;
+	}
 }
