@@ -19,13 +19,18 @@ import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartModel;
 import org.primefaces.model.charts.pie.PieChartOptions;
 
+import br.com.wti.erp.domain.dashboard.CardDetailComputer;
+import br.com.wti.erp.domain.dashboard.CardDetailLicense;
+import br.com.wti.erp.domain.dashboard.CardDetailMonitor;
+import br.com.wti.erp.domain.dashboard.CardDetailPeripheral;
+import br.com.wti.erp.domain.dashboard.CardDetailUser;
 import br.com.wti.erp.domain.dashboard.DashboardForProject;
 import br.com.wti.erp.domain.dashboard.DashboardGeneral;
-import br.com.wti.erp.domain.dashboard.DetailObjectCard;
 import br.com.wti.erp.domain.dto.QuantityChangesForMonth;
 import br.com.wti.erp.domain.dto.QuantityForStatus;
 import br.com.wti.erp.domain.dto.QuantityObjectForProject;
 import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
+import br.com.wti.erp.domain.enums.StatusUserEnum;
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
 import br.com.wti.erp.repository.DashboardRepository;
 
@@ -38,15 +43,15 @@ public class DashboardService implements Serializable {
 
 	public void setDataCardsGeneral(DashboardGeneral dashboard) {
 		
-		dashboard.setCardDetailComputers(getCardComputer());
+		dashboard.setCardDetailComputer(getCardComputer());
 
-//		dashboard.setCardDetailMonitors();
-//
-//		dashboard.setCardDetailPeripherals(getCard());
-//
-//		dashboard.setCardDetailLicenses(getCard());
-//
-//		dashboard.setCardDetailUsers(getCard());
+		dashboard.setCardDetailMonitor(getCardMonitor());
+
+		dashboard.setCardDetailPeripheral(getCardPeripheral());
+
+		dashboard.setCardDetailLicense(getCardLicense());
+
+		dashboard.setCardDetailUser(getCardUser());
 	}
 
 	public void setDataCardsForProject(DashboardForProject dashboard) {
@@ -431,85 +436,77 @@ public class DashboardService implements Serializable {
 		return numbers;
 	}
 	
-	public DetailObjectCard getCardComputer() {
+	public CardDetailComputer getCardComputer() {
 		
-		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatus();
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusComputer();
 
-		if(!listQuantityStatus.isEmpty()) {
-			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().get().getQuantity();
-			long quantityInUse = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().get().getQuantity();
-			long quantityDisabled = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().get().getQuantity();
+		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
+			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityInUse = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityDisabled = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
 			long quantityTotal = quantityStandBy + quantityInUse + quantityDisabled;
 			
-			return new DetailObjectCard(quantityTotal, quantityStandBy, quantityInUse, quantityDisabled);
+			return new CardDetailComputer(quantityTotal, quantityStandBy, quantityInUse, quantityDisabled);
 		}
-		return new DetailObjectCard();
+		return new CardDetailComputer();
 	}
+	
+	public CardDetailMonitor getCardMonitor() {
 
-//	public PieChartModel obterDadosPercentageComputers() {
-//		PieChartModel pieModel = new PieChartModel();
-//
-//        pieModel.set("Disponivel", 200);
-//        pieModel.set("Em Uso", 80);
-//        pieModel.set("Desativados", 10);
-//
-//        pieModel.setTitle("Computadores");
-//        pieModel.setLegendPosition(null);
-//        pieModel.setFill(false);
-//        pieModel.setShowDataLabels(true);
-//        pieModel.setDiameter(100);
-//        
-//        return pieModel;
-//	}
-//	
-//	public PieChartModel obterDadosPercentageMonitors() {
-//		PieChartModel pieModel = new PieChartModel();
-//
-//        pieModel.set("Disponivel", 500);
-//        pieModel.set("Em Uso", 150);
-//        pieModel.set("Desativados", 30);
-//        pieModel.setSeriesColors(null);
-//
-//        pieModel.setTitle("Monitores");
-//        pieModel.setLegendPosition(null);
-//        pieModel.setFill(false);
-//        pieModel.setShowDataLabels(true);
-//        pieModel.setDiameter(100);
-//        
-//        return pieModel;
-//	}
-//	
-//	public PieChartModel obterDadosPercentagePeripherals() {
-//		PieChartModel pieModel = new PieChartModel();
-//
-//        pieModel.set("Disponivel", 400);
-//        pieModel.set("Em Uso", 50);
-//        pieModel.set("Desativados", 5);
-//        pieModel.setSeriesColors(null);
-//
-//        pieModel.setTitle("Periféricos");
-//        pieModel.setLegendPosition(null);
-//        pieModel.setFill(false);
-//        pieModel.setShowDataLabels(true);
-//        pieModel.setDiameter(100);
-//        
-//        return pieModel;
-//	}
-//	
-//	public PieChartModel obterDadosPercentageLicenses() {
-//		PieChartModel pieModel = new PieChartModel();
-//
-//        pieModel.set("Disponivel", 400);
-//        pieModel.set("Em Uso", 50);
-//        pieModel.set("Desativados", 5);
-//        pieModel.setSeriesColors(null);
-//
-//        pieModel.setTitle("Licenças");
-//        pieModel.setLegendPosition(null);
-//        pieModel.setFill(false);
-//        pieModel.setShowDataLabels(true);
-//        pieModel.setDiameter(100);
-//        
-//        return pieModel;
-//	}
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusMonitor();
+		//TODO unificar o status
+		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
+			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityInUse = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityDisabled = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityTotal = quantityStandBy + quantityInUse + quantityDisabled;
+
+			return new CardDetailMonitor(quantityTotal, quantityStandBy, quantityInUse, quantityDisabled);
+		}
+		return new CardDetailMonitor();
+	}
+	
+	public CardDetailPeripheral getCardPeripheral() {
+
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusPeripheral();
+
+		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
+			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityInUse = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityDisabled = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityTotal = quantityStandBy + quantityInUse + quantityDisabled;
+
+			return new CardDetailPeripheral(quantityTotal, quantityStandBy, quantityInUse, quantityDisabled);
+		}
+		return new CardDetailPeripheral();
+	}
+	
+	public CardDetailLicense getCardLicense() {
+
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusLicense();
+
+		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
+			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityInUse = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityExpired = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityTotal = quantityStandBy + quantityInUse + quantityExpired;
+
+			return new CardDetailLicense(quantityTotal, quantityStandBy, quantityInUse, quantityExpired);
+		}
+		return new CardDetailLicense();
+	}
+	
+	public CardDetailUser getCardUser() {
+		
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusUser();
+
+		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
+			long quantityActive = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusUserEnum.ACTIVE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityDisabled = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusUserEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+			long quantityTotal = quantityActive + quantityDisabled;
+
+			return new CardDetailUser(quantityTotal, quantityActive, quantityDisabled);
+		}
+		return new CardDetailUser();
+	}
 }

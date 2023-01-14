@@ -72,7 +72,7 @@ public class Project extends AbstractEntity implements Serializable {
 			this.changes.remove(change);
 		}
 	}
-
+	//TODO Alterar pelo metodo do grafico
 	public Integer allMonitors() {
 		return 0;
 	}

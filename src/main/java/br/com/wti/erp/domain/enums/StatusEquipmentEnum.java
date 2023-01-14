@@ -8,7 +8,8 @@ public enum StatusEquipmentEnum implements StatusEnum {
 	STAND_BY("DISPONIVEL"), 
 	IN_USE("EM USO"), 
 	DISABLED("DESATIVADO"), 
-	DISCARDED("DESCARTADO");
+	DISCARDED("DESCARTADO"),
+	UNDEFINED("NÃO DEFINIDO");
 
 	private String descricao;
 

@@ -39,7 +39,7 @@ public abstract class Change implements Serializable  {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_change", nullable = false)
-	private Date dateChange;
+	private Date date;
 
 	@Column(nullable = false, length = 50)
 	private String author;

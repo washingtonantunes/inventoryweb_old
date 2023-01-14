@@ -18,37 +18,37 @@ INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_ent
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status, project_id, user_id) VALUES (11, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ0101RM', 004245, 'IN_USE', 2, 3);
 INSERT INTO tb_computers (id, brand, date_entry, location, model, type, note_entry, serial_number, patrimony_number, status) VALUES (12, 'HP', '2021-12-27 11:00:54', 'TI', 'PRODESK 400 G5', 'NOTEBOOK', '25416', 'BRJ14327RM', 001245, 'STAND_BY');
 
-INSERT INTO tb_changes_project (author, description, date, type, project_id) VALUES ('Washington Antunes', 'Projeto Cadastrado no Sistema', '2022-05-10', 'ENTRY', 1);
-INSERT INTO tb_changes_project (author, description, date, type, project_id) VALUES ('Washington Antunes', 'Projeto Cadastrado no Sistema', '2020-02-10', 'ENTRY', 2);
+INSERT INTO tb_changes_project (author, description, date_change, type_change, project_id) VALUES ('Washington Antunes', 'Projeto Cadastrado no Sistema', '2022-05-10', 'ENTRY', 1);
+INSERT INTO tb_changes_project (author, description, date_change, type_change, project_id) VALUES ('Washington Antunes', 'Projeto Cadastrado no Sistema', '2020-02-10', 'ENTRY', 2);
 
-INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Usuário Cadastrado no Sistema', '2020-05-05', 'ENTRY', 1);
-INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Usuário Cadastrado no Sistema', '2021-04-10', 'ENTRY', 2);
-INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Usuário Cadastrado no Sistema', '2022-05-18', 'ENTRY', 3);
+INSERT INTO tb_changes_user (author, description, date_change, type_change, user_id) VALUES ('Washington Antunes', 'Usuário Cadastrado no Sistema', '2020-05-05', 'ENTRY', 1);
+INSERT INTO tb_changes_user (author, description, date_change, type_change, user_id) VALUES ('Washington Antunes', 'Usuário Cadastrado no Sistema', '2021-04-10', 'ENTRY', 2);
+INSERT INTO tb_changes_user (author, description, date_change, type_change, user_id) VALUES ('Washington Antunes', 'Usuário Cadastrado no Sistema', '2022-05-18', 'ENTRY', 3);
 
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 1);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 2);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 3);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 4);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 5);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 6);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 7);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 8);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 9);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 10);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 11);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 12);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 1);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 2);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 3);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 4);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 5);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 6);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 7);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 8);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 9);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 10);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 11);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Computador Cadastrado no Sistema', '2021-05-10', 'ENTRY', 12);
 
-INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ93000RM', '2022-12-05', 'DELIVERY_TO_USER', 1);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário: 125622', '2022-12-05', 'DELIVERY_TO_USER', 6);
+INSERT INTO tb_changes_user (author, description, date_change, type_change, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ93000RM', '2022-12-05', 'DELIVERY_TO_USER', 1);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário: 125622', '2022-12-05', 'DELIVERY_TO_USER', 6);
 
-INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ831TSWN', '2022-12-05', 'DELIVERY_TO_USER', 3);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário: 123322', '2022-12-05', 'DELIVERY_TO_USER', 11);
+INSERT INTO tb_changes_user (author, description, date_change, type_change, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ831TSWN', '2022-12-05', 'DELIVERY_TO_USER', 3);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário: 123322', '2022-12-05', 'DELIVERY_TO_USER', 11);
 
-INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ934521', '2021-09-01', 'DELIVERY_TO_USER', 2);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário: 005622', '2021-09-01', 'DELIVERY_TO_USER', 5);
+INSERT INTO tb_changes_user (author, description, date_change, type_change, user_id) VALUES ('Washington Antunes', 'Entrega de Equipamento: BRJ934521', '2021-09-01', 'DELIVERY_TO_USER', 2);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Saida de Equipamento do Estoque para Usuário: 005622', '2021-09-01', 'DELIVERY_TO_USER', 5);
 
-INSERT INTO tb_changes_user (author, description, date, type, user_id) VALUES ('Washington Antunes', 'Devolução de Equipamento: BRJ934521', '2022-12-09', 'DEVOLUTION_TO_USER', 2);
-INSERT INTO tb_changes_computer (author, description, date, type, computer_id) VALUES ('Washington Antunes', 'Entrada de Equipamento no Estoque por Usuário: 005622', '2022-12-09', 'DEVOLUTION_TO_USER', 5);
+INSERT INTO tb_changes_user (author, description, date_change, type_change, user_id) VALUES ('Washington Antunes', 'Devolução de Equipamento: BRJ934521', '2022-12-09', 'DEVOLUTION_TO_USER', 2);
+INSERT INTO tb_changes_computer (author, description, date_change, type_change, computer_id) VALUES ('Washington Antunes', 'Entrada de Equipamento no Estoque por Usuário: 005622', '2022-12-09', 'DEVOLUTION_TO_USER', 5);
 
-INSERT INTO tb_items (identification, type, value, id_user) VALUES ('BRJ934521', 'NOTEBOOK', '0', '1');
-INSERT INTO tb_items (identification, type, value, id_user) VALUES ('BRJ0101RM', 'NOTEBOOK', '0', '3');
+INSERT INTO tb_items (identification, type_change, value, id_user) VALUES ('BRJ934521', 'NOTEBOOK', '0', '1');
+INSERT INTO tb_items (identification, type_change, value, id_user) VALUES ('BRJ0101RM', 'NOTEBOOK', '0', '3');

@@ -16,15 +16,15 @@ public class DashboardGeneral implements Serializable {
 	
 	private Integer yearSelected;
 
-	private DetailObjectCard cardDetailComputers;
+	private CardDetailComputer cardDetailComputer;
 
-	private DetailObjectCard cardDetailMonitors;
+	private CardDetailMonitor cardDetailMonitor;
 
-	private DetailObjectCard cardDetailPeripherals;
+	private CardDetailPeripheral cardDetailPeripheral;
 
-	private DetailObjectCard cardDetailLicenses;
+	private CardDetailLicense cardDetailLicense;
 
-	private DetailObjectCard cardDetailUsers;
+	private CardDetailUser cardDetailUser;
 
 	private BarChartModel logisticsBarChartModel;
 
