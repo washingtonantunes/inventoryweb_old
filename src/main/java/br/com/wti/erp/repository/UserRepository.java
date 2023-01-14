@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import br.com.wti.erp.domain.User;
+import br.com.wti.erp.domain.dto.QuantityForStatus;
 
 public class UserRepository implements IRepository<User>, Serializable {
 
@@ -58,5 +60,20 @@ public class UserRepository implements IRepository<User>, Serializable {
 	@Override
 	public User save(User user) {
 		return manager.merge(user);
+	}
+	
+	public List<QuantityForStatus> getQuantityForStatusUser() {
+		try {
+			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(u.status, COUNT(*)) "
+					+ "FROM User u " 
+					+ "GROUP BY u.status";
+
+			TypedQuery<QuantityForStatus> query = manager.createQuery(jpql, QuantityForStatus.class);
+
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

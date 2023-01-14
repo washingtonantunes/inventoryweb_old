@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import br.com.wti.erp.domain.Computer;
+import br.com.wti.erp.domain.dto.QuantityForStatus;
 
 public class ComputerRepository implements IRepository<Computer>, Serializable {
 
@@ -58,5 +60,21 @@ public class ComputerRepository implements IRepository<Computer>, Serializable {
 	@Override
 	public Computer save(Computer computer) {
 		return manager.merge(computer);
+	}
+	
+	public List<QuantityForStatus> getQuantityForStatusComputer() {
+		try {
+			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(c.status, COUNT(c)) "
+					+ "FROM Computer c " 
+					+ "WHERE c.status != 'DISCARDED' " 
+					+ "GROUP BY c.status";
+
+			TypedQuery<QuantityForStatus> query = manager.createQuery(jpql, QuantityForStatus.class);
+
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

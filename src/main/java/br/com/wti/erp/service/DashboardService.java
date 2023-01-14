@@ -32,7 +32,10 @@ import br.com.wti.erp.domain.dto.QuantityObjectForProject;
 import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
 import br.com.wti.erp.domain.enums.StatusUserEnum;
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
+import br.com.wti.erp.repository.ChangeRepository;
+import br.com.wti.erp.repository.ComputerRepository;
 import br.com.wti.erp.repository.DashboardRepository;
+import br.com.wti.erp.repository.UserRepository;
 
 public class DashboardService implements Serializable {
 
@@ -40,6 +43,15 @@ public class DashboardService implements Serializable {
 
 	@Inject
 	private DashboardRepository dashboardRepository;
+	
+	@Inject
+	private ChangeRepository changeRepository;
+	
+	@Inject
+	private ComputerRepository computerRepository;
+	
+	@Inject
+	private UserRepository userRepository;
 
 	public void setDataCardsGeneral(DashboardGeneral dashboard) {
 		
@@ -167,7 +179,7 @@ public class DashboardService implements Serializable {
 		dataSet.setBorderColor("rgb(163, 157, 212)");
 		dataSet.setBorderWidth(1);
 
-		List<QuantityChangesForMonth> values = dashboardRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DELIVERY_TO_USER);
+		List<QuantityChangesForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DELIVERY_TO_USER);
 
 		if (values != null && !values.isEmpty()) {
 			dataSet.setData(converterList(values));
@@ -183,7 +195,7 @@ public class DashboardService implements Serializable {
 		dataSet.setBorderColor("rgb(236, 47, 111)");
 		dataSet.setBorderWidth(1);
 
-		List<QuantityChangesForMonth> values = dashboardRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.EXCHANGE_TO_USER);
+		List<QuantityChangesForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.EXCHANGE_TO_USER);
 
 		if (values != null && !values.isEmpty()) {
 			dataSet.setData(converterList(values));
@@ -199,7 +211,7 @@ public class DashboardService implements Serializable {
 		dataSet.setBorderColor("rgb(161, 171, 122)");
 		dataSet.setBorderWidth(1);
 
-		List<QuantityChangesForMonth> values = dashboardRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DEVOLUTION_TO_USER);
+		List<QuantityChangesForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DEVOLUTION_TO_USER);
 
 		if (values != null && !values.isEmpty()) {
 			dataSet.setData(converterList(values));
@@ -438,7 +450,7 @@ public class DashboardService implements Serializable {
 	
 	public CardDetailComputer getCardComputer() {
 		
-		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusComputer();
+		List<QuantityForStatus> listQuantityStatus = computerRepository.getQuantityForStatusComputer();
 
 		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
 			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
@@ -498,7 +510,7 @@ public class DashboardService implements Serializable {
 	
 	public CardDetailUser getCardUser() {
 		
-		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusUser();
+		List<QuantityForStatus> listQuantityStatus = userRepository.getQuantityForStatusUser();
 
 		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
 			long quantityActive = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusUserEnum.ACTIVE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
