@@ -18,9 +18,9 @@
 				
 				<p:panelGrid columns="1" layout="flex" style="text-align: center;">
 			
-					<p:selectOneMenu label="project" required="true" value="#{managerBean.dashboard.projectSelected}" requiredMessage="É necessário selecionar um projeto">
+					<p:selectOneMenu label="project" required="true" value="#{managerBean.dashboard.projectSelected}" requiredMessage="É necessário selecionar um projeto" converter="ProjectConverter">
 						<f:selectItem itemLabel="Selecione o Projeto" noSelectionOption="true"/>
-						<f:selectItems value="#{managerBean.projects}" var="project" itemValue="#{project}" />
+						<f:selectItems value="#{managerBean.projects}" var="project" itemLabel="#{project.name}" itemValue="#{project}" />
 					</p:selectOneMenu>
 		
 					<p:selectOneMenu label="year" required="true" value="#{managerBean.dashboard.yearSelected}" requiredMessage="É necessário selecionar um ano">
@@ -29,7 +29,7 @@
 					</p:selectOneMenu>
 					
 					<p:commandButton value="Show" actionListener="#{managerBean.changeParameterSearch}" 
-						oncomplete="if (!args.validationFailed) PF('dialogSelectProjectYear').hide()" process="modal" update="@form messages"  />
+						oncomplete="if (!args.validationFailed) PF('dialogSelectProjectYear').hide() #{managerBean.loadProject()}" process="modal" update="@form messages"  />
 					
 					<p:commandButton value="Home" action="#{managerNavigationMB.redirectHome}"  />
 				</p:panelGrid>
@@ -37,11 +37,11 @@
 			
 			<p:outputPanel id="panel-main" rendered="#{managerBean.dashboard.projectSelected != null and managerBean.dashboard.yearSelected != null}">
 				<h:panelGroup class="panel-title">
-					<h1>Dashboard - #{managerBean.dashboard.projectSelected} - #{managerBean.dashboard.yearSelected}</h1>
+					<h1>Dashboard - #{managerBean.dashboard.projectSelected.name} - #{managerBean.dashboard.yearSelected}</h1>
 	
 					<h:panelGroup style="width: 300px;">
-						<p:selectOneMenu value="#{managerBean.dashboard.projectSelected}" style="margin:0 10px;">
-							<f:selectItems value="#{managerBean.projects}" />
+						<p:selectOneMenu value="#{managerBean.dashboard.projectSelected}" style="margin:0 10px;" converter="ProjectConverter">
+							<f:selectItems value="#{managerBean.projects}" var="project" itemLabel="#{project.name}" itemValue="#{project}" />
 	
 							<p:ajax event="change" listener="#{managerBean.changeParameterSearch}" update="panel-main" />
 						</p:selectOneMenu>

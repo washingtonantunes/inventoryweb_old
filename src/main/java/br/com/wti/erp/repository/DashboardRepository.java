@@ -16,25 +16,9 @@ public class DashboardRepository implements Serializable {
 	@Inject
 	private EntityManager manager;
 
-	public List<QuantityForStatus> getQuantityForStatusMonitor() {
-		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(m.status, COUNT(m)) "
-					+ "FROM Monitor m " 
-					+ "WHERE m.status != 'DISCARDED' " 
-					+ "GROUP BY m.status";
-
-			TypedQuery<QuantityForStatus> query = manager.createQuery(jpql, QuantityForStatus.class);
-
-			return query.getResultList();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
 	public List<QuantityForStatus> getQuantityForStatusPeripheral() {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(p.status, COUNT(p)) "
+			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(p.status, COUNT(*)) "
 					+ "FROM Peripheral p " 
 					+ "WHERE p.status != 'DISCARDED' " 
 					+ "GROUP BY p.status";
@@ -50,9 +34,9 @@ public class DashboardRepository implements Serializable {
 
 	public List<QuantityForStatus> getQuantityForStatusLicense() {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(l.status, COUNT(l)) "
+			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(l.status, COUNT(*)) "
 					+ "FROM License l " 
-					+ "WHERE c.status != 'DISCARDED' " 
+					+ "WHERE l.status != 'DISCARDED' " 
 					+ "GROUP BY l.status";
 
 			TypedQuery<QuantityForStatus> query = manager.createQuery(jpql, QuantityForStatus.class);

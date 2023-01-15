@@ -13,6 +13,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import br.com.wti.erp.domain.Project;
+import br.com.wti.erp.domain.dto.QuantityChangesForMonth;
 
 public class ProjectRepository implements IRepository<Project>, Serializable {
 
@@ -32,9 +33,14 @@ public class ProjectRepository implements IRepository<Project>, Serializable {
 	public List<Project> findAll() {
 		return manager.createQuery("from Project", Project.class).getResultList();
 	}
+	
+	public List<Project> findAllActive() {
+		return manager.createQuery("SELECT p FROM Project p WHERE p.status = 'ACTIVE'", Project.class).getResultList();
+	}
 
 	@Override
 	public List<Project> findAllByParams(Filter filter) {
+		//TODO remover criteria
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Project> query = builder.createQuery(Project.class);
 		Root<Project> root = query.from(Project.class);
@@ -61,7 +67,7 @@ public class ProjectRepository implements IRepository<Project>, Serializable {
 	}
 
 	public Long allComputers(Project project) {
-		String jpql = "select count(*) from Computer where project_id = :project_id";
+		String jpql = "SELECT COUNT(*) from Computer where project_id = :project_id";
 
 		TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
 		query.setParameter("project_id", project.getId());
@@ -70,7 +76,7 @@ public class ProjectRepository implements IRepository<Project>, Serializable {
 	}
 
 	public Long allUsers(Project project) {
-		String jpql = "select count(*) from User where project_id = :project_id";
+		String jpql = "SELECT COUNT(*) from User where project_id = :project_id";
 
 		TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
 		query.setParameter("project_id", project.getId());
@@ -79,7 +85,7 @@ public class ProjectRepository implements IRepository<Project>, Serializable {
 	}
 	
 	public Long allMonitors(Project project) {
-		String jpql = "select count(*) from Monitor where project_id = :project_id";
+		String jpql = "SELECT COUNT(*) from Monitor where project_id = :project_id";
 
 		TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
 		query.setParameter("project_id", project.getId());
@@ -92,5 +98,24 @@ public class ProjectRepository implements IRepository<Project>, Serializable {
 
 		return manager.createQuery(jpql, String.class).getResultList();
 
+	}
+	
+	public List<QuantityChangesForMonth> getListCostForYear(Integer project) {
+		//TODO melhorar apos criar tarifa
+		List<QuantityChangesForMonth> values = new ArrayList<>();
+		values.add(new QuantityChangesForMonth(1, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(2, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(3, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(4, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(5, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(6, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(7, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(8, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(9, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(10, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(11, Math.round(Math.random() * 1000)));
+		values.add(new QuantityChangesForMonth(12, Math.round(Math.random() * 1000)));
+		
+		return values;
 	}
 }

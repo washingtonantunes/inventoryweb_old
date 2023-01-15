@@ -35,6 +35,8 @@ import br.com.wti.erp.domain.enums.TypeChangeEnum;
 import br.com.wti.erp.repository.ChangeRepository;
 import br.com.wti.erp.repository.ComputerRepository;
 import br.com.wti.erp.repository.DashboardRepository;
+import br.com.wti.erp.repository.MonitorRepository;
+import br.com.wti.erp.repository.ProjectRepository;
 import br.com.wti.erp.repository.UserRepository;
 
 public class DashboardService implements Serializable {
@@ -51,32 +53,36 @@ public class DashboardService implements Serializable {
 	private ComputerRepository computerRepository;
 	
 	@Inject
+	private MonitorRepository monitorRepository;
+	
+	@Inject
 	private UserRepository userRepository;
+	
+	@Inject
+	private ProjectRepository projectRepository;
 
 	public void setDataCardsGeneral(DashboardGeneral dashboard) {
-		
 		dashboard.setCardDetailComputer(getCardComputer());
-
 		dashboard.setCardDetailMonitor(getCardMonitor());
-
 		dashboard.setCardDetailPeripheral(getCardPeripheral());
-
 		dashboard.setCardDetailLicense(getCardLicense());
-
 		dashboard.setCardDetailUser(getCardUser());
 	}
 
 	public void setDataCardsForProject(DashboardForProject dashboard) {
+		//TODO unificar buscar no banco
 		
-		final QuantityObjectForProject  quantityObjectForProject = new QuantityObjectForProject();
+		Integer id = dashboard.getProjectSelected().getId();
 		
-		quantityObjectForProject.setComputers(Math.round(Math.random() * 100));
-		quantityObjectForProject.setMonitors(Math.round(Math.random() * 100));
-		quantityObjectForProject.setPeripherals(Math.round(Math.random() * 100));
-		quantityObjectForProject.setLicenses(Math.round(Math.random() * 100));
-		quantityObjectForProject.setUsers(Math.round(Math.random() * 100));
+		final QuantityObjectForProject quantity = new QuantityObjectForProject();
 		
-		dashboard.setQuantityObject(quantityObjectForProject);
+		quantity.setComputers(computerRepository.getQuantityForProject(id));
+		quantity.setMonitors(monitorRepository.getQuantityForProject(id));
+//		quantity.setPeripherals(Math.round(Math.random() * 100));
+//		quantity.setLicenses(Math.round(Math.random() * 100));
+		quantity.setUsers(userRepository.getQuantityForProject(id));
+		
+		dashboard.setQuantityObject(quantity);
 	}
 
 	public void setLogisticsBarChartModel(DashboardGeneral dashboard) {
@@ -128,7 +134,20 @@ public class DashboardService implements Serializable {
 
 		ChartData data = new ChartData();
 
-		data.addChartDataSet(obterDadosCusto());
+		LineChartDataSet dataSet = new LineChartDataSet();
+		dataSet.setLabel(dashboard.getProjectSelected().getName());
+		dataSet.setBackgroundColor("rgba(248, 11, 5, 0.7)");
+		dataSet.setBorderColor("rgb(248, 11, 5)");
+		dataSet.setTension(0.1);
+		dataSet.setFill(false);
+		
+		List<QuantityChangesForMonth> values = projectRepository.getListCostForYear(dashboard.getProjectSelected().getId());
+
+		if (values != null && !values.isEmpty()) {
+			dataSet.setData(converterListCost(values));
+		}
+		
+		data.addChartDataSet(dataSet);
 
 		List<String> labels = new ArrayList<>();
 		labels.add("Janeiro");
@@ -166,8 +185,8 @@ public class DashboardService implements Serializable {
 	}
 
 	public void setPercentagePieChartModel(DashboardGeneral dashboard) {
-		dashboard.setPercentageComputersPieChartModel(obterDadosPercentageComputers());
-		dashboard.setPercentageMonitorsPieChartModel(obterDadosPercentageMonitors());
+		dashboard.setPercentageComputersPieChartModel(getDataPercentageComputers());
+		dashboard.setPercentageMonitorsPieChartModel(getDataPercentageMonitors());
 		dashboard.setPercentagePeripheralsPieChartModel(obterDadosPercentagePeripherals());
 		dashboard.setPercentageLicensesPieChartModel(obterDadosPercentageLicenses());
 	}
@@ -220,42 +239,20 @@ public class DashboardService implements Serializable {
 		return dataSet;
 	}
 
-	private LineChartDataSet obterDadosCusto() {
-		LineChartDataSet dataSet = new LineChartDataSet();
-		dataSet.setLabel("Sinquia");
-		dataSet.setBackgroundColor("rgba(248, 11, 5, 0.7)");
-		dataSet.setBorderColor("rgb(248, 11, 5)");
-		dataSet.setTension(0.1);
-		dataSet.setFill(false);
-
-		List<Object> values = new ArrayList<>();
-		values.add(1500);
-		values.add(1900);
-		values.add(2005);
-		values.add(10000);
-		values.add(5600);
-		values.add(45000);
-		values.add(10000);
-		values.add(20000);
-		values.add(7000);
-		values.add(80000);
-		values.add(30000);
-		values.add(4000);
-		dataSet.setData(values);
-
-		return dataSet;
-	}
-
-	private PieChartModel obterDadosPercentageComputers() {
+	private PieChartModel getDataPercentageComputers() {
 		PieChartModel pieModel = new PieChartModel();
 
 		ChartData data = new ChartData();
+		
+		List<QuantityForStatus> listQuantityStatus = computerRepository.getQuantityForStatusComputer();
 
 		PieChartDataSet dataSet = new PieChartDataSet();
 		List<Number> values = new ArrayList<>();
-		values.add(300);
-		values.add(50);
-		values.add(100);
+		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
+			values.add(listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity());
+			values.add(listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity());
+			values.add(listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity());
+		}
 		dataSet.setData(values);
 
 		List<String> bgColors = new ArrayList<>();
@@ -291,16 +288,21 @@ public class DashboardService implements Serializable {
 		return pieModel;
 	}
 
-	private PieChartModel obterDadosPercentageMonitors() {
+	private PieChartModel getDataPercentageMonitors() {
 		PieChartModel pieModel = new PieChartModel();
 
 		ChartData data = new ChartData();
+		//TODO melhora o grafico no caso de não ter valores
+		List<QuantityForStatus> listQuantityStatus = monitorRepository.getQuantityForStatusMonitor();
 
 		PieChartDataSet dataSet = new PieChartDataSet();
 		List<Number> values = new ArrayList<>();
-		values.add(300);
-		values.add(50);
-		values.add(100);
+		
+		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
+			values.add(listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity());
+			values.add(listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity());
+			values.add(listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity());
+		}
 		dataSet.setData(values);
 
 		List<String> bgColors = new ArrayList<>();
@@ -338,7 +340,7 @@ public class DashboardService implements Serializable {
 
 	private PieChartModel obterDadosPercentagePeripherals() {
 		PieChartModel pieModel = new PieChartModel();
-
+		//TODO alterar quando peripheral for mapeada
 		ChartData data = new ChartData();
 
 		PieChartDataSet dataSet = new PieChartDataSet();
@@ -383,7 +385,7 @@ public class DashboardService implements Serializable {
 
 	private PieChartModel obterDadosPercentageLicenses() {
 		PieChartModel pieModel = new PieChartModel();
-
+		//TODO alterar quando licenses for mapeada
 		ChartData data = new ChartData();
 
 		PieChartDataSet dataSet = new PieChartDataSet();
@@ -448,6 +450,28 @@ public class DashboardService implements Serializable {
 		return numbers;
 	}
 	
+	private List<Object> converterListCost(List<QuantityChangesForMonth> values) {
+
+		QuantityChangesForMonth[] quantidades = new QuantityChangesForMonth[12];
+
+		for (QuantityChangesForMonth value : values) {
+			int id = value.getDate();
+			quantidades[id - 1] = value;
+		}
+
+		List<Object> numbers = new ArrayList<>();
+
+		for (QuantityChangesForMonth quantity : quantidades) {
+			if (quantity != null) {
+				numbers.add(quantity.getQuantity());
+			} else {
+				numbers.add(0L);
+			}
+		}
+
+		return numbers;
+	}
+	
 	public CardDetailComputer getCardComputer() {
 		
 		List<QuantityForStatus> listQuantityStatus = computerRepository.getQuantityForStatusComputer();
@@ -465,7 +489,7 @@ public class DashboardService implements Serializable {
 	
 	public CardDetailMonitor getCardMonitor() {
 
-		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusMonitor();
+		List<QuantityForStatus> listQuantityStatus = monitorRepository.getQuantityForStatusMonitor();
 		//TODO unificar o status
 		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
 			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();

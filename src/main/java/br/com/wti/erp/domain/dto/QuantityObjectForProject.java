@@ -11,25 +11,20 @@ public class QuantityObjectForProject implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private Long computers;
-	private Long monitors;
-	private Long peripherals;
-	private Long licenses;
-	private Long users;
+	private long computers;
+	private long monitors;
+	private long peripherals;
+	private long licenses;
+	private long users;
 	
 	public QuantityObjectForProject() {
 	}
 	
-	public QuantityObjectForProject(Long computers, Long monitors, Long peripherals, Long licenses, Long users) {
+	public QuantityObjectForProject(long computers, long monitors, long peripherals, long licenses, long users) {
 		this.computers = computers;
 		this.monitors = monitors;
 		this.peripherals = peripherals;
 		this.licenses = licenses;
 		this.users = users;
-	}
-	
-	public QuantityObjectForProject(Long computers, Long monitors) {
-		this.computers = computers;
-		this.monitors = monitors;
 	}
 }

@@ -60,6 +60,13 @@ public class Project extends AbstractEntity implements Serializable {
 	@Getter
 	@Setter(value = AccessLevel.PRIVATE)
 	private List<ChangeProject> changes;
+	
+	public Project() {
+	}
+	
+	public Project(Integer id) {
+		super.setId(id);
+	}
 
 	public void addChange(ChangeProject change) {
 		if (change != null) {

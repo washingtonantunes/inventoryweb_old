@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.wti.erp.domain.Project;
 import br.com.wti.erp.domain.dashboard.DashboardForProject;
 import br.com.wti.erp.service.DashboardService;
 import br.com.wti.erp.service.ProjectService;
@@ -23,35 +24,40 @@ public class ManagerDashboardForProjectMB implements Serializable {
 
 	@Inject
 	private DashboardService dashboardService;
-	
+
 	@Inject
 	private ProjectService projectService;
 
 	@Inject
 	@Getter
 	private DashboardForProject dashboard;
-	
+
 	@Getter
-	private List<String> projects = new ArrayList<>();
-	
+	private List<Project> projects;
+
 	@Getter
 	private List<String> years = new ArrayList<>();
 
 	@PostConstruct
 	public void init() {
-		projects = projectService.findAllString();
-		
+		projects = projectService.findAllActive();
+
 		years.add("2021");
 		years.add("2022");
 		years.add("2023");
-		
+
 		dashboard.setYearSelected(Integer.toString(LocalDate.now().getYear()));
 	}
 
+	public void loadProject() {
+		if (dashboard.getProjectSelected() != null) {
+			dashboard.setProjectSelected(projectService.findById(dashboard.getProjectSelected().getId()));
+		}
+	}
+
 	public void changeParameterSearch() {
+		dashboard.setProjectSelected(projectService.findById(dashboard.getProjectSelected().getId()));
 		dashboardService.setDataCardsForProject(dashboard);
-
 		dashboardService.setCostLineChartModel(dashboard);
-
 	}
 }

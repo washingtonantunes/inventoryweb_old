@@ -12,33 +12,33 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import br.com.wti.erp.domain.Computer;
+import br.com.wti.erp.domain.Monitor;
 import br.com.wti.erp.domain.dto.QuantityForStatus;
 
-public class ComputerRepository implements IRepository<Computer>, Serializable {
+public class MonitorRepository implements IRepository<Monitor>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private EntityManager manager;
 	
-	public ComputerRepository() {
+	public MonitorRepository() {
 	}
 
-	public ComputerRepository(EntityManager manager) {
+	public MonitorRepository(EntityManager manager) {
 		this.manager = manager;
 	}
 
 	@Override
-	public List<Computer> findAll() {
-		return manager.createQuery("from Computer", Computer.class).getResultList();
+	public List<Monitor> findAll() {
+		return manager.createQuery("from Monitor", Monitor.class).getResultList();
 	}
 
 	@Override
-	public List<Computer> findAllByParams(Filter filter) {
+	public List<Monitor> findAllByParams(Filter filter) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<Computer> query = builder.createQuery(Computer.class);
-		Root<Computer> root = query.from(Computer.class);
+		CriteriaQuery<Monitor> query = builder.createQuery(Monitor.class);
+		Root<Monitor> root = query.from(Monitor.class);
 
 		List<Predicate> predicates = new ArrayList<>();
 		
@@ -53,21 +53,21 @@ public class ComputerRepository implements IRepository<Computer>, Serializable {
 	}
 
 	@Override
-	public Computer findById(Integer id) {
-		return manager.find(Computer.class, id);
+	public Monitor findById(Integer id) {
+		return manager.find(Monitor.class, id);
 	}
 
 	@Override
-	public Computer save(Computer computer) {
-		return manager.merge(computer);
+	public Monitor save(Monitor monitor) {
+		return manager.merge(monitor);
 	}
 	
-	public List<QuantityForStatus> getQuantityForStatusComputer() {
+	public List<QuantityForStatus> getQuantityForStatusMonitor() {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(c.status, COUNT(c)) "
-					+ "FROM Computer c " 
-					+ "WHERE c.status != 'DISCARDED' " 
-					+ "GROUP BY c.status";
+			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(m.status, COUNT(*)) "
+					+ "FROM Monitor m " 
+					+ "WHERE m.status != 'DISCARDED' " 
+					+ "GROUP BY m.status";
 
 			TypedQuery<QuantityForStatus> query = manager.createQuery(jpql, QuantityForStatus.class);
 
@@ -80,9 +80,9 @@ public class ComputerRepository implements IRepository<Computer>, Serializable {
 	
 	public Long getQuantityForProject(Integer project) {
 		try {
-			String jpql = "SELECT COUNT(c) "
-					+ "FROM Computer c "
-					+ "WHERE c.project.id = :project";
+			String jpql = "SELECT COUNT(m) "
+					+ "FROM Monitor m "
+					+ "WHERE m.project.id = :project";
 
 			TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
 			query.setParameter("project", project);

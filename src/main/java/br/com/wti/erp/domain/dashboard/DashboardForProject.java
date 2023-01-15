@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.primefaces.model.charts.line.LineChartModel;
 
+import br.com.wti.erp.domain.Project;
 import br.com.wti.erp.domain.dto.QuantityObjectForProject;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ public class DashboardForProject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String projectSelected;
+	private Project projectSelected;
 
 	private String yearSelected;
 

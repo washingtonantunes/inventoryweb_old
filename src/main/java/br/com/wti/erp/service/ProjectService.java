@@ -21,9 +21,9 @@ public class ProjectService implements IService<Project>, Serializable {
 	public List<Project> findAll() {
 		return projectRepository.findAll();
 	}
-
-	public List<String> findAllString() {
-		return projectRepository.findAllProjectString();
+	
+	public List<Project> findAllActive() {
+		return projectRepository.findAllActive();
 	}
 
 	@Override

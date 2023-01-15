@@ -76,4 +76,20 @@ public class UserRepository implements IRepository<User>, Serializable {
 			return null;
 		}
 	}
+	
+	public Long getQuantityForProject(Integer project) {
+		try {
+			String jpql = "SELECT COUNT(u) "
+					+ "FROM User u "
+					+ "WHERE u.project.id = :project";
+
+			TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
+			query.setParameter("project", project);
+			
+			return query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
