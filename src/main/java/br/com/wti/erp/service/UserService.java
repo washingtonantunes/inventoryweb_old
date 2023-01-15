@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.wti.erp.domain.Filter;
 import br.com.wti.erp.domain.User;
-import br.com.wti.erp.repository.Filter;
 import br.com.wti.erp.repository.UserRepository;
 
 public class UserService implements Serializable {

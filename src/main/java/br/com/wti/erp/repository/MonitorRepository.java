@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.com.wti.erp.domain.Filter;
 import br.com.wti.erp.domain.Monitor;
 import br.com.wti.erp.domain.vo.QuantityForStatus;
 
@@ -39,7 +40,7 @@ public class MonitorRepository implements Serializable {
 
 	public List<QuantityForStatus> getQuantityForStatusMonitor() {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(m.status, COUNT(*)) "
+			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(m.status, COUNT(*)) "
 					+ "FROM Monitor m " 
 					+ "WHERE m.status != 'DISCARDED' " 
 					+ "GROUP BY m.status";

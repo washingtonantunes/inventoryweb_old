@@ -6,8 +6,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.wti.erp.domain.Computer;
+import br.com.wti.erp.domain.Filter;
 import br.com.wti.erp.repository.ComputerRepository;
-import br.com.wti.erp.repository.Filter;
 
 public class ComputerService implements Serializable {
 

@@ -16,7 +16,7 @@ public class ChangeRepository {
 
 	public List<QuantityForMonth> getListChangesForYearAndType(Integer year, TypeChangeEnum type) {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityChangesForMonth(MONTH(cc.date), COUNT(cc)) "
+			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForMonth(MONTH(cc.date), COUNT(cc)) "
 					+ "FROM ChangeComputer cc " 
 					+ "WHERE type= :type AND year(date)= :year "
 					+ "GROUP BY month(cc.date)";

@@ -18,5 +18,4 @@ public class QuantityForStatus {
 		this.status = status;
 		this.quantity = quantity;
 	}
-
 }

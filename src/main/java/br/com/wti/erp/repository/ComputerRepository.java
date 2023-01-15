@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.wti.erp.domain.Computer;
+import br.com.wti.erp.domain.Filter;
 import br.com.wti.erp.domain.vo.QuantityForStatus;
 
 public class ComputerRepository implements Serializable {
@@ -39,7 +40,7 @@ public class ComputerRepository implements Serializable {
 
 	public List<QuantityForStatus> getQuantityForStatusComputer() {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(c.status, COUNT(c)) "
+			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(c.status, COUNT(c)) "
 					+ "FROM Computer c " 
 					+ "WHERE c.status != 'DISCARDED' " 
 					+ "GROUP BY c.status";

@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.wti.erp.domain.Filter;
 import br.com.wti.erp.domain.Project;
 import br.com.wti.erp.domain.vo.QuantityObjectForProject;
 import br.com.wti.erp.repository.ComputerRepository;
-import br.com.wti.erp.repository.Filter;
 import br.com.wti.erp.repository.MonitorRepository;
 import br.com.wti.erp.repository.ProjectRepository;
 import br.com.wti.erp.repository.UserRepository;

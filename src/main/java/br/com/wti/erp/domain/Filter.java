@@ -1,4 +1,4 @@
-package br.com.wti.erp.repository;
+package br.com.wti.erp.domain;
 
 import java.io.Serializable;
 

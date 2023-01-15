@@ -18,7 +18,7 @@ public class DashboardRepository implements Serializable {
 
 	public List<QuantityForStatus> getQuantityForStatusPeripheral() {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(p.status, COUNT(*)) "
+			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(p.status, COUNT(*)) "
 					+ "FROM Peripheral p " 
 					+ "WHERE p.status != 'DISCARDED' " 
 					+ "GROUP BY p.status";
@@ -34,7 +34,7 @@ public class DashboardRepository implements Serializable {
 
 	public List<QuantityForStatus> getQuantityForStatusLicense() {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(l.status, COUNT(*)) "
+			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(l.status, COUNT(*)) "
 					+ "FROM License l " 
 					+ "WHERE l.status != 'DISCARDED' " 
 					+ "GROUP BY l.status";

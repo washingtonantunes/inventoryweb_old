@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.com.wti.erp.domain.Filter;
 import br.com.wti.erp.domain.User;
 import br.com.wti.erp.domain.vo.QuantityForStatus;
 
@@ -43,7 +44,7 @@ public class UserRepository implements Serializable {
 
 	public List<QuantityForStatus> getQuantityForStatusUser() {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(u.status, COUNT(*)) "
+			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(u.status, COUNT(*)) "
 					+ "FROM User u " 
 					+ "GROUP BY u.status";
 
