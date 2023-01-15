@@ -7,15 +7,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import br.com.wti.erp.domain.Project;
-import br.com.wti.erp.domain.dto.QuantityChangesForMonth;
+import br.com.wti.erp.domain.vo.QuantityForMonth;
 
-public class ProjectRepository implements IRepository<Project>, Serializable {
+public class ProjectRepository implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,92 +25,45 @@ public class ProjectRepository implements IRepository<Project>, Serializable {
 		this.manager = manager;
 	}
 
-	@Override
-	public List<Project> findAll() {
-		return manager.createQuery("from Project", Project.class).getResultList();
-	}
-	
 	public List<Project> findAllActive() {
 		return manager.createQuery("SELECT p FROM Project p WHERE p.status = 'ACTIVE'", Project.class).getResultList();
 	}
 
-	@Override
 	public List<Project> findAllByParams(Filter filter) {
-		//TODO remover criteria
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<Project> query = builder.createQuery(Project.class);
-		Root<Project> root = query.from(Project.class);
+		try {
+			String jpql = "SELECT p "
+					+ "FROM Project p " 
+					+ "WHERE p.name like :name";
 
-		List<Predicate> predicates = new ArrayList<>();
-		
-		predicates.add(
-				builder.or(
-					builder.like(root.get("name"), filter.getParamSearch().toUpperCase() + "%")));
+			TypedQuery<Project> query = manager.createQuery(jpql, Project.class);
+			query.setParameter("name", filter.getParamSearch().toUpperCase() + "%");
 
-		query.where(predicates.toArray(new Predicate[0]));
-
-		return manager.createQuery(query).getResultList();
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	@Override
 	public Project findById(Integer id) {
 		return manager.find(Project.class, id);
 	}
 
-	@Override
-	public Project save(Project project) {
-		return manager.merge(project);
-	}
-
-	public Long allComputers(Project project) {
-		String jpql = "SELECT COUNT(*) from Computer where project_id = :project_id";
-
-		TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
-		query.setParameter("project_id", project.getId());
-
-		return query.getSingleResult();
-	}
-
-	public Long allUsers(Project project) {
-		String jpql = "SELECT COUNT(*) from User where project_id = :project_id";
-
-		TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
-		query.setParameter("project_id", project.getId());
-
-		return query.getSingleResult();
-	}
-	
-	public Long allMonitors(Project project) {
-		String jpql = "SELECT COUNT(*) from Monitor where project_id = :project_id";
-
-		TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
-		query.setParameter("project_id", project.getId());
-
-		return query.getSingleResult();
-	}
-	
-	public List<String> findAllProjectString() {
-		String jpql = "SELECT p.name FROM Project p";
-
-		return manager.createQuery(jpql, String.class).getResultList();
-
-	}
-	
-	public List<QuantityChangesForMonth> getListCostForYear(Integer project) {
+	public List<QuantityForMonth> getListCostForYear(Integer project) {
 		//TODO melhorar apos criar tarifa
-		List<QuantityChangesForMonth> values = new ArrayList<>();
-		values.add(new QuantityChangesForMonth(1, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(2, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(3, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(4, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(5, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(6, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(7, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(8, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(9, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(10, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(11, Math.round(Math.random() * 1000)));
-		values.add(new QuantityChangesForMonth(12, Math.round(Math.random() * 1000)));
+		List<QuantityForMonth> values = new ArrayList<>();
+		values.add(new QuantityForMonth(1, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(2, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(3, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(4, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(5, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(6, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(7, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(8, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(9, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(10, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(11, Math.round(Math.random() * 1000)));
+		values.add(new QuantityForMonth(12, Math.round(Math.random() * 1000)));
 		
 		return values;
 	}

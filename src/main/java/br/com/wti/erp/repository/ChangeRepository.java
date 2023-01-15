@@ -6,24 +6,22 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import br.com.wti.erp.domain.dto.QuantityChangesForMonth;
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
+import br.com.wti.erp.domain.vo.QuantityForMonth;
 
 public class ChangeRepository {
 
-//	private static final long serialVersionUID = 1L;
-	
 	@Inject
 	private EntityManager manager;
 
-	public List<QuantityChangesForMonth> getListChangesForYearAndType(Integer year, TypeChangeEnum type) {
+	public List<QuantityForMonth> getListChangesForYearAndType(Integer year, TypeChangeEnum type) {
 		try {
 			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityChangesForMonth(MONTH(cc.date), COUNT(cc)) "
 					+ "FROM ChangeComputer cc " 
 					+ "WHERE type= :type AND year(date)= :year "
 					+ "GROUP BY month(cc.date)";
 
-			TypedQuery<QuantityChangesForMonth> query = manager.createQuery(jpql, QuantityChangesForMonth.class);
+			TypedQuery<QuantityForMonth> query = manager.createQuery(jpql, QuantityForMonth.class);
 			query.setParameter("year", year);
 			query.setParameter("type", type);
 

@@ -26,12 +26,12 @@ import br.com.wti.erp.domain.dashboard.CardDetailPeripheral;
 import br.com.wti.erp.domain.dashboard.CardDetailUser;
 import br.com.wti.erp.domain.dashboard.DashboardForProject;
 import br.com.wti.erp.domain.dashboard.DashboardGeneral;
-import br.com.wti.erp.domain.dto.QuantityChangesForMonth;
-import br.com.wti.erp.domain.dto.QuantityForStatus;
-import br.com.wti.erp.domain.dto.QuantityObjectForProject;
 import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
 import br.com.wti.erp.domain.enums.StatusUserEnum;
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
+import br.com.wti.erp.domain.vo.QuantityForMonth;
+import br.com.wti.erp.domain.vo.QuantityForStatus;
+import br.com.wti.erp.domain.vo.QuantityObjectForProject;
 import br.com.wti.erp.repository.ChangeRepository;
 import br.com.wti.erp.repository.ComputerRepository;
 import br.com.wti.erp.repository.DashboardRepository;
@@ -141,7 +141,7 @@ public class DashboardService implements Serializable {
 		dataSet.setTension(0.1);
 		dataSet.setFill(false);
 		
-		List<QuantityChangesForMonth> values = projectRepository.getListCostForYear(dashboard.getProjectSelected().getId());
+		List<QuantityForMonth> values = projectRepository.getListCostForYear(dashboard.getProjectSelected().getId());
 
 		if (values != null && !values.isEmpty()) {
 			dataSet.setData(converterListCost(values));
@@ -198,7 +198,7 @@ public class DashboardService implements Serializable {
 		dataSet.setBorderColor("rgb(163, 157, 212)");
 		dataSet.setBorderWidth(1);
 
-		List<QuantityChangesForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DELIVERY_TO_USER);
+		List<QuantityForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DELIVERY_TO_USER);
 
 		if (values != null && !values.isEmpty()) {
 			dataSet.setData(converterList(values));
@@ -214,7 +214,7 @@ public class DashboardService implements Serializable {
 		dataSet.setBorderColor("rgb(236, 47, 111)");
 		dataSet.setBorderWidth(1);
 
-		List<QuantityChangesForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.EXCHANGE_TO_USER);
+		List<QuantityForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.EXCHANGE_TO_USER);
 
 		if (values != null && !values.isEmpty()) {
 			dataSet.setData(converterList(values));
@@ -230,7 +230,7 @@ public class DashboardService implements Serializable {
 		dataSet.setBorderColor("rgb(161, 171, 122)");
 		dataSet.setBorderWidth(1);
 
-		List<QuantityChangesForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DEVOLUTION_TO_USER);
+		List<QuantityForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DEVOLUTION_TO_USER);
 
 		if (values != null && !values.isEmpty()) {
 			dataSet.setData(converterList(values));
@@ -428,18 +428,18 @@ public class DashboardService implements Serializable {
 		return pieModel;
 	}
 
-	private List<Number> converterList(List<QuantityChangesForMonth> values) {
+	private List<Number> converterList(List<QuantityForMonth> values) {
 
-		QuantityChangesForMonth[] quantidades = new QuantityChangesForMonth[12];
+		QuantityForMonth[] quantidades = new QuantityForMonth[12];
 
-		for (QuantityChangesForMonth value : values) {
+		for (QuantityForMonth value : values) {
 			int id = value.getDate();
 			quantidades[id - 1] = value;
 		}
 
 		List<Number> numbers = new ArrayList<>();
 
-		for (QuantityChangesForMonth quantity : quantidades) {
+		for (QuantityForMonth quantity : quantidades) {
 			if (quantity != null) {
 				numbers.add(quantity.getQuantity());
 			} else {
@@ -450,18 +450,18 @@ public class DashboardService implements Serializable {
 		return numbers;
 	}
 	
-	private List<Object> converterListCost(List<QuantityChangesForMonth> values) {
+	private List<Object> converterListCost(List<QuantityForMonth> values) {
 
-		QuantityChangesForMonth[] quantidades = new QuantityChangesForMonth[12];
+		QuantityForMonth[] quantidades = new QuantityForMonth[12];
 
-		for (QuantityChangesForMonth value : values) {
+		for (QuantityForMonth value : values) {
 			int id = value.getDate();
 			quantidades[id - 1] = value;
 		}
 
 		List<Object> numbers = new ArrayList<>();
 
-		for (QuantityChangesForMonth quantity : quantidades) {
+		for (QuantityForMonth quantity : quantidades) {
 			if (quantity != null) {
 				numbers.add(quantity.getQuantity());
 			} else {

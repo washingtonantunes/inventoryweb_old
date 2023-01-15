@@ -6,51 +6,49 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.wti.erp.domain.Project;
+import br.com.wti.erp.domain.vo.QuantityObjectForProject;
+import br.com.wti.erp.repository.ComputerRepository;
 import br.com.wti.erp.repository.Filter;
+import br.com.wti.erp.repository.MonitorRepository;
 import br.com.wti.erp.repository.ProjectRepository;
-import br.com.wti.erp.util.annotations.Transactional;
+import br.com.wti.erp.repository.UserRepository;
 
-public class ProjectService implements IService<Project>, Serializable {
+public class ProjectService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private ProjectRepository projectRepository;
-
-	@Override
-	public List<Project> findAll() {
-		return projectRepository.findAll();
-	}
 	
+	@Inject
+	private ComputerRepository computerRepository;
+	
+	@Inject
+	private MonitorRepository monitorRepository;
+	
+	@Inject
+	private UserRepository userRepository;
+
 	public List<Project> findAllActive() {
 		return projectRepository.findAllActive();
 	}
 
-	@Override
 	public List<Project> findAllByParam(Filter filter) {
 		return projectRepository.findAllByParams(filter);
 	}
 
-	@Override
 	public Project findById(Integer id) {
 		return projectRepository.findById(id);
 	}
-
-	@Override
-	@Transactional
-	public void save(Project project) {
-		projectRepository.save(project);
-	}
-
-	public Long allComputers(Project project) {
-		return projectRepository.allComputers(project);
-	}
-
-	public Long allUsers(Project project) {
-		return projectRepository.allUsers(project);
-	}
-
-	public Long allMonitors(Project project) {
-		return projectRepository.allMonitors(project);
+	
+	public QuantityObjectForProject getQuantityObjectForProject(Integer project) {
+		//TODO melhorar
+		final QuantityObjectForProject quantity = new QuantityObjectForProject();
+		
+		quantity.setComputers(computerRepository.getQuantityForProject(project));
+		quantity.setMonitors(monitorRepository.getQuantityForProject(project));
+		quantity.setUsers(userRepository.getQuantityForProject(project));
+		
+		return quantity;
 	}
 }

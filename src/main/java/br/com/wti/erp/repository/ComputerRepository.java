@@ -1,21 +1,16 @@
 package br.com.wti.erp.repository;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import br.com.wti.erp.domain.Computer;
-import br.com.wti.erp.domain.dto.QuantityForStatus;
+import br.com.wti.erp.domain.vo.QuantityForStatus;
 
-public class ComputerRepository implements IRepository<Computer>, Serializable {
+public class ComputerRepository implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,43 +20,23 @@ public class ComputerRepository implements IRepository<Computer>, Serializable {
 	public ComputerRepository() {
 	}
 
-	public ComputerRepository(EntityManager manager) {
-		this.manager = manager;
-	}
-
-	@Override
-	public List<Computer> findAll() {
-		return manager.createQuery("from Computer", Computer.class).getResultList();
-	}
-
-	@Override
 	public List<Computer> findAllByParams(Filter filter) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<Computer> query = builder.createQuery(Computer.class);
-		Root<Computer> root = query.from(Computer.class);
+		try {
+			String jpql = "SELECT c "
+					+ "FROM Computer c " 
+					+ "WHERE c.serialNumber like :serialNumber OR c.patrimonyNumber like :patrimonyNumber";
 
-		List<Predicate> predicates = new ArrayList<>();
-		
-		predicates.add(
-			builder.or(
-				builder.like(root.get("serialNumber"), filter.getParamSearch().toUpperCase() + "%"),
-				builder.like(root.get("patrimonyNumber"), filter.getParamSearch().toUpperCase() + "%")));
+			TypedQuery<Computer> query = manager.createQuery(jpql, Computer.class);
+			query.setParameter("serialNumber", filter.getParamSearch().toUpperCase() + "%");
+			query.setParameter("patrimonyNumber", filter.getParamSearch().toUpperCase() + "%");
 
-		query.where(predicates.toArray(new Predicate[0]));
-
-		return manager.createQuery(query).getResultList();
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	@Override
-	public Computer findById(Integer id) {
-		return manager.find(Computer.class, id);
-	}
-
-	@Override
-	public Computer save(Computer computer) {
-		return manager.merge(computer);
-	}
-	
 	public List<QuantityForStatus> getQuantityForStatusComputer() {
 		try {
 			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(c.status, COUNT(c)) "

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.primefaces.model.charts.line.LineChartModel;
 
 import br.com.wti.erp.domain.Project;
-import br.com.wti.erp.domain.dto.QuantityObjectForProject;
+import br.com.wti.erp.domain.vo.QuantityObjectForProject;
 import lombok.Getter;
 import lombok.Setter;
 

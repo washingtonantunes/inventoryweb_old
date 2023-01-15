@@ -57,9 +57,14 @@ public class Project extends AbstractEntity implements Serializable {
 
 	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
-	@Getter
 	@Setter(value = AccessLevel.PRIVATE)
 	private List<ChangeProject> changes;
+	
+	private Long quantityComputers;
+	
+	private Long quantityUsers;
+	
+	private Long quantityMonitors;
 	
 	public Project() {
 	}
@@ -78,10 +83,6 @@ public class Project extends AbstractEntity implements Serializable {
 		if (change != null) {
 			this.changes.remove(change);
 		}
-	}
-	//TODO Alterar pelo metodo do grafico
-	public Integer allMonitors() {
-		return 0;
 	}
 
 	@Override
