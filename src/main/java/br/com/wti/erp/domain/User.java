@@ -1,7 +1,7 @@
 package br.com.wti.erp.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
@@ -64,8 +62,7 @@ public class User extends AbstractEntity implements Serializable {
 
 	@NotNull
 	@Column(name = "date_entry", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dateEntry;
+	private LocalDate dateEntry;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Item> itens;

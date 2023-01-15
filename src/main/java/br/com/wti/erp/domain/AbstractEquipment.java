@@ -2,7 +2,7 @@ package br.com.wti.erp.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -45,8 +43,7 @@ public abstract class AbstractEquipment extends AbstractEntity implements Serial
 
 	@NotNull
 	@Column(name = "date_entry", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateEntry;
+	private LocalDate dateEntry;
 
 	@NotEmpty
 	@Column(name = "note_entry", nullable = false, length = 20)

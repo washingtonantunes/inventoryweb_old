@@ -1,7 +1,7 @@
 package br.com.wti.erp.domain.changes;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
 import lombok.EqualsAndHashCode;
@@ -37,9 +35,8 @@ public abstract class Change implements Serializable  {
 	@Column(nullable = false, length = 200)
 	private String description;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_change", nullable = false)
-	private Date date;
+	private LocalDate date;
 
 	@Column(nullable = false, length = 50)
 	private String author;

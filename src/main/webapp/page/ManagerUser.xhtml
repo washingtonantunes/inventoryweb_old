@@ -101,7 +101,7 @@
 						
 							<p:outputLabel value="Data de Entrada" for="dateEntry" />
 							<p:outputLabel id="dateEntry" value="#{model.dateEntry}">
-								<f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="pt_BR"/>
+								<f:convertDateTime type="localDate" locale="pt_BR" />
 							</p:outputLabel>
 							
 							<p:outputLabel value="Status" for="status" />
@@ -155,8 +155,7 @@
 			
 								<p:column headerText="Data">
 									<h:outputText value="#{change.date}">
-										<f:convertDateTime type="date" pattern="dd/MM/yyyy"
-											locale="pt_BR" />
+										<f:convertDateTime type="localDate" locale="pt_BR" />
 									</h:outputText>
 								</p:column>
 								
