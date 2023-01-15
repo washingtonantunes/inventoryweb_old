@@ -1,21 +1,17 @@
 package br.com.wti.erp.repository;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
+import br.com.wti.erp.domain.Filter;
 import br.com.wti.erp.domain.User;
-import br.com.wti.erp.domain.dto.QuantityForStatus;
+import br.com.wti.erp.domain.vo.QuantityForStatus;
 
-public class UserRepository implements IRepository<User>, Serializable {
+public class UserRepository implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,42 +25,26 @@ public class UserRepository implements IRepository<User>, Serializable {
 		this.manager = manager;
 	}
 
-	@Override
-	public List<User> findAll() {
-		return manager.createQuery("from User", User.class).getResultList();
-	}
-
-	@Override
 	public List<User> findAllByParams(Filter filter) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<User> query = builder.createQuery(User.class);
-		Root<User> root = query.from(User.class);
+		try {
+			String jpql = "SELECT u "
+					+ "FROM User u " 
+					+ "WHERE u.registration like :registration OR u.cpf like :cpf";
 
-		List<Predicate> predicates = new ArrayList<>();
+			TypedQuery<User> query = manager.createQuery(jpql, User.class);
+			query.setParameter("registration", filter.getParamSearch().toUpperCase() + "%");
+			query.setParameter("cpf", filter.getParamSearch().toUpperCase() + "%");
 
-		predicates.add(
-			builder.or(
-				builder.like(root.get("registration"), filter.getParamSearch().toUpperCase() + "%"),
-				builder.like(root.get("cpf"), filter.getParamSearch().toUpperCase() + "%")));
-
-		query.where(predicates.toArray(new Predicate[0]));
-
-		return manager.createQuery(query).getResultList();
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	@Override
-	public User findById(Integer id) {
-		return manager.find(User.class, id);
-	}
-
-	@Override
-	public User save(User user) {
-		return manager.merge(user);
-	}
-	
 	public List<QuantityForStatus> getQuantityForStatusUser() {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.dto.QuantityForStatus(u.status, COUNT(*)) "
+			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(u.status, COUNT(*)) "
 					+ "FROM User u " 
 					+ "GROUP BY u.status";
 

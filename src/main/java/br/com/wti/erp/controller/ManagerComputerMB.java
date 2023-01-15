@@ -1,64 +1,49 @@
 package br.com.wti.erp.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.wti.erp.domain.Computer;
+import br.com.wti.erp.domain.Filter;
 import br.com.wti.erp.service.ComputerService;
+import lombok.Getter;
+import lombok.Setter;
 
 @Named
 @ViewScoped
-public class ManagerComputerMB extends BaseCrudMB<Computer> implements Serializable {
+public class ManagerComputerMB extends BaseMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private ComputerService computerService;
 	
+	@Getter
+	@Setter
+	private Computer entity;
+	
+	@Inject
+	@Getter
+	@Setter
+	private Filter filter;
+
+	@Getter
+	private List<Computer> searchResult;
+	
 	@PostConstruct
-	@Override
 	public void init() {
-		setService(computerService);
 	}
+	
+	public void search() {
+		searchResult = computerService.findAllByParam(filter);
 
-	@Override
-	public void preNew(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void posNew(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void preUpdate(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void posUpdate(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void preSave(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void posSave(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		if (searchResult.isEmpty()) {
+			messageInfo("Sua consulta não retornou registros.");
+		}
 	}
 }

@@ -11,7 +11,7 @@
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.0.0.160/inventory" />
 			<property name="javax.persistence.jdbc.user" value="user" />
 			<property name="javax.persistence.jdbc.password" value="password@123" />
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="hibernate.show_sql" value="true" />

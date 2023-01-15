@@ -1,84 +1,61 @@
 package br.com.wti.erp.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.wti.erp.domain.Filter;
 import br.com.wti.erp.domain.Project;
+import br.com.wti.erp.domain.vo.QuantityObjectForProject;
 import br.com.wti.erp.service.ProjectService;
 import lombok.Getter;
+import lombok.Setter;
 
 @Named
 @ViewScoped
-public class ManagerProjectMB extends BaseCrudMB<Project> implements Serializable {
+public class ManagerProjectMB extends BaseMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private ProjectService projectService;
 	
+	@Getter
+	@Setter
+	private Project entity;
+	
+	@Inject
+	@Getter
+	@Setter
+	private Filter filter;
+
+	@Getter
+	private List<Project> searchResult;
+	
 	@PostConstruct
-	@Override
 	public void init() {
-		setService(projectService);
-	}
-
-	@Override
-	public void preNew(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void posNew(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void preUpdate(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void posUpdate(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void preSave(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void posSave(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
 	}
 	
-	@Getter
-	private Long allComputers;
-	
-	@Getter
-	private Long allUsers;
-	
-	@Getter
-	private Long allMonitors;
+	public void search() {
+		searchResult = projectService.findAllByParam(filter);
+
+		if (searchResult.isEmpty()) {
+			messageInfo("Sua consulta não retornou registros.");
+		}
+	}
 	
 	public void updateQuantity() {
-		if(getEntity() != null) {
-			allComputers = projectService.allComputers(getEntity());
+		
+		if(entity != null) {
+			QuantityObjectForProject quantity = projectService.getQuantityObjectForProject(entity.getId());
 			
-			allUsers = projectService.allUsers(getEntity());
-			
-			allMonitors = projectService.allMonitors(getEntity());
+			entity.setQuantityComputers(quantity.getComputers());
+			entity.setQuantityMonitors(quantity.getMonitors());
+			entity.setQuantityUsers(quantity.getUsers());
 		}
 	}
 }

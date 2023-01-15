@@ -1,4 +1,4 @@
-package br.com.wti.erp.domain.dto;
+package br.com.wti.erp.domain.vo;
 
 import br.com.wti.erp.domain.enums.StatusEnum;
 import lombok.Getter;
@@ -18,5 +18,4 @@ public class QuantityForStatus {
 		this.status = status;
 		this.quantity = quantity;
 	}
-
 }

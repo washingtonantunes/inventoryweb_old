@@ -9,8 +9,7 @@ import javax.inject.Inject;
 
 import org.primefaces.PrimeFaces;
 
-import br.com.wti.erp.repository.Filter;
-import br.com.wti.erp.service.IService;
+import br.com.wti.erp.domain.Filter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,19 +31,19 @@ public abstract class BaseCrudMB<Bean> extends BaseMB implements Serializable {
 
 	private List<String> componentesUpdateOnSave;
 
-	private IService<Bean> service;
-	
-	public void setService(IService<?> service) {
-		this.service = (IService<Bean>) service;
-	}
+//	private IService<Bean> service;
+//	
+//	public void setService(IService<?> service) {
+//		this.service = (IService<Bean>) service;
+//	}
 
-	public void search() {
-		searchResult = service.findAllByParam(filter);
-
-		if (searchResult.isEmpty()) {
-			messageInfo("Sua consulta não retornou registros.");
-		}
-	}
+//	public void search() {
+//		searchResult = service.findAllByParam(filter);
+//
+//		if (searchResult.isEmpty()) {
+//			messageInfo("Sua consulta não retornou registros.");
+//		}
+//	}
 
 	public void newEntity(ActionEvent event) {
 
