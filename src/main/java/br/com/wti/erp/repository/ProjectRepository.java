@@ -46,11 +46,11 @@ public class ProjectRepository implements Serializable {
 		}
 	}
 
-	public Project findById(Integer id) {
+	public Project findById(Long id) {
 		return manager.find(Project.class, id);
 	}
 
-	public List<QuantityForMonth> getListCostForYear(Integer project) {
+	public List<QuantityForMonth> getListCostForYear(Long project) {
 		//TODO melhorar apos criar tarifa
 		List<QuantityForMonth> values = new ArrayList<>();
 		values.add(new QuantityForMonth(1, Math.round(Math.random() * 1000)));

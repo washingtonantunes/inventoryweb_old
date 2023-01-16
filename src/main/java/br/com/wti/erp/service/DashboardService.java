@@ -72,7 +72,7 @@ public class DashboardService implements Serializable {
 	public void setDataCardsForProject(DashboardForProject dashboard) {
 		//TODO unificar buscar no banco
 		
-		Integer id = dashboard.getProjectSelected().getId();
+		Long id = dashboard.getProjectSelected().getId();
 		
 		final QuantityObjectForProject quantity = new QuantityObjectForProject();
 		

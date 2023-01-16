@@ -8,18 +8,18 @@ import javax.faces.convert.FacesConverter;
 import br.com.wti.erp.domain.Project;
 
 @FacesConverter(value = "ProjectConverter")
-public class ProjectConverter implements Converter {
+public class ProjectConverter implements Converter<Project> {
 	
 	@Override
-	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+	public Project getAsObject(FacesContext context, UIComponent component, String value) {
 		if (value != null && !value.trim().isEmpty()) {
-			return new Project(Integer.valueOf(value));
+			return new Project(Long.valueOf(value));
 		}
 		return null;
 	}
 
 	@Override
-	public String getAsString(FacesContext context, UIComponent component, Object value) {
+	public String getAsString(FacesContext context, UIComponent component, Project value) {
 		if (value == null) {
 			return null;
 		}

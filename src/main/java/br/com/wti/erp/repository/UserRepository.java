@@ -57,7 +57,7 @@ public class UserRepository implements Serializable {
 		}
 	}
 	
-	public Long getQuantityForProject(Integer project) {
+	public Long getQuantityForProject(Long project) {
 		try {
 			String jpql = "SELECT COUNT(u) "
 					+ "FROM User u "

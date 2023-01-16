@@ -54,7 +54,7 @@ public class MonitorRepository implements Serializable {
 		}
 	}
 	
-	public Long getQuantityForProject(Integer project) {
+	public Long getQuantityForProject(Long project) {
 		try {
 			String jpql = "SELECT COUNT(m) "
 					+ "FROM Monitor m "

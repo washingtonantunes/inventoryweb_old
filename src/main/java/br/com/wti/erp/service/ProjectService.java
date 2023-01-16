@@ -37,11 +37,11 @@ public class ProjectService implements Serializable {
 		return projectRepository.findAllByParams(filter);
 	}
 
-	public Project findById(Integer id) {
+	public Project findById(Long id) {
 		return projectRepository.findById(id);
 	}
 	
-	public QuantityObjectForProject getQuantityObjectForProject(Integer project) {
+	public QuantityObjectForProject getQuantityObjectForProject(Long project) {
 		//TODO melhorar
 		final QuantityObjectForProject quantity = new QuantityObjectForProject();
 		

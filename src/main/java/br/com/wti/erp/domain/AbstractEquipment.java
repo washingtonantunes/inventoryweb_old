@@ -66,12 +66,12 @@ public abstract class AbstractEquipment extends AbstractEntity implements Serial
 	@Column(nullable = false, length = 30)
 	private StatusEquipmentEnum status;
 	
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "project_id", referencedColumnName = "id")
+	@ManyToOne
+	@JoinColumn(name = "project_id")
 	private Project project;
 
-	@OneToOne(optional = true)
-	@JoinColumn(name = "user_id", unique = true)
+	@OneToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 }
