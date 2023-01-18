@@ -10,11 +10,12 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.wti.erp.domain.Project;
 import br.com.wti.erp.domain.dashboard.DashboardForProject;
+import br.com.wti.erp.domain.entity.Project;
 import br.com.wti.erp.service.DashboardService;
 import br.com.wti.erp.service.ProjectService;
 import lombok.Getter;
+import lombok.Setter;
 
 @Named
 @ViewScoped
@@ -30,6 +31,7 @@ public class ManagerDashboardForProjectMB implements Serializable {
 
 	@Inject
 	@Getter
+	@Setter
 	private DashboardForProject dashboard;
 
 	@Getter

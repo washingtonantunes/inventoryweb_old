@@ -8,8 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.wti.erp.domain.Filter;
-import br.com.wti.erp.domain.Project;
+import br.com.wti.erp.domain.entity.Filter;
+import br.com.wti.erp.domain.entity.Project;
 import br.com.wti.erp.domain.vo.QuantityObjectForProject;
 import br.com.wti.erp.service.ProjectService;
 import lombok.Getter;

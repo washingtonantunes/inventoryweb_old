@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import org.primefaces.PrimeFaces;
 
-import br.com.wti.erp.domain.Filter;
+import br.com.wti.erp.domain.entity.Filter;
 import lombok.Getter;
 import lombok.Setter;
 

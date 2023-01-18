@@ -1,4 +1,4 @@
-package br.com.wti.erp.domain;
+package br.com.wti.erp.domain.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;

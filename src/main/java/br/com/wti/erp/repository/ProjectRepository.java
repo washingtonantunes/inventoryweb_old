@@ -8,8 +8,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import br.com.wti.erp.domain.Filter;
-import br.com.wti.erp.domain.Project;
+import br.com.wti.erp.domain.entity.Filter;
+import br.com.wti.erp.domain.entity.Project;
 import br.com.wti.erp.domain.vo.QuantityForMonth;
 
 public class ProjectRepository implements Serializable {

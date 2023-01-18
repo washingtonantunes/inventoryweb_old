@@ -5,7 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.com.wti.erp.domain.Project;
+import br.com.wti.erp.domain.entity.Project;
 
 @FacesConverter(value = "ProjectConverter")
 public class ProjectConverter implements Converter<Project> {
