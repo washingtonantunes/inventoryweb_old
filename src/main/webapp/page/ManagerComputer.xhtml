@@ -176,32 +176,6 @@
 							</p:panelGrid>
 						</p:fieldset>
 					</p:tab>
-		            <p:tab title="Alterações">
-		                <p:outputPanel>
-							<p:dataTable id="changeDataTable"
-								value="#{model.changes}" var="change"
-								emptyMessage="Nenhum registro encontrado!" rows="10" size="small">
-			
-								<p:column headerText="Tipo">
-									<h:outputText value="#{change.type.descricao}" />
-								</p:column>
-			
-								<p:column headerText="Descrição">
-									<h:outputText value="#{change.description}" />
-								</p:column>
-			
-								<p:column headerText="Data">
-									<h:outputText value="#{change.date}">
-										<f:convertDateTime type="localDate" locale="pt_BR" />
-									</h:outputText>
-								</p:column>
-								
-								<p:column headerText="Autor">
-									<h:outputText value="#{change.author}" />
-								</p:column>
-							</p:dataTable>
-						</p:outputPanel>
-		            </p:tab>
 		        </p:tabView>
 		    </p:panel>
 	    </h:form>

@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import br.com.wti.erp.domain.Computer;
-import br.com.wti.erp.domain.Filter;
+import br.com.wti.erp.domain.entity.Computer;
+import br.com.wti.erp.domain.entity.Filter;
 import br.com.wti.erp.domain.vo.QuantityForStatus;
 
 public class ComputerRepository implements Serializable {
