@@ -2,36 +2,44 @@ package br.com.wti.erp.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.wti.erp.domain.enums.StatusUserEnum;
-import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = {"id", "registration"})
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_users")
-public class User extends AbstractEntity implements Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@NotEmpty
 	@Column(unique = true, nullable = false, length = 10)
@@ -64,7 +72,7 @@ public class User extends AbstractEntity implements Serializable {
 	private LocalDate dateEntry;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-	private List<Item> itens;
+	private Set<Item> itens;
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "project_id", referencedColumnName = "id")

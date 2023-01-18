@@ -1,15 +1,24 @@
 package br.com.wti.erp.domain;
 
 import java.io.Serializable;
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
 import lombok.Getter;
@@ -19,9 +28,24 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_monitors")
-public class Monitor extends AbstractEquipment implements Serializable {
+public class Monitor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@NotEmpty
+	@Column(name = "serial_number", unique = true, nullable = false, length = 30)
+	private String serialNumber;
+	
+	@Column(name = "patrimony_number", unique = true, length = 10)
+	private String patrimonyNumber;
+	
+	@NotEmpty
+	@Column(nullable = false, length = 10)
+	private String brand;
 
 	@NotEmpty
 	@Column(nullable = false, length = 30)

@@ -54,7 +54,7 @@ public class ComputerRepository implements Serializable {
 		}
 	}
 	
-	public Long getQuantityForProject(Integer project) {
+	public Long getQuantityForProject(Long project) {
 		try {
 			String jpql = "SELECT COUNT(c) "
 					+ "FROM Computer c "
