@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,8 +32,9 @@ public class Change implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(nullable = false)
-	private String entity;
+	@NotEmpty
+	@Column(unique = true, nullable = false)
+	private Long identification;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type_change", nullable = false)

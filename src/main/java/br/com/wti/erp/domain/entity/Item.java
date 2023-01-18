@@ -1,6 +1,7 @@
 package br.com.wti.erp.domain.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +29,11 @@ public class Item implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "id_project", nullable = false)
+	private Project project;
 
 	@NotNull
 	@ManyToOne
@@ -35,8 +41,8 @@ public class Item implements Serializable {
 	private User user;
 
 	@NotEmpty
-	@Column(unique = true, nullable = false, length = 30)
-	private String identification;
+	@Column(unique = true, nullable = false)
+	private Long identification;
 
 	@NotEmpty
 	@Column(nullable = false, length = 30)
@@ -45,6 +51,13 @@ public class Item implements Serializable {
 	@NotEmpty
 	@Column(nullable = false, length = 20)
 	private Double value;
+	
+	@NotNull
+	@Column(name = "date_delivery", nullable = false)
+	private LocalDate dateDelivery;
+	
+	@Column(name = "date_devolution", nullable = false)
+	private LocalDate dateDevolution;
 
 	@Override
 	public String toString() {
