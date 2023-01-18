@@ -9,7 +9,6 @@ import javax.persistence.TypedQuery;
 
 import br.com.wti.erp.domain.entity.Computer;
 import br.com.wti.erp.domain.entity.Filter;
-import br.com.wti.erp.domain.vo.QuantityForStatus;
 
 public class ComputerRepository implements Serializable {
 
@@ -17,7 +16,7 @@ public class ComputerRepository implements Serializable {
 
 	@Inject
 	private EntityManager manager;
-	
+
 	public ComputerRepository() {
 	}
 
@@ -38,22 +37,6 @@ public class ComputerRepository implements Serializable {
 		}
 	}
 
-	public List<QuantityForStatus> getQuantityForStatusComputer() {
-		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(c.status, COUNT(c)) "
-					+ "FROM Computer c " 
-					+ "WHERE c.status != 'DISCARDED' " 
-					+ "GROUP BY c.status";
-
-			TypedQuery<QuantityForStatus> query = manager.createQuery(jpql, QuantityForStatus.class);
-
-			return query.getResultList();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
 	public Long getQuantityForProject(Long project) {
 		try {
 			String jpql = "SELECT COUNT(c) "
@@ -62,7 +45,7 @@ public class ComputerRepository implements Serializable {
 
 			TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
 			query.setParameter("project", project);
-			
+
 			return query.getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();

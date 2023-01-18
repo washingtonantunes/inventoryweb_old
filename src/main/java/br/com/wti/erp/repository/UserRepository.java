@@ -9,7 +9,6 @@ import javax.persistence.TypedQuery;
 
 import br.com.wti.erp.domain.entity.Filter;
 import br.com.wti.erp.domain.entity.User;
-import br.com.wti.erp.domain.vo.QuantityForStatus;
 
 public class UserRepository implements Serializable {
 
@@ -42,21 +41,6 @@ public class UserRepository implements Serializable {
 		}
 	}
 
-	public List<QuantityForStatus> getQuantityForStatusUser() {
-		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(u.status, COUNT(*)) "
-					+ "FROM User u " 
-					+ "GROUP BY u.status";
-
-			TypedQuery<QuantityForStatus> query = manager.createQuery(jpql, QuantityForStatus.class);
-
-			return query.getResultList();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
 	public Long getQuantityForProject(Long project) {
 		try {
 			String jpql = "SELECT COUNT(u) "
@@ -65,7 +49,7 @@ public class UserRepository implements Serializable {
 
 			TypedQuery<Long> query = manager.createQuery(jpql, Long.class);
 			query.setParameter("project", project);
-			
+
 			return query.getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();

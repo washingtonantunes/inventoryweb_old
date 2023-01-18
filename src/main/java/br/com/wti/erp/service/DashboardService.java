@@ -27,6 +27,9 @@ import br.com.wti.erp.domain.dashboard.CardDetailPeripheral;
 import br.com.wti.erp.domain.dashboard.CardDetailUser;
 import br.com.wti.erp.domain.dashboard.DashboardForProject;
 import br.com.wti.erp.domain.dashboard.DashboardGeneral;
+import br.com.wti.erp.domain.entity.Computer;
+import br.com.wti.erp.domain.entity.Monitor;
+import br.com.wti.erp.domain.entity.User;
 import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
 import br.com.wti.erp.domain.enums.StatusUserEnum;
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
@@ -242,7 +245,7 @@ public class DashboardService implements Serializable {
 
 		ChartData data = new ChartData();
 		
-		List<QuantityForStatus> listQuantityStatus = computerRepository.getQuantityForStatusComputer();
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatus(Computer.class);
 
 		PieChartDataSet dataSet = new PieChartDataSet();
 		List<Number> values = new ArrayList<>();
@@ -291,7 +294,7 @@ public class DashboardService implements Serializable {
 
 		ChartData data = new ChartData();
 		//TODO melhora o grafico no caso de não ter valores
-		List<QuantityForStatus> listQuantityStatus = monitorRepository.getQuantityForStatusMonitor();
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatus(Monitor.class);
 
 		PieChartDataSet dataSet = new PieChartDataSet();
 		List<Number> values = new ArrayList<>();
@@ -472,7 +475,7 @@ public class DashboardService implements Serializable {
 	
 	public CardDetailComputer getCardComputer() {
 		
-		List<QuantityForStatus> listQuantityStatus = computerRepository.getQuantityForStatusComputer();
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatus(Computer.class);
 
 		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
 			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
@@ -487,7 +490,7 @@ public class DashboardService implements Serializable {
 	
 	public CardDetailMonitor getCardMonitor() {
 
-		List<QuantityForStatus> listQuantityStatus = monitorRepository.getQuantityForStatusMonitor();
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatus(Monitor.class);
 		//TODO unificar o status
 		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
 			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
@@ -501,38 +504,38 @@ public class DashboardService implements Serializable {
 	}
 	
 	public CardDetailPeripheral getCardPeripheral() {
-
-		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusPeripheral();
-
-		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
-			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
-			long quantityInUse = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
-			long quantityDisabled = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
-			long quantityTotal = quantityStandBy + quantityInUse + quantityDisabled;
-
-			return new CardDetailPeripheral(quantityTotal, quantityStandBy, quantityInUse, quantityDisabled);
-		}
+		//TODO alterar quando Peripheral for mapeada
+//		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatus(Peripheral.class);
+//
+//		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
+//			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+//			long quantityInUse = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+//			long quantityDisabled = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+//			long quantityTotal = quantityStandBy + quantityInUse + quantityDisabled;
+//
+//			return new CardDetailPeripheral(quantityTotal, quantityStandBy, quantityInUse, quantityDisabled);
+//		}
 		return new CardDetailPeripheral();
 	}
 	
 	public CardDetailLicense getCardLicense() {
-
-		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatusLicense();
-
-		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
-			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
-			long quantityInUse = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
-			long quantityExpired = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
-			long quantityTotal = quantityStandBy + quantityInUse + quantityExpired;
-
-			return new CardDetailLicense(quantityTotal, quantityStandBy, quantityInUse, quantityExpired);
-		}
+		//TODO alterar quando License for mapeada
+//		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatus(License.class);
+//
+//		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
+//			long quantityStandBy = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.STAND_BY)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+//			long quantityInUse = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.IN_USE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+//			long quantityExpired = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusEquipmentEnum.DISABLED)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();
+//			long quantityTotal = quantityStandBy + quantityInUse + quantityExpired;
+//
+//			return new CardDetailLicense(quantityTotal, quantityStandBy, quantityInUse, quantityExpired);
+//		}
 		return new CardDetailLicense();
 	}
 	
 	public CardDetailUser getCardUser() {
 		
-		List<QuantityForStatus> listQuantityStatus = userRepository.getQuantityForStatusUser();
+		List<QuantityForStatus> listQuantityStatus = dashboardRepository.getQuantityForStatus(User.class);
 
 		if(listQuantityStatus != null && !listQuantityStatus.isEmpty()) {
 			long quantityActive = listQuantityStatus.stream().filter(value -> value.getStatus().equals(StatusUserEnum.ACTIVE)).findFirst().orElse(new QuantityForStatus(StatusUserEnum.UNDEFINED, 0)).getQuantity();

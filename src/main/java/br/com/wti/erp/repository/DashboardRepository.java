@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import br.com.wti.erp.domain.vo.QuantityForStatus;
 
@@ -16,32 +18,15 @@ public class DashboardRepository implements Serializable {
 	@Inject
 	private EntityManager manager;
 
-	public List<QuantityForStatus> getQuantityForStatusPeripheral() {
+	public List<QuantityForStatus> getQuantityForStatus(Class<?> entity) {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(p.status, COUNT(*)) "
-					+ "FROM Peripheral p " 
-					+ "WHERE p.status != 'DISCARDED' " 
-					+ "GROUP BY p.status";
+			CriteriaBuilder builder = manager.getCriteriaBuilder();
+			CriteriaQuery<QuantityForStatus> query = builder.createQuery(QuantityForStatus.class);
+			Root<?> from = query.from(entity);
 
-			TypedQuery<QuantityForStatus> query = manager.createQuery(jpql, QuantityForStatus.class);
+			query.multiselect(from.get("status"), builder.count(from.get("status"))).groupBy(from.get("status"));
 
-			return query.getResultList();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public List<QuantityForStatus> getQuantityForStatusLicense() {
-		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForStatus(l.status, COUNT(*)) "
-					+ "FROM License l " 
-					+ "WHERE l.status != 'DISCARDED' " 
-					+ "GROUP BY l.status";
-
-			TypedQuery<QuantityForStatus> query = manager.createQuery(jpql, QuantityForStatus.class);
-
-			return query.getResultList();
+			return manager.createQuery(query).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
