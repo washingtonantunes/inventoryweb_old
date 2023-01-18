@@ -3,6 +3,7 @@ package br.com.wti.erp.service;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -29,6 +30,7 @@ import br.com.wti.erp.domain.dashboard.DashboardGeneral;
 import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
 import br.com.wti.erp.domain.enums.StatusUserEnum;
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
+import br.com.wti.erp.domain.vo.QuantityChangeForMonth;
 import br.com.wti.erp.domain.vo.QuantityForMonth;
 import br.com.wti.erp.domain.vo.QuantityForStatus;
 import br.com.wti.erp.domain.vo.QuantityObjectForProject;
@@ -89,10 +91,12 @@ public class DashboardService implements Serializable {
 		BarChartModel barModel = new BarChartModel();
 
 		ChartData data = new ChartData();
+		
+		List<QuantityChangeForMonth> values = changeRepository.getListChangesForYear(dashboard.getYearSelected());
 
-		data.addChartDataSet(getDataDeliveries(dashboard));
-		data.addChartDataSet(getDataExchanges(dashboard));
-		data.addChartDataSet(getDataDevolutions(dashboard));
+		data.addChartDataSet(getDataDeliveries(values));
+		data.addChartDataSet(getDataExchanges(values));
+		data.addChartDataSet(getDataDevolutions(values));
 
 		List<String> labels = new ArrayList<>();
 		labels.add("Janeiro");
@@ -191,49 +195,43 @@ public class DashboardService implements Serializable {
 		dashboard.setPercentageLicensesPieChartModel(obterDadosPercentageLicenses());
 	}
 
-	private BarChartDataSet getDataDeliveries(DashboardGeneral dashboard) {
+	private BarChartDataSet getDataDeliveries(List<QuantityChangeForMonth> values) {
 		BarChartDataSet dataSet = new BarChartDataSet();
 		dataSet.setLabel("Entregas");
 		dataSet.setBackgroundColor("rgba(163, 157, 212, 0.7)");
 		dataSet.setBorderColor("rgb(163, 157, 212)");
 		dataSet.setBorderWidth(1);
 
-		List<QuantityForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DELIVERY_TO_USER);
-
 		if (values != null && !values.isEmpty()) {
-			dataSet.setData(converterList(values));
+			dataSet.setData(converterList(values.stream().filter(c -> c.getType().equals(TypeChangeEnum.DELIVERY_TO_USER)).collect(Collectors.toList())));
 		}
 
 		return dataSet;
 	}
 
-	private BarChartDataSet getDataExchanges(DashboardGeneral dashboard) {
+	private BarChartDataSet getDataExchanges(List<QuantityChangeForMonth> values) {
 		BarChartDataSet dataSet = new BarChartDataSet();
 		dataSet.setLabel("Trocas");
 		dataSet.setBackgroundColor("rgba(236, 47, 111, 0.7)");
 		dataSet.setBorderColor("rgb(236, 47, 111)");
 		dataSet.setBorderWidth(1);
 
-		List<QuantityForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.EXCHANGE_TO_USER);
-
 		if (values != null && !values.isEmpty()) {
-			dataSet.setData(converterList(values));
+			dataSet.setData(converterList(values.stream().filter(c -> c.getType().equals(TypeChangeEnum.EXCHANGE_TO_USER)).collect(Collectors.toList())));
 		}
 
 		return dataSet;
 	}
 
-	private BarChartDataSet getDataDevolutions(DashboardGeneral dashboard) {
+	private BarChartDataSet getDataDevolutions(List<QuantityChangeForMonth> values) {
 		BarChartDataSet dataSet = new BarChartDataSet();
 		dataSet.setLabel("Devoluções");
 		dataSet.setBackgroundColor("rgba(161, 171, 122, 0.7)");
 		dataSet.setBorderColor("rgb(161, 171, 122)");
 		dataSet.setBorderWidth(1);
 
-		List<QuantityForMonth> values = changeRepository.getListChangesForYearAndType(dashboard.getYearSelected(), TypeChangeEnum.DEVOLUTION_TO_USER);
-
 		if (values != null && !values.isEmpty()) {
-			dataSet.setData(converterList(values));
+			dataSet.setData(converterList(values.stream().filter(c -> c.getType().equals(TypeChangeEnum.DEVOLUTION_TO_USER)).collect(Collectors.toList())));
 		}
 
 		return dataSet;
@@ -428,18 +426,18 @@ public class DashboardService implements Serializable {
 		return pieModel;
 	}
 
-	private List<Number> converterList(List<QuantityForMonth> values) {
+	private List<Number> converterList(List<QuantityChangeForMonth> values) {
 
-		QuantityForMonth[] quantidades = new QuantityForMonth[12];
+		QuantityChangeForMonth[] quantidades = new QuantityChangeForMonth[12];
 
-		for (QuantityForMonth value : values) {
-			int id = value.getDate();
+		for (QuantityChangeForMonth value : values) {
+			int id = value.getMonth();
 			quantidades[id - 1] = value;
 		}
 
 		List<Number> numbers = new ArrayList<>();
 
-		for (QuantityForMonth quantity : quantidades) {
+		for (QuantityChangeForMonth quantity : quantidades) {
 			if (quantity != null) {
 				numbers.add(quantity.getQuantity());
 			} else {

@@ -6,24 +6,22 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import br.com.wti.erp.domain.enums.TypeChangeEnum;
-import br.com.wti.erp.domain.vo.QuantityForMonth;
+import br.com.wti.erp.domain.vo.QuantityChangeForMonth;
 
 public class ChangeRepository {
 
 	@Inject
 	private EntityManager manager;
 
-	public List<QuantityForMonth> getListChangesForYearAndType(Integer year, TypeChangeEnum type) {
+	public List<QuantityChangeForMonth> getListChangesForYear(Integer year) {
 		try {
-			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityForMonth(MONTH(cc.date), COUNT(cc)) "
-					+ "FROM Change cc " 
-					+ "WHERE type= :type AND year(date)= :year "
-					+ "GROUP BY month(cc.date)";
+			String jpql = "SELECT new br.com.wti.erp.domain.vo.QuantityChangeForMonth(cc.type, COUNT(cc), MONTH(cc.date)) "
+					+ "FROM Change cc "
+					+ "WHERE (cc.type = 'DELIVERY_TO_USER' OR cc.type = 'EXCHANGE_TO_USER' OR cc.type = 'DEVOLUTION_TO_USER') AND year(cc.date)= :year "
+					+ "GROUP BY cc.type, MONTH(cc.date)";
 
-			TypedQuery<QuantityForMonth> query = manager.createQuery(jpql, QuantityForMonth.class);
+			TypedQuery<QuantityChangeForMonth> query = manager.createQuery(jpql, QuantityChangeForMonth.class);
 			query.setParameter("year", year);
-			query.setParameter("type", type);
 
 			return query.getResultList();
 		} catch (Exception e) {
