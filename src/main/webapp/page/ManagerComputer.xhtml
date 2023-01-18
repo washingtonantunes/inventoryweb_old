@@ -16,7 +16,8 @@
 
 	<ui:define name="content">
 		<h:form id="frm">
-			<p:panel id="panelDataTable" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panelDataTable">
+		
+			<p:panel>
 			
 				<p:toolbar id="toolbar" style="padding: 10px">
 					<p:toolbarGroup>
@@ -32,46 +33,7 @@
 							process="@this paramSearch" />
 					</p:toolbarGroup>
 				</p:toolbar>
-		
-				<p:spacer height="20px" />
 				
-				<p:dataTable id="computerDataTable" value="#{managerBean.searchResult}" 
-					var="computer" emptyMessage="Nenhum Registro Encontrado!" 
-					paginator="true" rows="10"
-					paginatorPosition="bottom" selectionMode="single"
-					selection="#{model}" rowKey="#{computer.id}"
-					size="small" stripedRows="true">
-		
-					<p:ajax event="rowSelect" process="@this" update="computerDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" />
-			
-					<p:column headerText="Ações">
-						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{model.id == null or model.id != computer.id}" onclick="PF('panelDetails').show()" />
-					</p:column>
-					
-					<p:column headerText="Número de Série">
-						<h:outputText value="#{computer.serialNumber}" />
-					</p:column>
-		
-					<p:column headerText="Tipo">
-						<h:outputText value="#{computer.type}" />
-					</p:column>
-		
-					<p:column headerText="N.º Patrimônio" >
-						<h:outputText value="#{computer.patrimonyNumber}" />
-					</p:column>
-		
-					<p:column headerText="Marca">
-						<h:outputText value="#{computer.brand}" />
-					</p:column>
-
-					<p:column headerText="Modelo">
-						<h:outputText value="#{computer.model}" />
-					</p:column>
-
-					<p:column headerText="Status">
-						<h:outputText value="#{computer.status.descricao}" />
-					</p:column>
-				</p:dataTable>
 			</p:panel>
 			
 			<p:spacer height="10px" />
@@ -178,6 +140,50 @@
 					</p:tab>
 		        </p:tabView>
 		    </p:panel>
+		    
+		    <p:spacer height="10px" />
+		
+			<p:panel id="panelDataTable" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panelDataTable">
+			
+				<p:dataTable id="computerDataTable" value="#{managerBean.searchResult}" 
+					var="computer" emptyMessage="Nenhum Registro Encontrado!" 
+					paginator="true" rows="10"
+					paginatorPosition="bottom" selectionMode="single"
+					selection="#{model}" rowKey="#{computer.id}"
+					size="small" stripedRows="true">
+		
+					<p:ajax event="rowSelect" process="@this" update="computerDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" />
+			
+					<p:column headerText="Ações">
+						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{model.id == null or model.id != computer.id}" onclick="PF('panelDetails').show()" update="frm"/>
+					</p:column>
+					
+					<p:column headerText="Número de Série">
+						<h:outputText value="#{computer.serialNumber}" />
+					</p:column>
+		
+					<p:column headerText="Tipo">
+						<h:outputText value="#{computer.type}" />
+					</p:column>
+		
+					<p:column headerText="N.º Patrimônio" >
+						<h:outputText value="#{computer.patrimonyNumber}" />
+					</p:column>
+		
+					<p:column headerText="Marca">
+						<h:outputText value="#{computer.brand}" />
+					</p:column>
+
+					<p:column headerText="Modelo">
+						<h:outputText value="#{computer.model}" />
+					</p:column>
+
+					<p:column headerText="Status">
+						<h:outputText value="#{computer.status.descricao}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+			
 	    </h:form>
 		
 	</ui:define>

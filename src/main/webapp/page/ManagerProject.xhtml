@@ -16,7 +16,8 @@
 
 	<ui:define name="content">
 		<h:form id="frm">
-			<p:panel id="panelDataTable" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panelDataTable">
+		
+			<p:panel>
 			
 				<p:toolbar id="toolbar" style="padding: 10px">
 					<p:toolbarGroup>
@@ -32,43 +33,12 @@
 							process="@this paramSearch" />
 					</p:toolbarGroup>
 				</p:toolbar>
-		
-				<p:spacer height="20px" />
 				
-				<p:dataTable id="projectDataTable" value="#{managerBean.searchResult}" 
-					var="project" emptyMessage="Nenhum Registro Encontrado!" 
-					paginator="true" rows="10"
-					paginatorPosition="bottom" selectionMode="single"
-					selection="#{model}" rowKey="#{project.id}"
-					size="small" stripedRows="true">
-		
-					<p:ajax event="rowSelect" process="@this" update="projectDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" oncomplete="#{managerBean.updateQuantity()}" />
-			
-					<p:column headerText="Ações">
-						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{model.id == null or model.id != project.id}" onclick="PF('panelDetails').show()" />
-					</p:column>
-					
-					<p:column headerText="Nome">
-						<h:outputText value="#{project.name}" />
-					</p:column>
-		
-					<p:column headerText="Cidade">
-						<h:outputText value="#{project.city}" />
-					</p:column>
-		
-					<p:column headerText="Centro de Custo" >
-						<h:outputText value="#{project.costCenter}" />
-					</p:column>
-		
-					<p:column headerText="Status">
-						<h:outputText value="#{project.status.descricao}" />
-					</p:column>
-				</p:dataTable>
 			</p:panel>
 			
 			<p:spacer height="10px" />
-		
-		    <p:panel id="panelDetails" header="Projeto" closable="true" toggleSpeed="500"
+			
+			<p:panel id="panelDetails" header="Projeto" closable="true" toggleSpeed="500"
 		                closeSpeed="500" widgetVar="panelDetails" visible="detailsPanelVisible">
 		                
 		        <p:tabView dynamic="true" cache="true">
@@ -125,6 +95,42 @@
 					</p:tab>
 		        </p:tabView>
 		    </p:panel>
+		    
+		    <p:spacer height="10px" />
+			
+			<p:panel id="panelDataTable" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panelDataTable">
+		
+				<p:dataTable id="projectDataTable" value="#{managerBean.searchResult}" 
+					var="project" emptyMessage="Nenhum Registro Encontrado!" 
+					paginator="true" rows="10"
+					paginatorPosition="bottom" selectionMode="single"
+					selection="#{model}" rowKey="#{project.id}"
+					size="small" stripedRows="true">
+		
+					<p:ajax event="rowSelect" process="@this" update="projectDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" oncomplete="#{managerBean.updateQuantity()}" />
+			
+					<p:column headerText="Ações">
+						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{model.id == null or model.id != project.id}" onclick="PF('panelDetails').show()" />
+					</p:column>
+					
+					<p:column headerText="Nome">
+						<h:outputText value="#{project.name}" />
+					</p:column>
+		
+					<p:column headerText="Cidade">
+						<h:outputText value="#{project.city}" />
+					</p:column>
+		
+					<p:column headerText="Centro de Custo" >
+						<h:outputText value="#{project.costCenter}" />
+					</p:column>
+		
+					<p:column headerText="Status">
+						<h:outputText value="#{project.status.descricao}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+			
 	    </h:form>
 		
 	</ui:define>

@@ -16,7 +16,8 @@
 
 	<ui:define name="content">
 		<h:form id="frm">
-			<p:panel id="panelDataTable" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panelDataTable">
+			
+			<p:panel>
 			
 				<p:toolbar id="toolbar" style="padding: 10px">
 					<p:toolbarGroup>
@@ -32,47 +33,12 @@
 							process="@this paramSearch" />
 					</p:toolbarGroup>
 				</p:toolbar>
-		
-				<p:spacer height="20px" />
 				
-				<p:dataTable id="userDataTable" value="#{managerBean.searchResult}" 
-					var="user" emptyMessage="Nenhum Registro Encontrado!" 
-					paginator="true" rows="10"
-					paginatorPosition="bottom" selectionMode="single"
-					selection="#{model}" rowKey="#{user.id}"
-					size="small" stripedRows="true">
-		
-					<p:ajax event="rowSelect" process="@this" update="userDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" />
-			
-					<p:column headerText="Ações">
-						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{model.id == null or model.id != user.id}" onclick="PF('panelDetails').show()" />
-					</p:column>
-					
-					<p:column headerText="Matrícula">
-						<h:outputText value="#{user.registration}" />
-					</p:column>
-		
-					<p:column headerText="Nome">
-						<h:outputText value="#{user.name}" />
-					</p:column>
-		
-					<p:column headerText="CPF" >
-						<h:outputText value="#{user.cpf}" converter="CPFConverter" />
-					</p:column>
-		
-					<p:column headerText="Projeto">
-						<h:outputText value="#{user.project.name}" />
-					</p:column>
-		
-					<p:column headerText="Status">
-						<h:outputText value="#{user.status.descricao}" />
-					</p:column>
-				</p:dataTable>
 			</p:panel>
 			
 			<p:spacer height="10px" />
-		
-		    <p:panel id="panelDetails" header="Usuario" closable="true" toggleSpeed="500"
+			
+			<p:panel id="panelDetails" header="Usuario" closable="true" toggleSpeed="500"
 		                closeSpeed="500" widgetVar="panelDetails" visible="detailsPanelVisible">
 		                
 		        <p:tabView dynamic="true" cache="true">
@@ -141,6 +107,46 @@
 		            </p:tab>
 		        </p:tabView>
 		    </p:panel>
+			
+			<p:spacer height="10px" />
+		
+			<p:panel id="panelDataTable" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panelDataTable">
+			
+				<p:dataTable id="userDataTable" value="#{managerBean.searchResult}" 
+					var="user" emptyMessage="Nenhum Registro Encontrado!" 
+					paginator="true" rows="10"
+					paginatorPosition="bottom" selectionMode="single"
+					selection="#{model}" rowKey="#{user.id}"
+					size="small" stripedRows="true">
+		
+					<p:ajax event="rowSelect" process="@this" update="userDataTable frm:panelDetails" onsuccess="PF('panelDetails').close()" />
+			
+					<p:column headerText="Ações">
+						<p:commandButton type="button" icon="pi pi-file-edit" disabled="#{model.id == null or model.id != user.id}" onclick="PF('panelDetails').show()" />
+					</p:column>
+					
+					<p:column headerText="Matrícula">
+						<h:outputText value="#{user.registration}" />
+					</p:column>
+		
+					<p:column headerText="Nome">
+						<h:outputText value="#{user.name}" />
+					</p:column>
+		
+					<p:column headerText="CPF" >
+						<h:outputText value="#{user.cpf}" converter="CPFConverter" />
+					</p:column>
+		
+					<p:column headerText="Projeto">
+						<h:outputText value="#{user.project.name}" />
+					</p:column>
+		
+					<p:column headerText="Status">
+						<h:outputText value="#{user.status.descricao}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+			
 	    </h:form>
 		
 	</ui:define>
