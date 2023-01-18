@@ -11,8 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import br.com.wti.erp.domain.changes.ChangeMonitor;
-import lombok.AccessLevel;
+import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,23 +23,42 @@ public class Monitor extends AbstractEquipment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(mappedBy = "monitor", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
-	@Getter
-	@Setter(value = AccessLevel.PRIVATE)
-	private List<ChangeMonitor> changes;
+	@NotEmpty
+	@Column(nullable = false, length = 30)
+	private String model;
 
-	public void addChange(ChangeMonitor change) {
-		if (change != null) {
-			this.changes.add(change);
-		}
-	}
+	@NotNull
+	@Column(name = "date_entry", nullable = false)
+	private LocalDate dateEntry;
 
-	public void removeChange(ChangeMonitor change) {
-		if (change != null) {
-			this.changes.remove(change);
-		}
-	}
+	@NotEmpty
+	@Column(name = "note_entry", nullable = false, length = 20)
+	private String noteEntry;
+	
+	@NotEmpty
+	@Column(nullable = false, length = 30)
+	private String location;
+
+	private String note;
+
+	@Column(precision = 10, scale = 2)
+	private BigDecimal value;
+	
+	@Column(name = "cost_type", length = 30)
+	private String costType;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 30)
+	private StatusEquipmentEnum status;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "project_id")
+	private Project project;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	@Override
 	public String toString() {

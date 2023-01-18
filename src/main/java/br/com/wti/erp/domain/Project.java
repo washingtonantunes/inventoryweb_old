@@ -17,7 +17,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.com.wti.erp.domain.changes.ChangeProject;
 import br.com.wti.erp.domain.enums.StatusProjectEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -52,34 +51,14 @@ public class Project extends AbstractEntity implements Serializable {
 	@Column(name = "date_entry", nullable = false)
 	private LocalDate dateEntry;
 
-	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
-	@Setter(value = AccessLevel.PRIVATE)
-	private List<ChangeProject> changes;
-	
 	private Long quantityComputers;
 	
 	private Long quantityUsers;
 	
 	private Long quantityMonitors;
 	
-	public Project() {
-	}
-	
-	public Project(Integer id) {
-		super.setId(id);
-	}
-
-	public void addChange(ChangeProject change) {
-		if (change != null) {
-			this.changes.add(change);
-		}
-	}
-
-	public void removeChange(ChangeProject change) {
-		if (change != null) {
-			this.changes.remove(change);
-		}
+	public Project(Long id) {
+		this.id = id;
 	}
 
 	@Override

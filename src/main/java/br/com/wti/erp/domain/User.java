@@ -20,7 +20,6 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
-import br.com.wti.erp.domain.changes.ChangeUser;
 import br.com.wti.erp.domain.enums.StatusUserEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -70,25 +69,7 @@ public class User extends AbstractEntity implements Serializable {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "project_id", referencedColumnName = "id")
 	private Project project;
-
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
-	@Getter
-	@Setter(value = AccessLevel.PRIVATE)
-	private List<ChangeUser> changes;
-
-	public void addChange(ChangeUser change) {
-		if (change != null) {
-			this.changes.add(change);
-		}
-	}
-
-	public void removeChange(ChangeUser change) {
-		if (change != null) {
-			this.changes.remove(change);
-		}
-	}
-
+	
 	@Override
 	public String toString() {
 		return "User " + super.toString();

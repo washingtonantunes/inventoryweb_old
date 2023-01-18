@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import br.com.wti.erp.domain.changes.ChangeComputer;
+import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
 import br.com.wti.erp.domain.enums.TypeComputerEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -46,23 +46,9 @@ public class Computer extends AbstractEquipment implements Serializable {
 	@Column(name = "hard_disk", length = 10)
 	private String hardDisk;
 
-	@OneToMany(mappedBy = "computer", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
-	@Getter
-	@Setter(value = AccessLevel.PRIVATE)
-	private List<ChangeComputer> changes;
-
-	public void addChange(ChangeComputer change) {
-		if (change != null) {
-			this.changes.add(change);
-		}
-	}
-
-	public void removeChange(ChangeComputer change) {
-		if (change != null) {
-			this.changes.remove(change);
-		}
-	}
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	@Override
 	public String toString() {
