@@ -36,7 +36,7 @@ public class Project implements Serializable {
 	private Long id;
 
 	@NotEmpty
-	@Column(unique = true, nullable = false)
+	@Column(name = "name_project", unique = true, nullable = false)
 	private String name;
 
 	@NotEmpty
@@ -49,7 +49,7 @@ public class Project implements Serializable {
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 30)
+	@Column(name = "status_project", nullable = false)
 	private StatusProjectEnum status;
 
 	@NotNull

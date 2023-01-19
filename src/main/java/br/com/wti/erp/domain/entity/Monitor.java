@@ -21,11 +21,15 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = {"id", "serialNumber"})
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_monitors")
 public class Monitor implements Serializable {
@@ -73,15 +77,15 @@ public class Monitor implements Serializable {
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 30)
+	@Column(name = "status_monitor", nullable = false)
 	private StatusEquipmentEnum status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "project_id")
+	@JoinColumn(name = "id_project")
 	private Project project;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "id_user")
 	private User user;
 
 	@Override

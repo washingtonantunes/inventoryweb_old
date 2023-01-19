@@ -15,11 +15,15 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = {"id", "identification"})
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_items")
 public class Item implements Serializable {
@@ -45,7 +49,7 @@ public class Item implements Serializable {
 	private Long identification;
 
 	@NotEmpty
-	@Column(nullable = false, length = 30)
+	@Column(name = "type_item", nullable = false, length = 30)
 	private String type;
 
 	@NotEmpty

@@ -21,11 +21,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.wti.erp.domain.enums.StatusEquipmentEnum;
 import br.com.wti.erp.domain.enums.TypeComputerEnum;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = {"id", "serialNumber"})
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_computers")
 public class Computer implements Serializable {
@@ -37,10 +41,10 @@ public class Computer implements Serializable {
 	private Long id;
 	
 	@NotEmpty
-	@Column(name = "serial_number", unique = true, nullable = false, length = 30)
+	@Column(name = "serial_number", unique = true, nullable = false)
 	private String serialNumber;
 	
-	@Column(name = "patrimony_number", unique = true, length = 10)
+	@Column(name = "patrimony_number", unique = true)
 	private String patrimonyNumber;
 	
 	@NotEmpty
@@ -73,12 +77,12 @@ public class Computer implements Serializable {
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 30)
+	@Column(name = "status_computer", nullable = false)
 	private StatusEquipmentEnum status;
 	
 	@NotNull
-	@Column(nullable = false, length = 30)
 	@Enumerated(EnumType.STRING)
+	@Column(name = "type_computer", nullable = false)
 	private TypeComputerEnum type;
 
 	@Column(name = "host_name", unique = true, length = 30)
@@ -94,11 +98,11 @@ public class Computer implements Serializable {
 	private String hardDisk;
 	
 	@ManyToOne
-	@JoinColumn(name = "project_id")
+	@JoinColumn(name = "id_project")
 	private Project project;
 
 	@OneToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "id_user")
 	private User user;
 
 	@Override

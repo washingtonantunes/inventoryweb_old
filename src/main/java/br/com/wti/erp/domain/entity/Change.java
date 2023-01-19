@@ -17,12 +17,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 import br.com.wti.erp.domain.enums.TypeChangeEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = {"id", "identification"})
+@NoArgsConstructor
 @Entity
-@EqualsAndHashCode(of = { "id" })
 @Table(name = "tb_changes")
 public class Change implements Serializable  {
 
@@ -40,7 +42,7 @@ public class Change implements Serializable  {
 	@Column(name = "type_change", nullable = false)
 	private TypeChangeEnum type;
 
-	@Column(nullable = false, length = 200)
+	@Column(name = "description_change", nullable = false, length = 200)
 	private String description;
 
 	@Column(name = "date_change", nullable = false)

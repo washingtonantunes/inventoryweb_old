@@ -46,7 +46,7 @@ public class User implements Serializable {
 	private String registration;
 
 	@NotEmpty
-	@Column(nullable = false, length = 100)
+	@Column(name = "name_user", nullable = false, length = 100)
 	private String name;
 
 	@CPF
@@ -64,7 +64,7 @@ public class User implements Serializable {
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 30)
+	@Column(name = "status_user", nullable = false)
 	private StatusUserEnum status;
 
 	@NotNull
@@ -75,7 +75,7 @@ public class User implements Serializable {
 	private Set<Item> itens;
 
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "project_id", referencedColumnName = "id")
+	@JoinColumn(name = "id_project")
 	private Project project;
 	
 	@Override
