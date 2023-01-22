@@ -25,6 +25,6 @@ public abstract class BaseMB implements Serializable {
 	}
 
 	public void messageError(String msg) {
-		add(msg, FacesMessage.SEVERITY_WARN);
+		add(msg, FacesMessage.SEVERITY_ERROR);
 	}
 }

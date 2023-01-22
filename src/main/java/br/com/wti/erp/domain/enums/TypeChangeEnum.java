@@ -11,9 +11,9 @@ public enum TypeChangeEnum {
 	EXCHANGE_TO_USER("TROCA DE EQUIPAMENTO"),
 	DEVOLUTION_TO_USER("DEVOLUÇÃO POR USUÁRIO");
 
-	private String descricao;
+	private String description;
 	
-	private TypeChangeEnum(String descricao) {
-		this.descricao = descricao;
+	private TypeChangeEnum(String description) {
+		this.description = description;
 	}
 }

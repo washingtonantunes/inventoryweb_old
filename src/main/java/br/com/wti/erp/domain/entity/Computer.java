@@ -69,7 +69,7 @@ public class Computer implements Serializable {
 
 	private String note;
 
-	@Column(precision = 10, scale = 2)
+	@Column(name = "value_computer", precision = 10, scale = 2)
 	private BigDecimal value;
 	
 	@Column(name = "cost_type", length = 30)
