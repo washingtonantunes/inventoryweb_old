@@ -15,6 +15,13 @@ public abstract class BaseMB implements Serializable {
 
 		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 	}
+	
+	private void add(String msg, FacesMessage.Severity severity, String component) {
+		FacesMessage facesMessage = new FacesMessage(msg);
+		facesMessage.setSeverity(severity);
+
+		FacesContext.getCurrentInstance().addMessage(component, facesMessage);
+	}
 
 	public void messageInfo(String msg) {
 		add(msg, FacesMessage.SEVERITY_INFO);
@@ -26,5 +33,9 @@ public abstract class BaseMB implements Serializable {
 
 	public void messageError(String msg) {
 		add(msg, FacesMessage.SEVERITY_ERROR);
+	}
+	
+	public void messageError(String msg, String component) {
+		add(msg, FacesMessage.SEVERITY_ERROR, component);
 	}
 }
