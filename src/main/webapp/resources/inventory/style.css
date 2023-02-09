@@ -5,14 +5,10 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0px;
 	font-weight: normal;
+	color: #092834 !important;
 }
 
 header {
-	padding: 5px 5px;
-	margin-bottom: 20px;
-	background-color: #545454;
-	color: #fff;
-	box-shadow: 0px 2px 2px #ccc;
 }
 
 #content {
@@ -20,12 +16,12 @@ header {
 }
 
 footer {
-	border-top: 1px solid #ccc;
 	padding: 5px 8px;
 	margin-top: 20px;
 	margin-bottom: 10px;
 	text-align: center;
-	background-color: #c0c0c0;
+	background: #092834 !important;
+	color: #FC600A
 }
 
 h1 {
@@ -36,12 +32,11 @@ h1 {
 	margin-bottom: 10px;
 }
 
-h2 {
-	font-size: 20px;
-	font-weight: 500px;
-	padding: 0px 15px;
-}
-
-.ui-panel-titlebar {
-	background-color: #A1C6EA !important;
+.title {
+	color: #092834 !important;
+	font-size: 24px !important;
+	font-weight: bold;
+	padding: 2px 25px;
+	margin: 5px 0px;
+	border-bottom: 1px solid #092834;
 }

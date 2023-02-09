@@ -11,6 +11,7 @@
 
 	<h:outputStylesheet library="inventory" name="style.css" />
 	<h:outputStylesheet library="inventory" name="dashboard.css" />
+	<h:outputStylesheet library="inventory" name="pages.css" />
 
 </h:head>
 
@@ -20,7 +21,7 @@
 
 	<header>
 		<h:form>
-			<p:menubar style="padding: 4px">
+			<p:menubar style="padding: 4px; background: #347B98 !important;">
 				<p:menuitem disabled="true">
 					<h:graphicImage library="inventory" name="logo.png" />
 				</p:menuitem>
@@ -30,7 +31,7 @@
 				<p:menuitem value="Home" icon="pi pi-home" action="#{managerNavigationMB.redirectManagerHome}" />
 
 				<p:submenu label="Gestão" icon="pi pi-building">
-					<p:menuitem value="Computadores" action="#{managerNavigationMB.redirectManagerComputer}" />
+					<p:menuitem value="Computadores" action="#{managerNavigationMB.redirectManagerComputer}"  />
 					<p:menuitem value="Usuários" action="#{managerNavigationMB.redirectManagerUser}" />
 				</p:submenu>
 				
@@ -43,9 +44,9 @@
 		</h:form>
 	</header>
 
-	<h2>
+	<div id="title">
 		<ui:insert name="title" />
-	</h2>
+	</div>
 
 	<div id="content">
 		<ui:insert name="content" />

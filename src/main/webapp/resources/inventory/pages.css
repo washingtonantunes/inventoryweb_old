@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+.margin5 {
+	margin: 5px !important;
+}
+
+.padding8 {
+	padding: 8px !important;
+}
+.paddingLeft7 {
+	padding-left: 7px;
+}
+
+.panelWidth400 {
+	width: 400px !important;
+}
+
+.panelHeight450 {
+	height: 450px !important;
+}
+
+.font-bold {
+	font-weight: bold !important;
+}
+
+.fontSize20 {
+	font-size: 20px !important;
+}
+
+.fontSize18 {
+	font-size: 18px !important;
+}
+
+.fontSize22 {
+	font-size: 22px !important;
+}
+
+.corTextHeader {
+	color: #FC600A !important;
+}
+
+.display-flex {
+	display: flex;
+	justify-content: space-between
+}
+
+.card {
+	border-color: transparent;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 1px 2px 4px rgba(0, 0, 0, 0.3);
+	padding: 16px;
+	margin-left: 20px;
+}
+
+.panelBg{
+	background: #F7E0D4 !important;
+}
+
+.buttonColor {
+	background: #347B98 !important;
+}

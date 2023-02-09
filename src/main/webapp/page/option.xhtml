@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:wss="http://xmlns.jcp.org/jsf/composite/componentsinventory"
+	template="/WEB-INF/template/_layout.xhtml">
+	
+	<ui:param name="managerBean" value="#{optionMB}"></ui:param>
+	<ui:param name="panelNewOption" value="false"></ui:param>
+
+	<ui:define name="title">
+		<p:outputPanel styleClass="title">
+			<h3 style="margin: 5px;">Painel de Ferramentas</h3>
+		</p:outputPanel>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form id="frm">
+		
+			<wss:panel id="panel_computer" message="Computador" name="panelComputer" visible="true" width="panelWidth400" height="panelHeight450">
+
+				<p:outputPanel styleClass="display-flex ">
+
+					<p:outputLabel value="#{managerBean.typeSelected.description}"
+						styleClass="margin5 font-bold fontSize20" />
+
+					<p:selectOneMenu id="type" value="#{managerBean.typeSelected}">
+						<f:selectItem itemLabel="Selecione o Tipo" itemDisabled="true" />
+						<f:selectItems value="#{managerBean.type}" var="type" itemLabel="#{type.description}" itemValue="#{type}" />
+
+						<p:ajax event="change"
+							listener="#{managerBean.changed}"
+							update="panelComputer" />
+					</p:selectOneMenu>
+
+				</p:outputPanel>
+
+				<p:spacer height="5px" />
+
+				<p:outputPanel id="panel_toolbar">
+					
+					<p:toolbar id="toolbar" styleClass="padding8">
+						<p:toolbarGroup>
+						
+							<p:commandButton title="Novo" icon="pi pi-plus" 
+								styleClass="buttonColor margin5" 
+								update="panelNew" 
+								process="@this"
+								disabled="#{managerBean.typeSelected == null}">
+								<p:resetInput target="panelNew"/>
+							</p:commandButton>
+							
+							<p:commandButton title="Editar" icon="pi pi-pencil" styleClass="buttonColor margin5" disabled="#{managerBean.optionSelected == null}" />
+							
+							<p:commandButton title="Remover" icon="pi pi-minus" styleClass="buttonColor margin5" disabled="#{managerBean.optionSelected == null}" />
+						</p:toolbarGroup>
+					</p:toolbar>
+				
+				</p:outputPanel>
+				
+				<p:spacer height="5px" />
+				
+				<p:outputPanel id="panelNew" rendered="#{managerBean.typeSelected != null}">
+
+					<p:defaultCommand target="salvarCommandButton" scope="panelNew" />
+
+					<h:panelGrid id="optionPanelGrid" columns="3">
+
+						<p:outputLabel value="Descrição: " for="description" />
+						<p:inputText id="description" size="18" maxlength="50"
+							value="#{managerBean.description}" />
+
+						<p:commandButton id="salvarCommandButton" value="Salvar"
+							actionListener="#{managerBean.save}"
+							update="optionDataTable messages" process="optionPanelGrid" />
+
+					</h:panelGrid>
+
+				</p:outputPanel>
+				
+				<p:spacer height="5px" />
+				
+				<p:dataTable id="optionDataTable" value="#{managerBean.options}" 
+					var="option" emptyMessage="Nenhum Registro Encontrado!" 
+					selectionMode="single" scrollable="true" scrollHeight="150"
+					selection="#{managerBean.optionSelected}" rowKey="#{option.id}"
+					size="small" stripedRows="true" >
+					
+					<p:ajax event="rowSelect" update=":frm:panel_computer:toolbar" />
+		
+					<p:ajax event="rowUnselect" update=":frm:panel_computer:toolbar" />
+					
+					<p:column >
+						<h:outputText value="#{option.description}" />
+					</p:column>
+					
+				</p:dataTable>
+					
+		</wss:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
